@@ -1,21 +1,31 @@
 import React from 'react';
-import { Button } from 'antd';
+import { Switch, Route } from 'react-router-dom'
+import TheNavigation from './component/TheNavigation';
+import './App.css';
+import TheRegister from './component/TheRegister';
+import TheSummary from './component/TheSummary';
 
-const App = () => {
+
+
+
+const App: React.FC = () => {
+
+  
   return (
-    <main
-      style={{
-        height: '500px',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center'
-      }}
-    >
-      <Button type="primary">Hello, Ant Design!</Button>
-      <a href="foo.bar">I'm a link. Click me, please!</a>
-    </main>
-  );
-};
+    <div>
+      <header>
+          <TheNavigation/>
+          <h1>NÁKUPY A PRONÁJMY</h1>
+          
+      </header>
+		  <main>
+        <Switch>
+					<Route path="/" component={TheRegister} exact />
+					<Route path="/summary" component={TheSummary} />
+				</Switch>
+		  </main>
+    </div>
+	)
+}
 
-export default App;
+export default App
