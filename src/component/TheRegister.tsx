@@ -1,32 +1,14 @@
 import React, {useState} from 'react';
 import TheSetting from './TheSetting';
 import TheFilter from './TheFilter';
+import RegisterList from './RegisterList';
 
 
 
 const TheRegister: React.FC = () => {
   const [showFilter, setShowFilter] = useState(false);
 
-  const purchases = [
-    {
-    "id": "001",
-    "type": "pujcka",
-    "name": "prvnijmeno",
-    "price": 10
-    },
-    {
-    "id": "002",
-    "type": "prodej",
-    "name": "druhejmeno",
-    "price": 100
-    },
-    {
-    "id": "003",
-    "type": "pujcka",
-    "name": "tretijmeno",
-    "price": 1000
-    }
-]
+ 
 
     return (
       <div>
@@ -34,11 +16,12 @@ const TheRegister: React.FC = () => {
         
       {showFilter && <TheFilter/>}
         <ul>
-          {purchases.map(purchases => (
+          {/* {purchases.map(purchases => (
              <li key={purchases.id}>
                 {purchases.type}{' '}{purchases.name}{' '}{purchases.price}
              </li> 
-          ))}
+          ))} */}
+          <RegisterList/>
         </ul>
       </div>
     );
