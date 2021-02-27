@@ -1,30 +1,39 @@
 import React, {useState} from 'react';
-import { List, Typography, Avatar, Icon } from 'antd';
+import { List, Typography, Avatar, Icon, Button } from 'antd';
 const { Title } = Typography;
 
-const purchases = [
-    {
-    "id": "001",
-    "type": "Pronájem",
-    "name": "prvnijmeno",
-    "price": 10
-    },
-    {
-    "id": "002",
-    "type": "Nákup",
-    "name": "druhejmeno",
-    "price": 100
-    },
-    {
-    "id": "003",
-    "type": "Pronájem",
-    "name": "tretijmeno",
-    "price": 1000
-    }
-]
 
-const RegisterList: React.FC = () => {
-    const [data, setData] = useState(purchases);
+
+  interface Props {
+    data: {
+        id: string;
+        type: string;
+        name: string;
+        price: number;
+    }[],
+    setData: React.Dispatch<React.SetStateAction<{
+        id: string;
+        type: string;
+        name: string;
+        price: number;
+    }[]>>
+  }
+
+const RegisterList: React.FC<Props> = (Props) => {
+    //const [data, setData] = useState(purchases);
+    const [rewriteText, setRewriteText] = useState('');
+
+    function handleCLick(itemId: string, itemName: string) {
+        let newArr = Props.data.map((item) => {
+            if (itemId == item.id) {
+                return { ...item, ['name']: itemName };
+            } else {
+                return item;
+            }
+        });
+        Props.setData(newArr);
+    }
+
 
     
         return (
@@ -32,7 +41,7 @@ const RegisterList: React.FC = () => {
            
               <List
                 bordered
-                dataSource={data}
+                dataSource={Props.data}
                 renderItem={item => (
                   <List.Item key={item.id}>
                     <List.Item.Meta
@@ -41,10 +50,20 @@ const RegisterList: React.FC = () => {
                             {(item.type=='Nákup')&&<Icon type="dollar" theme="twoTone"/>}
                             {(item.type=='Pronájem')&&<Icon type="clock-circle" theme="twoTone" />}
                         </Avatar>}
-                      title={<Title level={4}>{item.name}</Title>}
+                      title={<Title
+                        editable={{
+                            onChange: setRewriteText,
+                          }}
+                      level={4} >{item.name}</Title>}
+
                       description={item.type}
                     />
                     <div>{item.price} {(item.type=='Nákup') ? ' Kč':'Kč/měsíc'}</div>
+                    <Button onClick={(event: React.MouseEvent<HTMLElement>) => 
+                        {handleCLick('001', 'ani hovno')}}>
+                            Změň
+                    </Button>
+                    <Button>X</Button>
                   </List.Item>
                 )}
               > 
