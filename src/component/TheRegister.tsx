@@ -3,26 +3,30 @@ import TheSetting from './TheSetting';
 import TheFilter from './TheFilter';
 import RegisterList from './RegisterList';
 
+
+
 const purchases = [
   {
   "id": "001",
   "type": "Pronájem",
   "name": "prvnijmeno",
-  "price": 10
+  "price": 10,
   },
   {
   "id": "002",
   "type": "Nákup",
   "name": "druhejmeno",
-  "price": 100
+  "price": 100,
   },
   {
   "id": "003",
   "type": "Pronájem",
   "name": "tretijmeno",
-  "price": 1000
+  "price": 1000,
   },
 ]
+
+console.log(purchases);
 
 const TheRegister: React.FC = () => {
   const [showFilter, setShowFilter] = useState(false);
