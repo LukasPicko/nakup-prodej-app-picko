@@ -26,19 +26,18 @@ const purchases = [
   },
 ]
 
-console.log(purchases);
+interface Props {
+  showFilter: boolean;
+}
 
-const TheRegister: React.FC = () => {
-  const [showFilter, setShowFilter] = useState(false);
+const TheRegister: React.FC<Props> = (Props) => {
   const [data, setData] = useState(purchases);
 
  
 
     return (
       <div>
-        <TheSetting showFilter={showFilter} setShowFilter={setShowFilter}/>
-        
-      {showFilter && <TheFilter/>}
+      {Props.showFilter && <TheFilter/>}
           <RegisterList data={data} setData={setData}/>
       </div>
     );

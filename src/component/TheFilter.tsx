@@ -25,9 +25,8 @@ const TheFilter: React.FC = () => {
             <Form layout="inline" id="filter" 
               onSubmit={handleSubmit}
             >
-                  <Icon type="filter" 
-                      style={{fontSize: 30,}}
-                  />
+                <Form.Item><p>Filtr:</p></Form.Item>
+                        
                   <Form.Item>
                  <Input 
                       id="filterName"

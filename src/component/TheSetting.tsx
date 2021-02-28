@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Button,Icon} from 'antd';
+import {Button} from 'antd';
 import 'antd/dist/antd.css';
 
 
@@ -10,36 +10,23 @@ interface Props {
 
 
 const TheSetting: React.FC<Props> = (Props) => {
-    const [changeIkon, setChangeIkon] = useState(true);
+    const [changeButton, setChangeButton] = useState(true);
 
     const handleOnOffFilter = () => {
-        setChangeIkon(!changeIkon);
-        Props.setShowFilter(!Props.showFilter);
+        setChangeButton(!changeButton);
+        Props.setShowFilter(!Props.showFilter)
     }
     return (
       <div>
-       
-          
-          <nav>
-          {changeIkon && 
-                    <Icon type="filter" 
-                    onClick={handleOnOffFilter}
-                    style={{fontSize: '2em',}}
-                    />
+          {changeButton && 
+                    <Button onClick={handleOnOffFilter} type="primary" shape="circle" icon="filter" size='default' />
                 }
-                {!changeIkon &&     
-                    <Icon type="filter" theme="filled" 
-                    onClick={handleOnOffFilter} 
-                    style={{fontSize: '2em',
-                    border: '1px' 
-                    }}
-                    />
+                {!changeButton &&     
+                    <Button onClick={handleOnOffFilter} type="default" shape="circle" icon="filter" size='default' />
                 }
             <Button>Přidat</Button>{''}
             <Button>Cz</Button>
             <Button>En</Button>
-          </nav>
-       
       </div>
     );
   }
