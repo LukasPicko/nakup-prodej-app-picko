@@ -3,6 +3,7 @@ import {Form, Input, Button, Select, Icon} from 'antd';
 import 'antd/dist/antd.css';
 
 const { Option } = Select;
+const {Search} = Input;
 
 const TheFilter: React.FC = () => {
     const [filterName, setFilterName] = useState('');
@@ -38,6 +39,14 @@ const TheFilter: React.FC = () => {
                         }}
                         placeholder="Název položky"
                   />
+                  {/* <Search
+                    id="filterName"
+                    name="filterName"
+                    placeholder="Název položky"
+                    value = {filterName}
+                    onSearch={value => console.log(value)}
+                    style={{ width: 200 }}
+                  /> */}
                  </Form.Item>
                  <Form.Item>
                   <Select id="filterType" defaultValue="#" style={{ width: 150 }} onChange={handleChangeFilterType}>
@@ -46,7 +55,7 @@ const TheFilter: React.FC = () => {
                       <Option value="pronajem">Pronájem</Option>
                   </Select>
                   </Form.Item>
-                  <Button htmlType="submit">X</Button>
+                  <Button htmlType="submit" type="dashed" >X</Button>
             </Form>
         </div>
     );

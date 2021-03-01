@@ -32,9 +32,7 @@ interface Props {
 
 const TheRegister: React.FC<Props> = (Props) => {
   const [data, setData] = useState(purchases);
-
- 
-
+  
     return (
       <div>
       {Props.showFilter && <TheFilter/>}
