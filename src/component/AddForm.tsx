@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
 import {Form, Input,Select, InputNumber} from 'antd';
+import {DataProps} from '../types/types';
 import 'antd/dist/antd.css';
 const { Option } = Select;
 
-const AddForm: React.FC = () => {
+const AddForm: React.FC<DataProps> = (props) => {
     const [addFormName, setAddFormName] = useState('');
     const [addFormType, setAddFormType] = useState('');
     const [objectToAdd, setObjectToAdd] = useState(

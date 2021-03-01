@@ -1,42 +1,17 @@
-import React, {useState} from 'react';
-import TheSetting from './TheSetting';
+import React from 'react';
 import TheFilter from './TheFilter';
 import RegisterList from './RegisterList';
+import {CommonProps} from '../types/types';
 
 
 
-const purchases = [
-  {
-  "id": "001",
-  "type": "Pronájem",
-  "name": "prvnijmeno",
-  "price": 10,
-  },
-  {
-  "id": "002",
-  "type": "Nákup",
-  "name": "druhejmeno",
-  "price": 100,
-  },
-  {
-  "id": "003",
-  "type": "Pronájem",
-  "name": "tretijmeno",
-  "price": 1000,
-  },
-]
-
-interface Props {
-  showFilter: boolean;
-}
-
-const TheRegister: React.FC<Props> = (Props) => {
-  const [data, setData] = useState(purchases);
+const TheRegister: React.FC<CommonProps> = (Props) => {
+  
   
     return (
       <div>
       {Props.showFilter && <TheFilter/>}
-          <RegisterList data={data} setData={setData}/>
+          <RegisterList data={Props.data} setData={Props.setData}/>
       </div>
     );
   }

@@ -1,25 +1,11 @@
 import React, {useState} from 'react';
 import { List, Typography, Avatar, Icon, Button } from 'antd';
+import { DataProps as CommonProps } from './../types/types';
 const { Title } = Typography;
 
 
 
-  interface Props {
-    data: {
-        id: string;
-        type: string;
-        name: string;
-        price: number;
-    }[],
-    setData: React.Dispatch<React.SetStateAction<{
-        id: string;
-        type: string;
-        name: string;
-        price: number;
-    }[]>>
-  }
-
-const RegisterList: React.FC<Props> = (Props) => {
+const RegisterList: React.FC<CommonProps> = (Props) => {
     const [rewriteText, setRewriteText] = useState('');
 
     function handleCLick(itemId: string, itemName: string) {

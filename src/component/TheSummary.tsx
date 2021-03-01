@@ -2,8 +2,21 @@ import React from 'react';
 import {Card} from 'antd';
 
 
-
-const TheSummary: React.FC = () => {
+interface Props {
+  data: {
+    id: string;
+    type: string;
+    name: string;
+    price: number;
+}[],
+setData: React.Dispatch<React.SetStateAction<{
+    id: string;
+    type: string;
+    name: string;
+    price: number;
+}[]>>
+}
+const TheSummary: React.FC<Props> = () => {
     return (
       <Card title="Sumář">
         <Card type="inner" title="Nákupy">

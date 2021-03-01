@@ -2,15 +2,11 @@ import React, {useState} from 'react';
 import {Button, Modal} from 'antd';
 import AddForm from './AddForm';
 import 'antd/dist/antd.css';
+import { CommonProps } from './../types/types';
 
 
-interface Props {
-    showFilter: boolean;
-    setShowFilter: (value: boolean | ((prevVar: boolean) => boolean)) => any;
-}
 
-
-const TheSetting: React.FC<Props> = (Props) => {
+const TheSetting: React.FC<CommonProps> = (Props) => {
     const [changeButton, setChangeButton] = useState(true);
     const [visibleModalForm, setVisibleModalForm] = useState(false);
 
@@ -47,7 +43,7 @@ const TheSetting: React.FC<Props> = (Props) => {
                 onOk={handleOk}
                 onCancel={handleCancel}
                 >
-                    <AddForm/>
+                    <AddForm data={Props.data} setData={Props.setData}/>
             </Modal>
       </div>
     );
