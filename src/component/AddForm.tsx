@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Form, Input,Select, InputNumber} from 'antd';
+import {Form, Input,Select, InputNumber, Button} from 'antd';
 import {DataProps} from '../types/types';
 import 'antd/dist/antd.css';
 const { Option } = Select;
@@ -7,6 +7,7 @@ const { Option } = Select;
 const AddForm: React.FC<DataProps> = (props) => {
     const [addFormName, setAddFormName] = useState('');
     const [addFormType, setAddFormType] = useState('');
+    const [addFormPrice, setAddFormPrice] = useState(0);
     const [objectToAdd, setObjectToAdd] = useState(
         {
             "id": "",
@@ -24,15 +25,28 @@ const AddForm: React.FC<DataProps> = (props) => {
 
     const handleSubmit = (event: any) => {
         event.preventDefault();
-        alert('name ' + addFormName + ' type ' + addFormType);
+        setObjectToAdd({
+            'id': Math.floor(Date.now() / 1000).toString(),
+            'type': addFormType,
+            'name': addFormName,
+            'price': addFormPrice
+        });
+        console.log(objectToAdd);
+        props.setData(
+            (oldData => [...oldData, objectToAdd])
+        );
+        console.log(props.data);
+
     }
 
     const handleChangeNumber = (value:any) => {
-        if(typeof value != "string"){console.log('error')}
-        if (!isNaN(value)&&!isNaN(parseFloat(value))){console.log('success')}
+        // if(typeof value != "string"){console.log('error')}
+        // if (!isNaN(value)&&!isNaN(parseFloat(value))){console.log('success')}
+        setAddFormPrice(parseFloat(value));
+        //"^-?\\d*(\\.\\d+)?$"
     }
 
-        //"^-?\\d*(\\.\\d+)?$"
+        
 
 
     return (
@@ -65,13 +79,10 @@ const AddForm: React.FC<DataProps> = (props) => {
                   </Form.Item>
                   <Form.Item
                         label="Cena"
-                  
                   >
-                        <InputNumber />
+                        <InputNumber value={addFormPrice} onChange={handleChangeNumber}/>
                     </Form.Item>
-                  
-                    
-                     
+                    <Button htmlType="submit" type="default" >Odeslat</Button>
             </Form>
         </div>
     );

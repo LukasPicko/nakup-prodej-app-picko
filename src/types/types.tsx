@@ -1,8 +1,8 @@
 
 
   export interface FilterProps {
-    showFilter?: boolean;
-    setShowFilter?: (value: boolean | ((prevVar: boolean) => boolean)) => any;
+    showFilter: boolean;
+    setShowFilter: (value: boolean | ((prevVar: boolean) => boolean)) => any;
   }
 
   export interface DataProps {

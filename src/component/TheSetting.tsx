@@ -42,6 +42,7 @@ const TheSetting: React.FC<CommonProps> = (Props) => {
                 visible={visibleModalForm}
                 onOk={handleOk}
                 onCancel={handleCancel}
+                footer={null}
                 >
                     <AddForm data={Props.data} setData={Props.setData}/>
             </Modal>
