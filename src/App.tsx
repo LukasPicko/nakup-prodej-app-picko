@@ -5,6 +5,7 @@ import './App.css';
 import TheRegister from './component/TheRegister';
 import TheSummary from './component/TheSummary';
 import TheSetting from './component/TheSetting';
+import UpdateForm from './component/UpdateForm';
 
 
 const purchases = [
@@ -48,6 +49,9 @@ const App: React.FC = () => {
 
 					<Route path="/summary" component={TheSummary} >
                 <TheSummary data={data} setData={setData}/>
+          </Route>
+          <Route path="/:id"  >
+                <UpdateForm data={data} setData={setData}/>
           </Route>
 				</Switch>
 		  </main>

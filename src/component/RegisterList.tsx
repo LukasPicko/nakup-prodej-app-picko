@@ -1,14 +1,16 @@
 import React, {useState} from 'react';
 import { List, Typography, Avatar, Icon, Button } from 'antd';
-import { DataProps as CommonProps } from './../types/types';
+import { DataProps } from './../types/types';
+import { useHistory } from "react-router-dom";
 const { Title } = Typography;
 
 
 
-const RegisterList: React.FC<CommonProps> = (Props) => {
+const RegisterList: React.FC<DataProps> = (Props) => {
     const [rewriteText, setRewriteText] = useState('');
+    const history = useHistory();
 
-    function handleCLick(itemId: string, itemName: string) {
+    function handleCLickChangeButton(itemId: string, itemName: string) {
         let newArr = Props.data.map((item) => {
             if (itemId === item.id) {
                 return { ...item, ['name']: itemName };
@@ -18,6 +20,11 @@ const RegisterList: React.FC<CommonProps> = (Props) => {
         });
         Props.setData(newArr);
     }
+
+        function editRecordForm(value:string){
+          alert('newString' + value);
+          history.push('/'+{value})
+        }
 
 
     
@@ -37,15 +44,14 @@ const RegisterList: React.FC<CommonProps> = (Props) => {
                         </Avatar>}
                       title={<Title
                         editable={{
-                            onChange: setRewriteText,
                           }}
-                      level={4} >{item.name}</Title>}
+                      level={4} ><span onClick= {() => {editRecordForm(item.id)}}>{item.name}</span></Title>}
 
                       description={item.type}
                     />
                     <div>{item.price} {(item.type==='Nákup') ? ' Kč':'Kč/měsíc'}</div>
                     <Button onClick={(event: React.MouseEvent<HTMLElement>) => 
-                        {handleCLick('001', 'ani hovno')}}>
+                        {handleCLickChangeButton(item.id, item.name)}}>
                             Změň
                     </Button>
                     <Button>X</Button>
