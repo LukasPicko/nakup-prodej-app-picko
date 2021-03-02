@@ -1,8 +1,10 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Form, Input,Select, InputNumber, Button} from 'antd';
 import {DataProps} from '../types/types';
 import 'antd/dist/antd.css';
 const { Option } = Select;
+
+
 
 const AddForm: React.FC<DataProps> = (props) => {
     const [addFormName, setAddFormName] = useState('');
@@ -16,9 +18,10 @@ const AddForm: React.FC<DataProps> = (props) => {
             "price": 0,
         })
 
-    let myValidateStatus:string = 'succes';
+        useEffect(() => { console.log('yapsano ' + addFormType) }, [addFormType]);
 
-    const handleChangeFilterType = (value:string) => {
+    const handleChangeFormType = (value:string) => {
+        console.log('vybrano ' + value);
         setAddFormType(value);
       }
    
@@ -71,8 +74,8 @@ const AddForm: React.FC<DataProps> = (props) => {
                  <Form.Item 
                     label="Typ transakce"
                  >
-                  <Select id="addType" defaultValue="#" style={{ width: 150 }} onChange={handleChangeFilterType}>
-                  <Option value="#"   disabled>Typ položky</Option>
+                  <Select id="addType" defaultValue="#" style={{ width: 150 }} onChange={handleChangeFormType}>
+                      <Option value="#"  disabled>Typ položky</Option>
                       <Option value="nakup">Nákup</Option>
                       <Option value="pronajem">Pronájem</Option>
                   </Select>

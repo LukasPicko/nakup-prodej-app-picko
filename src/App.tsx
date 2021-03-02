@@ -50,7 +50,7 @@ const App: React.FC = () => {
 					<Route path="/summary" component={TheSummary} >
                 <TheSummary data={data} setData={setData}/>
           </Route>
-          <Route path="/:id"  >
+          <Route path="/:id" >
                 <UpdateForm data={data} setData={setData}/>
           </Route>
 				</Switch>

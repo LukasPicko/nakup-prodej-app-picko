@@ -7,7 +7,6 @@ const { Title } = Typography;
 
 
 const RegisterList: React.FC<DataProps> = (Props) => {
-    const [rewriteText, setRewriteText] = useState('');
     const history = useHistory();
 
     function handleCLickChangeButton(itemId: string, itemName: string) {
@@ -22,8 +21,7 @@ const RegisterList: React.FC<DataProps> = (Props) => {
     }
 
         function editRecordForm(value:string){
-          alert('newString' + value);
-          history.push('/'+{value})
+          history.push('/'+ value)
         }
 
 
