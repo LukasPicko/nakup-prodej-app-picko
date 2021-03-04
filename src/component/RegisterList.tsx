@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {} from 'react';
 import { List, Typography, Avatar, Icon, Button } from 'antd';
 import { DataProps } from './../types/types';
 import { useHistory } from "react-router-dom";
@@ -8,28 +8,18 @@ const { Title } = Typography;
 
 const RegisterList: React.FC<DataProps> = (Props) => {
     const history = useHistory();
-
-    function handleCLickChangeButton(itemId: string, itemName: string) {
-        let newArr = Props.data.map((item) => {
-            if (itemId === item.id) {
-                return { ...item, ['name']: itemName };
-            } else {
-                return item;
-            }
-        });
-        Props.setData(newArr);
-    }
+    function handleClickDeleteRecord(id:any){
+          let objTemp:any={id: '', type: '', name: '', price: 0};
+        if(Props.data!==undefined){objTemp = Props.data.filter(item => item.id !== id)}
+        Props.setData(objTemp);
+        }
 
         function editRecordForm(value:string){
           history.push('/'+ value)
         }
-
-
-    
         return (
           <div className="demo-infinite-container">
-           
-              <List
+              <List 
                 bordered
                 dataSource={Props.data}
                 renderItem={item => (
@@ -40,19 +30,12 @@ const RegisterList: React.FC<DataProps> = (Props) => {
                             {(item.type==='Nákup')&&<Icon type="dollar" theme="twoTone"/>}
                             {(item.type==='Pronájem')&&<Icon type="clock-circle" theme="twoTone" />}
                         </Avatar>}
-                      title={<Title
-                        editable={{
-                          }}
-                      level={4} ><span onClick= {() => {editRecordForm(item.id)}}>{item.name}</span></Title>}
-
+                      title={
+                        <Title level={4} ><span onClick= {() => {editRecordForm(item.id)}}>{item.name}</span></Title>}
                       description={item.type}
                     />
-                    <div>{item.price} {(item.type==='Nákup') ? ' Kč':'Kč/měsíc'}</div>
-                    <Button onClick={(event: React.MouseEvent<HTMLElement>) => 
-                        {handleCLickChangeButton(item.id, item.name)}}>
-                            Změň
-                    </Button>
-                    <Button>X</Button>
+                    <div>{item.price}{(item.type==='Nákup') ? ' Kč':'Kč/měsíc'}</div>
+                    <Button onClick={()=>{handleClickDeleteRecord(item.id)}}>X</Button>
                   </List.Item>
                 )}
               > 
