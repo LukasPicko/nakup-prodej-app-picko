@@ -22,27 +22,29 @@ const UpdateForm: React.FC<DataProps> = (props) => {
         const history = useHistory();
     
     useEffect(() => {
-
-      
+        if(!updFormName){
+        console.log('prazdny objTemp')
         let objTemp:any={id: '', type: '', name: '', price: 0};
+        console.log(objTemp)
         if(props.data!==undefined){objTemp = props.data.find(item => item.id === updFormId)}
+        console.log('plny objTemp')
+        console.log(objTemp)
        setUpdFormName(objTemp.name);
        setUpdFormType(objTemp.type);
-       setUpdFormPrice(objTemp.price);
-    }, []);
+       setUpdFormPrice(objTemp.price);}
 
-    // let myValidateStatus:string = 'succes';
+       console.log('props.data v useEffectu po updatu')
+       console.log(props.data);
+
+    }, [updFormName, updFormType, updFormPrice, updFormId, props.data]);
 
     const handleChangeType = (value:string) => {
-        setUpdFormType(value);
-        alert(updFormType);
+        setUpdFormType((value==='nakup')?"Nákup":"Pronájem");
       }
-   
 
     const handleSubmit = (event: any) => {
         event.preventDefault();
         console.log('submituju update form');
-
         setObjectToUpd(
             {
                 id:updFormId,
@@ -55,9 +57,18 @@ const UpdateForm: React.FC<DataProps> = (props) => {
         console.log(objectToUpd);
         console.log('pred updatem');
         console.log(props.data);
-        props.setData({...props.data, [updFormId]: objectToUpd});
+        props.setData(props.data.filter(item => item.id !== updFormId));
+        props.setData(prevData => [...prevData, 
+            {'id':updFormId,
+             'type': updFormType,
+             'name': updFormName,
+             'price': updFormPrice   
+            }
+        ]);
         console.log('po updatu')
         console.log(props.data);
+
+        history.push("/");
         
     }
 
