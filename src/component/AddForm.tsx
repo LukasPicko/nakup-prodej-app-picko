@@ -1,44 +1,41 @@
 import React, {useState, useEffect} from 'react';
 import {Form, Input,Select, InputNumber, Button} from 'antd';
-import {DataProps} from '../types/types';
+import {DataModalProps} from '../types/types';
 import 'antd/dist/antd.css';
 const { Option } = Select;
 
 
 
-const AddForm: React.FC<DataProps> = (props) => {
+const AddForm: React.FC<DataModalProps> = (props) => {
     const [addFormName, setAddFormName] = useState('');
     const [addFormType, setAddFormType] = useState('');
     const [addFormPrice, setAddFormPrice] = useState(0);
-    const [objectToAdd, setObjectToAdd] = useState(
-        {
-            "id": "",
-            "type": "",
-            "name": "",
-            "price": 0,
-        })
 
-        useEffect(() => { console.log('yapsano ' + addFormType) }, [addFormType]);
+
+        useEffect(() => {
+       
+    
+        }, [addFormName, addFormType, addFormPrice, props.data]);
 
     const handleChangeFormType = (value:string) => {
-        console.log('vybrano ' + value);
-        setAddFormType(value);
+        setAddFormType((value==='nakup')?'Nákup':'Pronájem');
       }
    
 
     const handleSubmit = (event: any) => {
         event.preventDefault();
-        setObjectToAdd({
-            'id': Math.floor(Date.now() / 1000).toString(),
-            'type': addFormType,
-            'name': addFormName,
-            'price': addFormPrice
-        });
-        console.log(objectToAdd);
         props.setData(
-            (oldData => [...oldData, objectToAdd])
-        );
-        console.log(props.data);
+            (oldData =>  [...oldData, 
+                {
+                'id': Math.floor(Date.now() / 1000).toString(),
+                'type': addFormType,
+                'name': addFormName,
+                'price': addFormPrice}
+                ]));
+        setAddFormName('');
+        setAddFormType('');
+        setAddFormPrice(0);
+        props.setVisibleModalForm(false);
 
     }
 

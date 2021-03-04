@@ -20,5 +20,9 @@
   }[]>>
   }
 
+  export interface DataModalProps extends DataProps {
+    setVisibleModalForm: React.Dispatch<React.SetStateAction<boolean>>
+  }
+
   export interface CommonProps extends FilterProps, DataProps {}
 

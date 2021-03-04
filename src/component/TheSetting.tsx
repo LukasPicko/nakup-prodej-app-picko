@@ -16,9 +16,9 @@ const TheSetting: React.FC<CommonProps> = (Props) => {
     }
 
     const showModal = () => {
-        setVisibleModalForm(true);
+        setVisibleModalForm(!visibleModalForm);
       };
-      
+
     return (
       <div>
           {changeButton && 
@@ -33,9 +33,10 @@ const TheSetting: React.FC<CommonProps> = (Props) => {
             <Modal
                 title="Přidat položku"
                 visible={visibleModalForm}
+                onCancel={showModal}
                 footer={null}
                 >
-                    <AddForm data={Props.data} setData={Props.setData}/>
+                    <AddForm data={Props.data} setData={Props.setData} setVisibleModalForm={setVisibleModalForm}/>
             </Modal>
       </div>
     );
