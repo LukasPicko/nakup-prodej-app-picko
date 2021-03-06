@@ -102,7 +102,6 @@ const UpdateForm: React.FC<DataProps> = (props) => {
                           width: 150,
                         }}
                         placeholder="Název položky"
-                        required
                   />
                  </Form.Item>
                  <Form.Item 

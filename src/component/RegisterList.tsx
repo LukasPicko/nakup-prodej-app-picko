@@ -1,13 +1,21 @@
-import React, {} from 'react';
+import React, {useState, useEffect} from 'react';
 import { List, Typography, Avatar, Icon, Button } from 'antd';
-import { DataProps } from './../types/types';
+import { CommonProps } from './../types/types';
 import { useHistory } from "react-router-dom";
+import TheFilter from './TheFilter';
 const { Title } = Typography;
 
 
 
-const RegisterList: React.FC<DataProps> = (Props) => {
+const RegisterList: React.FC<CommonProps> = (Props) => {
+    const[filterName, setFilterName] = useState('');
+    const[filterType, setFilterType] = useState('');
     const history = useHistory();
+
+    useEffect(() => {
+      console.log(Props.data)
+    }, [Props.data]);
+
     function handleClickDeleteRecord(id:any){
           let objTemp:any={id: '', type: '', name: '', price: 0};
         if(Props.data!==undefined){objTemp = Props.data.filter(item => item.id !== id)}
@@ -19,6 +27,7 @@ const RegisterList: React.FC<DataProps> = (Props) => {
         }
         return (
           <div className="demo-infinite-container">
+            {Props.showFilter && <TheFilter filterName={filterName} setFilterName={setFilterType} filterType={filterType} setFilterType={setFilterType}  showFilter={Props.showFilter}  setShowFilter={Props.setShowFilter}/>}
               <List 
                 bordered
                 dataSource={Props.data}

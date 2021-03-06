@@ -1,52 +1,45 @@
-import React, {useState} from 'react';
-import {Form, Input, Button, Select, Icon} from 'antd';
+import React, {useState, useEffect} from 'react';
+import {Form, Input, Button, Select} from 'antd';
+import { FilterValuesProps } from './../types/types';
 import 'antd/dist/antd.css';
-
 const { Option } = Select;
-const {Search} = Input;
 
-const TheFilter: React.FC = () => {
-    const [filterName, setFilterName] = useState('');
-    const [filterType, setFilterType] = useState('');
+const TheFilter: React.FC<FilterValuesProps> = (props) => {
+
+    useEffect(() => {
+       console.log('filterType ' + props.filterType);
+    
+    }, [props.filterType, props.filterName]);
 
     const handleChangeFilterType = (value:string) => {
-        setFilterType(value);
+        props.setFilterType((value==='nakup')?'Nákup':'Pronájem');
       }
-    // const handleChangeFilterName = (value: string) => {
-    //     setFilterName(value);
-    // }
 
-    const handleSubmit = (event: any) => {
+   
+
+    const handleEraseFilter = (event: any) => {
         event.preventDefault();
-        alert('name ' + filterName + ' type ' + filterType);
+        props.setFilterName('');
+        props.setFilterType('');
+        props.setShowFilter(!props.showFilter);
 
     }
     return (
         <div>
-            <Form layout="inline" id="filter" 
-              onSubmit={handleSubmit}
-            >
+            <Form layout="inline" id="filter">
                 <Form.Item><p>Filtr:</p></Form.Item>
                         
                   <Form.Item>
-                 <Input 
-                      id="filterName"
-                      name="filterName"
-                      value={filterName}
-                      onChange={(e: React.FormEvent<HTMLInputElement>) => setFilterName(e.currentTarget.value)}
+                  <Input 
+                      id="adName"
+                      name="addName"
+                      value={props.filterName}
+                      onChange={(e: React.FormEvent<HTMLInputElement>) => props.setFilterName(e.currentTarget.value)}
                       style={{
                           width: 150,
                         }}
                         placeholder="Název položky"
                   />
-                  {/* <Search
-                    id="filterName"
-                    name="filterName"
-                    placeholder="Název položky"
-                    value = {filterName}
-                    onSearch={value => console.log(value)}
-                    style={{ width: 200 }}
-                  /> */}
                  </Form.Item>
                  <Form.Item>
                   <Select id="filterType" defaultValue="#" style={{ width: 150 }} onChange={handleChangeFilterType}>
@@ -55,7 +48,7 @@ const TheFilter: React.FC = () => {
                       <Option value="pronajem">Pronájem</Option>
                   </Select>
                   </Form.Item>
-                  <Button htmlType="submit" type="dashed" >X</Button>
+                  <Button onClick={handleEraseFilter}>X</Button>
             </Form>
         </div>
     );

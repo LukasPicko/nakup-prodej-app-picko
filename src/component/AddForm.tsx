@@ -1,8 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import {Form, Input,Select, InputNumber, Button} from 'antd';
+import { useHistory } from "react-router-dom";
 import {DataModalProps} from '../types/types';
 import 'antd/dist/antd.css';
 const { Option } = Select;
+
 
 
 
@@ -10,7 +12,7 @@ const AddForm: React.FC<DataModalProps> = (props) => {
     const [addFormName, setAddFormName] = useState('');
     const [addFormType, setAddFormType] = useState('');
     const [addFormPrice, setAddFormPrice] = useState(0);
-
+    const history = useHistory();
 
         useEffect(() => {
        
@@ -36,6 +38,7 @@ const AddForm: React.FC<DataModalProps> = (props) => {
         setAddFormType('');
         setAddFormPrice(0);
         props.setVisibleModalForm(false);
+        history.push("/");
 
     }
 
