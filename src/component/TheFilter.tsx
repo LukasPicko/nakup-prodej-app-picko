@@ -12,7 +12,7 @@ const TheFilter: React.FC<FilterValuesProps> = (props) => {
     }, [props.filterType, props.filterName]);
 
     const handleChangeFilterType = (value:string) => {
-        props.setFilterType((value==='nakup')?'Nákup':'Pronájem');
+        props.setFilterType((value==='nakup')?'Nákup':(value==='pronajem')?'Pronájem':'#');
       }
 
    
@@ -20,7 +20,7 @@ const TheFilter: React.FC<FilterValuesProps> = (props) => {
     const handleEraseFilter = (event: any) => {
         event.preventDefault();
         props.setFilterName('');
-        props.setFilterType('');
+        props.setFilterType('#');
         props.setShowFilter(!props.showFilter);
 
     }
@@ -39,11 +39,12 @@ const TheFilter: React.FC<FilterValuesProps> = (props) => {
                           width: 150,
                         }}
                         placeholder="Název položky"
+                        aria-autocomplete='inline'
                   />
                  </Form.Item>
                  <Form.Item>
-                  <Select id="filterType" defaultValue="#" style={{ width: 150 }} onChange={handleChangeFilterType}>
-                  <Option value="#"   disabled>Typ položky</Option>
+                  <Select id="filterType"  style={{ width: 150 }} onChange={handleChangeFilterType}>
+                      <Option value="#">Všechno</Option>
                       <Option value="nakup">Nákup</Option>
                       <Option value="pronajem">Pronájem</Option>
                   </Select>
