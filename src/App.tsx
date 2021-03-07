@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import { Switch, Route } from 'react-router-dom'
+import { PageHeader, Button, Descriptions } from 'antd';
 import TheNavigation from './component/TheNavigation';
 import './App.css';
 import TheRegister from './component/TheRegister';
@@ -40,11 +41,13 @@ const App: React.FC = () => {
   const [data, setData] = useState(purchases);
   return (
     <div>
-      <header>
-          <TheNavigation/>
-          <h1>NÁKUPY A PRONÁJMY</h1>
+      <TheNavigation/>
+      <PageHeader
+        title="NÁKUPY A PRONÁJMY"
+        extra={[
           <TheSetting showFilter={showFilter} setShowFilter={setShowFilter} data={data} setData={setData}/>
-      </header>
+      ]}
+    ></PageHeader>
 		  <main>
         <Switch>
 					<Route path="/" component={TheRegister} exact>
