@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {Form, Input,Select, InputNumber, Button} from 'antd';
 import { useHistory } from "react-router-dom";
 import {DataModalProps} from '../types/types';
+import { v4 as uuidv4 } from 'uuid';
 import 'antd/dist/antd.css';
 const { Option } = Select;
 
@@ -29,14 +30,16 @@ const AddForm: React.FC<DataModalProps> = (props) => {
         props.setData(
             (oldData =>  [...oldData, 
                 {
-                'id': Math.floor(Date.now() / 1000).toString(),
+                'id': uuidv4(),
                 'type': addFormType,
                 'name': addFormName,
                 'price': addFormPrice}
                 ]));
+        
         setAddFormName('');
         setAddFormType('');
         setAddFormPrice(0);
+
         props.setVisibleModalForm(false);
         history.push("/");
 
