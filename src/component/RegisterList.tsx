@@ -5,8 +5,14 @@ import { useHistory } from "react-router-dom";
 import TheFilter from './TheFilter';
 const { Title } = Typography;
 
-var storedFilterType:string = (localStorage.getItem("storedFilterType"))?localStorage.getItem("storedFilterType"):'#'
-var storedFilterName:string = (localStorage.getItem("storedFilterName"))?localStorage.getItem("storedFilterName"):''
+var storedFilterName:string, storedFilterType:string;
+var stType = localStorage.getItem("storedFilterType");
+var stName = localStorage.getItem("storedFilterName");
+storedFilterType = stType ? stType : '#';
+storedFilterName = stName ? stName : '';
+
+//var storedFilterType:string = (localStorage.getItem("storedFilterType"))?localStorage.getItem("storedFilterType"):'#'
+//var storedFilterName:string = (localStorage.getItem("storedFilterName"))?localStorage.getItem("storedFilterName"):''
 
 const filterResult = (data:{id: string; type: string; name: string; price: number;}[], filterName:string, filterType:string) => {
   if(!filterName&&filterType==='#'){return data}
