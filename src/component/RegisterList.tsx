@@ -1,15 +1,18 @@
-import React, {useState, useEffect, useCallback} from 'react';
-import { List, Typography, Avatar, Icon, Button } from 'antd';
+import React, {useState, useEffect} from 'react';
+import { List, Typography, Avatar, Button } from 'antd';
 import { CommonProps } from './../types/types';
 import { useHistory } from "react-router-dom";
+import _ from 'lodash';
 import TheFilter from './TheFilter';
 const { Title } = Typography;
 
-var storedFilterName:string, storedFilterType:string;
+var storedFilterName:string, storedFilterType:string, storedSorting: {item: string; direction: string;}[];
 var stType = localStorage.getItem("storedFilterType");
 var stName = localStorage.getItem("storedFilterName");
+var stSort = localStorage.getItem('storedSorting');
 storedFilterType = stType ? stType : '#';
 storedFilterName = stName ? stName : '';
+storedSorting = stSort ? JSON.parse(stSort) : [{item:'name', direction:'asc'}, {item:'type', direction:'asc'} ];
 
 const filterResult = (data:{id: string; type: string; name: string; price: number;}[], filterName:string, filterType:string) => {
   if(!filterName&&filterType==='#'){return data}
@@ -25,21 +28,25 @@ function filterTypeResult(data:{id: string; type: string; name: string; price: n
   return data.filter(item => item.type === filterType)
 }
 
+function sortDataToShow(data:{id: string; type: string; name: string; price: number;}[], sorting:{item: string; direction: string;}[]){
+    return sorting[0].direction==='asc' ? _.orderBy(data, [sorting[0].item, sorting[1].item] , ['asc', 'asc']) : _.orderBy(data, [sorting[0].item, sorting[1].item] , ['desc', 'asc']);
+}
+
 const RegisterList: React.FC<CommonProps> = (Props) => {
     const[filterName, setFilterName] = useState(storedFilterName);
     const[filterType, setFilterType] = useState(storedFilterType);
+    const[sorting, setSorting] = useState(storedSorting)
     const[dataToShow, setDataToShow] = useState(Props.data);
     const history = useHistory();
 
 
     useEffect(() => {
-      console.log('dataToShow')
-      console.log(dataToShow)
-      setDataToShow(filterResult(Props.data, filterName, filterType ))
+      setDataToShow(sortDataToShow  ((filterResult(Props.data, filterName, filterType )), sorting));
       localStorage.setItem('storedFilterType', filterType);
       localStorage.setItem('storedFilterName', filterName);
+      localStorage.setItem('storedSorting', JSON.stringify(sorting));
       localStorage.setItem('storedData', JSON.stringify(Props.data));
-    }, [filterType, filterName, Props.data]);
+    }, [filterType, filterName, sorting, Props.data]);
 
     
    
@@ -57,7 +64,16 @@ const RegisterList: React.FC<CommonProps> = (Props) => {
         
         return (
             <div className="demo-infinite-container">
-              {Props.showFilter && <TheFilter filterName={filterName} setFilterName={setFilterName} filterType={filterType} setFilterType={setFilterType}  showFilter={Props.showFilter}  setShowFilter={Props.setShowFilter}/>}
+              {Props.showFilter && <TheFilter 
+                      filterName={filterName}
+                       setFilterName={setFilterName} 
+                       filterType={filterType} 
+                       setFilterType={setFilterType}  
+                       showFilter={Props.showFilter}  
+                       setShowFilter={Props.setShowFilter}
+                       sorting={sorting}
+                       setSorting={setSorting}
+              />}
                 <List 
                   bordered
                   dataSource={dataToShow}

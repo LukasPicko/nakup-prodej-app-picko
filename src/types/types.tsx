@@ -6,10 +6,18 @@
   }
 
   export interface FilterValuesProps extends FilterShowProps{
-    filterName: string
-    setFilterName: React.Dispatch<React.SetStateAction<string>>
-    filterType: string
-    setFilterType: React.Dispatch<React.SetStateAction<string>>
+    filterName: string;
+    setFilterName: React.Dispatch<React.SetStateAction<string>>;
+    filterType: string;
+    setFilterType: React.Dispatch<React.SetStateAction<string>>;
+    sorting: {
+      item: string;
+      direction: string;
+    }[];
+    setSorting: React.Dispatch<React.SetStateAction<{
+      item: string;
+      direction: string;
+    }[]>>
   }
 
   export interface DataProps {

@@ -50,9 +50,9 @@ const TheSummary: React.FC<DataProps> = (props) => {
           <br />
           <Text>Nákupy průměrná cena {purchaseAvg}</Text>
           <br />
-          <Text>Nákupy celková cena{purchaseSum}</Text>
+          <Text>Nákupy celková cena {purchaseSum}</Text>
           <br />
-          <Text>Nákupy počet{purchaseCount}</Text>
+          <Text>Nákupy počet {purchaseCount}</Text>
         </Card>
         <Card
           style={{ marginTop: 16 }}

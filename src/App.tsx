@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { Switch, Route } from 'react-router-dom'
-import { PageHeader, Button, Descriptions } from 'antd';
+import { PageHeader } from 'antd';
 import TheNavigation from './component/TheNavigation';
 import './App.css';
 import TheRegister from './component/TheRegister';
