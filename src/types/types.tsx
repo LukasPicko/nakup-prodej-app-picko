@@ -26,12 +26,19 @@
       type: string;
       name: string;
       price: number;
+      currency: string;
+      dateOfAction: string;
+      dateOfRegister: string;
+
   }[],
   setData: React.Dispatch<React.SetStateAction<{
       id: string;
       type: string;
       name: string;
       price: number;
+      currency: string;
+      dateOfAction:string;
+      dateOfRegister: string;
   }[]>>
   }
 
@@ -41,12 +48,18 @@
       type: string;
       name: string;
       price: number;
+      currency: string;
+      dateOfAction: string;
+      dateOfRegister: string;
   }[],
   setDataToShow: React.Dispatch<React.SetStateAction<{
       id: string;
       type: string;
       name: string;
       price: number;
+      currency: string;
+      dateOfAction: string;
+      dateOfRegister: string;
   }[]>>
   }
 

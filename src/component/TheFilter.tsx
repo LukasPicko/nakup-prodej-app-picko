@@ -1,14 +1,14 @@
 import React, {useEffect} from 'react';
-import {Form, Input, Button, Select} from 'antd';
+import {Form, Input, Button, Select, Typography} from 'antd';
 import _ from 'lodash';
 import { FilterValuesProps } from './../types/types';
 import 'antd/dist/antd.css';
 const { Option } = Select;
+const {Text} = Typography;
 
 const TheFilter: React.FC<FilterValuesProps> = (props) => {
 
     useEffect(() => {
-       console.log('filterType ' + props.filterType);
     
     }, [props.filterType, props.filterName]);
 
@@ -38,8 +38,7 @@ const TheFilter: React.FC<FilterValuesProps> = (props) => {
                         
                   <Form.Item>
                   <Input 
-                      id="adName"
-                      name="addName"
+                      
                       value={props.filterName}
                       onChange={(e: React.FormEvent<HTMLInputElement>) => props.setFilterName(e.currentTarget.value)}
                       style={{
@@ -54,14 +53,11 @@ const TheFilter: React.FC<FilterValuesProps> = (props) => {
                         size='small' 
                         icon="sort-ascending"
                         onClick={() => handleChangeSorting('name', 'asc')}
-                        style={{marginLeft:0}}
                 />
                 <Button 
                         size='small' 
                         icon="sort-descending"
                         onClick={() => handleChangeSorting('name', 'desc')}
-                        style={{marginLeft:0,
-                        marginRight:30}}
                 />
                  
                  <Form.Item>
@@ -84,6 +80,50 @@ const TheFilter: React.FC<FilterValuesProps> = (props) => {
                         style={{marginLeft:0,
                         marginRight:30}}
                 />
+                <Text>Cena</Text>
+                <Button 
+                        size='small' 
+                        icon="sort-ascending"
+                        onClick={() => handleChangeSorting('price', 'asc')}
+                        style={{marginLeft:0}}
+                />
+                <Button 
+                        size='small' 
+                        icon="sort-descending"
+                        onClick={() => handleChangeSorting('price', 'desc')}
+                        style={{marginLeft:0,
+                        marginRight:30}}
+                />
+                <Text>Datum platnosti</Text>
+                <Button 
+                        size='small' 
+                        icon="sort-ascending"
+                        onClick={() => handleChangeSorting('dateOfAction', 'asc')}
+                        style={{marginLeft:0}}
+                />
+                <Button 
+                        size='small' 
+                        icon="sort-descending"
+                        onClick={() => handleChangeSorting('dateOfAction', 'desc')}
+                        style={{marginLeft:0,
+                        marginRight:30}}
+                />
+                <Text>Datum registrace</Text>
+                <Button 
+                        size='small' 
+                        icon="sort-ascending"
+                        onClick={() => handleChangeSorting('dateOfRegister', 'asc')}
+                        style={{marginLeft:0}}
+                />
+                <Button 
+                        size='small' 
+                        icon="sort-descending"
+                        onClick={() => handleChangeSorting('dateOfRegister', 'desc')}
+                        style={{marginLeft:0,
+                        marginRight:30}}
+                />
+
+
                   <Button onClick={handleEraseFilter}>X</Button>
             </Form>
         </div>

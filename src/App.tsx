@@ -20,18 +20,28 @@ else {
     "type": "Pronájem",
     "name": "prvnijmeno",
     "price": 10,
+    "currency" : 'CZK',
+    "dateOfAction": '2021-03-08',
+    "dateOfRegister": '2021-03-08',
+
     },
     {
     "id": "90e7c81e-ad7a-4f99-9ee6-f4a73182dc93",
     "type": "Nákup",
     "name": "druhejmeno",
     "price": 100,
+    "currency" : 'CZK',
+    "dateOfAction": '2021-03-08',
+    "dateOfRegister": '2021-03-08',
     },
     {
     "id": "abee251c-78c8-4c0c-bf1c-a4c962e8b0de",
     "type": "Pronájem",
     "name": "tretijmeno",
     "price": 1000,
+    "currency" : 'EUR',
+    "dateOfAction": '2021-03-08',
+    "dateOfRegister": '2021-03-08',
     },
   ]
 }
