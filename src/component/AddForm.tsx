@@ -16,18 +16,17 @@ const AddForm: React.FC<DataModalProps> = (props) => {
     const [addFormPrice, setAddFormPrice] = useState(0);
     const [addFormCurrency, setAddFormCurrency] = useState('');
     const [addFormDateOfAction, setAddFormDateOfAction] = useState(()=>nowDate())
-    const [addFormDateOfRegister, setAddFormDateOfRegister] = useState(()=>nowDate())
+    const [addFormDateOfRegister, ] = useState(()=>nowDate())
+    const [addFormDateOfReturn, setAddFormDateOfReturn] = useState(()=>nowDate())
     const history = useHistory();
 
     function nowDate(){return moment(Date.now()).format('YYYY-MM-DD')}
 
         useEffect(() => {
-       
-    
-        }, [addFormName, addFormType, addFormPrice, addFormCurrency, addFormDateOfAction, addFormDateOfRegister, props.data]);
+        }, [addFormName, addFormType, addFormPrice, addFormCurrency, addFormDateOfAction, addFormDateOfRegister,addFormDateOfReturn, props.data]);
 
     const handleChangeFormType = (value:string) => {
-        setAddFormType((value==='nakup')?'Nákup':'Pronájem');
+        setAddFormType(value);
       }
 
     const handleChangeFormCurrency = (value:string) => {setAddFormCurrency(value)}
@@ -44,7 +43,8 @@ const AddForm: React.FC<DataModalProps> = (props) => {
                 'price': addFormPrice,
                 'currency': addFormCurrency,
                 'dateOfAction': addFormDateOfAction,
-                'dateOfRegister': addFormDateOfRegister
+                'dateOfRegister': addFormDateOfRegister,
+                'dateOfReturn': addFormDateOfReturn
 
 
             }
@@ -55,6 +55,7 @@ const AddForm: React.FC<DataModalProps> = (props) => {
         setAddFormPrice(0);
         setAddFormCurrency('');
         setAddFormDateOfAction(nowDate());
+        setAddFormDateOfReturn(nowDate());
 
         props.setVisibleModalForm(false);
         history.push("/");
@@ -69,8 +70,12 @@ const AddForm: React.FC<DataModalProps> = (props) => {
     }
 
       
-    const handleChangeDate = (date:any, dateString:string) => {
+    const handleChangeDateOfAction = (date:any, dateString:string) => {
         setAddFormDateOfAction(moment(date).format("YYYY-MM-DD"))
+    }
+
+    const handleChangeDateOfReturn = (date:any, dateString:string) => {
+        setAddFormDateOfReturn(moment(date).format("YYYY-MM-DD"))
     }
 
 
@@ -80,7 +85,9 @@ const AddForm: React.FC<DataModalProps> = (props) => {
               onSubmit={handleSubmit}
             >
                 <Form.Item
-                    label="Název"
+                   
+                   label="Název"
+                  
                 >
                  <Input 
                       id="adName"
@@ -100,13 +107,17 @@ const AddForm: React.FC<DataModalProps> = (props) => {
                       <Option value="#"  disabled>Typ položky</Option>
                       <Option value="nakup">Nákup</Option>
                       <Option value="pronajem">Pronájem</Option>
+                      <Option value="zapujcka">Zápůjčka</Option>
                   </Select>
                   </Form.Item>
                   
+                  {addFormType!=='zapujcka'&&
+                  <>
                   <Form.Item
-                        label="Cena"
+                        label={(addFormType==='pronajem')?'Cena za měsíc':'Cena'}
+                        
                   >
-                        <InputNumber value={addFormPrice} onChange={handleChangeNumber}/>
+                        <InputNumber value={addFormPrice} min={0} onChange={handleChangeNumber}/>
                     </Form.Item>
                     <Form.Item>
                     <Select id="addCurrency" value={addFormCurrency} style={{ width: 150 }} onChange={handleChangeFormCurrency}>
@@ -115,9 +126,19 @@ const AddForm: React.FC<DataModalProps> = (props) => {
                       <Option value="EUR">€</Option>
                   </Select>
                   </Form.Item>
+                  </>}
+                  {addFormType==='zapujcka'&&<>
+                  Termín vrácení
+                  <Form.Item>
+                      <DatePicker onChange={handleChangeDateOfReturn} value={moment(addFormDateOfReturn)}/>
+                  </Form.Item>
+                  
+                  </>}
+
+
                   Uzavření smlouvy
                   <Form.Item>
-                      <DatePicker onChange={handleChangeDate} value={moment(addFormDateOfAction)}/>
+                      <DatePicker onChange={handleChangeDateOfAction} value={moment(addFormDateOfAction)}/>
                   </Form.Item>
                     <Button htmlType="submit" type="default" >Odeslat</Button>
             </Form>

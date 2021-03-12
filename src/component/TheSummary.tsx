@@ -15,14 +15,14 @@ const TheSummary: React.FC<DataProps> = (props) => {
     const[leaseCount, setLeaseCount] = useState(0)
 
     useEffect(() => {
-      setPurchaseMax(maxFce('Nákup'));
-      setPurchaseSum(sumFce('Nákup'));
-      setPurchaseAvg(avgFce('Nákup'));
-      setPurchaseCount(countFce('Nákup'));
-      setLesaeMax(maxFce('Pronájem'));
-      setLeaseSum(sumFce('Pronájem'));
-      setLeaseAvg(avgFce('Pronájem'));
-      setLeaseCount(countFce('Pronájem'));
+      setPurchaseMax(maxFce('nakup'));
+      setPurchaseSum(sumFce('nakup'));
+      setPurchaseAvg(avgFce('nakup'));
+      setPurchaseCount(countFce('nakup'));
+      setLesaeMax(maxFce('pronajem'));
+      setLeaseSum(sumFce('pronajem'));
+      setLeaseAvg(avgFce('pronajem'));
+      setLeaseCount(countFce('pronajem'));
 
     },[]);
 
@@ -66,9 +66,8 @@ const TheSummary: React.FC<DataProps> = (props) => {
           <Text>Pronájmy celková cena {leaseSum}</Text>
           <br />
           <Text>Pronájmy počet {leaseCount}</Text>
-          
-          
         </Card>
+        
   </Card>
     );
   }

@@ -10,13 +10,14 @@ const { Option } = Select;
 
 
 const UpdateForm: React.FC<DataProps> = (props) => {
-    const [updFormName, setUpdFormName] = useState('');
-    const [updFormType, setUpdFormType] = useState('');
-    const [updFormPrice, setUpdFormPrice] = useState(0);
-    const [updFormCurrency, setUpdFormCurrency] = useState('');
-    const [updFormId, ] = useState(useParams<{ id: string }>().id);
+    const [updName, setUpdName] = useState('');
+    const [updType, setUpdType] = useState('');
+    const [updPrice, setUpdPrice] = useState(0);
+    const [updCurrency, setUpdCurrency] = useState('');
+    const [updId, ] = useState(useParams<{ id: string }>().id);
     const [updDateOfAction, setUpdDateOfAction] = useState('');
     const [updDateOfRegister, setUpdDateOfRegister] = useState('');
+    const [updDateOfReturn, setUpdDateOfReturn] = useState('');
     const [objectToUpd, setObjectToUpd] = useState(
         {
             "id": "",
@@ -25,66 +26,70 @@ const UpdateForm: React.FC<DataProps> = (props) => {
             "price": 0,
             "currency": "",
             "dateOfAction":"",
-            "dateOfRegister":""
+            "dateOfRegister":"",
+            "dateOfReturn":""
         })
         
         const history = useHistory();
     
     useEffect(() => {
-        if(!updFormName){
+        if(!updName){
         console.log('prazdny objTemp')
-        let objTemp:any={id: '', type: '', name: '', price: 0, currency:'', dateOfAction:'', dateOfRegister:''};
+        let objTemp:any={id: '', type: '', name: '', price: 0, currency:'', dateOfAction:'', dateOfRegister:'', dateOfReturn:''};
         console.log(objTemp)
-        if(props.data!==undefined){objTemp = props.data.find(item => item.id === updFormId)}
+        if(props.data!==undefined){objTemp = props.data.find(item => item.id === updId)}
         console.log('plny objTemp')
         console.log(objTemp)
-       setUpdFormName(objTemp.name);
-       setUpdFormType(objTemp.type);
-       setUpdFormPrice(objTemp.price);
-       setUpdFormCurrency(objTemp.currency);
+       setUpdName(objTemp.name);
+       setUpdType(objTemp.type);
+       setUpdPrice(objTemp.price);
+       setUpdCurrency(objTemp.currency);
        setUpdDateOfAction(objTemp.dateOfAction);
        setUpdDateOfRegister(objTemp.dateOfRegister);
+       setUpdDateOfReturn(objTemp.dateOfReturn);
     }
 
        console.log('props.data v useEffectu po updatu')
        console.log(props.data);
 
-    }, [updFormName, updFormType, updFormPrice, updFormId, updFormCurrency, updDateOfAction, updDateOfRegister, props.data]);
+    }, [updName, updType, updPrice, updId, updCurrency, updDateOfAction, updDateOfRegister, updDateOfReturn, props.data]);
 
     
     const handleChangeType = (value:string) => {
-        setUpdFormType((value==='nakup')?"Nákup":"Pronájem");
+        setUpdType(value);
       }
 
-    const handleChangeCurrency = (value:string) => {setUpdFormCurrency(value)}
+    const handleChangeCurrency = (value:string) => {setUpdCurrency(value)}
     
     const handleSubmit = (event: any) => {
         event.preventDefault();
         console.log('submituju update form');
         setObjectToUpd(
             {
-                id:updFormId,
-                type:updFormType,
-                name:updFormName,
-                price:updFormPrice,
-                currency: updFormCurrency,
+                id:updId,
+                type:updType,
+                name:updName,
+                price:updPrice,
+                currency: updCurrency,
                 dateOfAction: updDateOfAction,
-                dateOfRegister: updDateOfRegister
+                dateOfRegister: updDateOfRegister,
+                dateOfReturn: updDateOfReturn
             }
         );
         console.log('editovany object');
         console.log(objectToUpd);
         console.log('pred updatem');
         console.log(props.data);
-        props.setData(props.data.filter(item => item.id !== updFormId));
+        props.setData(props.data.filter(item => item.id !== updId));
         props.setData(prevData => [...prevData, 
-            {'id':updFormId,
-             'type': updFormType,
-             'name': updFormName,
-             'price': updFormPrice,
-             'currency': updFormCurrency,
+            {'id':updId,
+             'type': updType,
+             'name': updName,
+             'price': updPrice,
+             'currency': updCurrency,
              'dateOfAction':updDateOfAction,
-             'dateOfRegister': updDateOfRegister   
+             'dateOfRegister': updDateOfRegister,
+             'dateOfReturn': updDateOfReturn   
             }]);
         console.log('po updatu')
         console.log(props.data);
@@ -96,13 +101,17 @@ const UpdateForm: React.FC<DataProps> = (props) => {
     const handleChangeNumber = (value:any) => {
         // if(typeof value != "string"){console.log('error')}
         // if (!isNaN(value)&&!isNaN(parseFloat(value))){console.log('success')}
-        setUpdFormPrice(parseFloat(value));
-        console.log(updFormPrice);
+        setUpdPrice(parseFloat(value));
+        console.log(updPrice);
         //"^-?\\d*(\\.\\d+)?$"
     }
 
-    const handleChangeDate = (date:any, dateString:string) => {
-        setUpdDateOfRegister(moment(date).format("YYYY-MM-DD"))
+    const handleChangeDateOfAction = (date:any, dateString:string) => {
+        setUpdDateOfAction(moment(date).format("YYYY-MM-DD"))
+    }
+
+    const handleChangeDateOfReturn = (date:any, dateString:string) => {
+        setUpdDateOfReturn(moment(date).format("YYYY-MM-DD"))
     }
     
     function handleClickDeleteRecord(id:any){
@@ -125,8 +134,8 @@ const UpdateForm: React.FC<DataProps> = (props) => {
                  <Input 
                       id="adName"
                       name="addName"
-                      value={updFormName}
-                      onChange={(e: React.FormEvent<HTMLInputElement>) => setUpdFormName(e.currentTarget.value)}
+                      value={updName}
+                      onChange={(e: React.FormEvent<HTMLInputElement>) => setUpdName(e.currentTarget.value)}
                       style={{
                           width: 150,
                         }}
@@ -136,28 +145,37 @@ const UpdateForm: React.FC<DataProps> = (props) => {
                  <Form.Item 
                     label="Typ transakce"
                  >
-                  <Select id="updType" value={updFormType} style={{ width: 150 }} onChange={handleChangeType}>
+                  <Select id="updType" value={updType} style={{ width: 150 }} onChange={handleChangeType}>
                       <Option value="nakup">Nákup</Option>
                       <Option value="pronajem">Pronájem</Option>
+                      <Option value="zapujcka">Zápůjčka</Option>
                   </Select>
                   </Form.Item>
+                  {(updType!=='zapujcka')&&<>
                   <Form.Item
-                        label="Cena"
+                        label={(updType==='nakup')?'Cena':'Cena za měsíc'}
                   >
-                        <InputNumber value={updFormPrice} onChange={handleChangeNumber}/>
+                        <InputNumber value={updPrice} onChange={handleChangeNumber}/>
                     </Form.Item>
                     <Form.Item >
-                  <Select id="updCurrency" value={updFormCurrency} style={{ width: 150 }} onChange={handleChangeCurrency}>
+                  <Select id="updCurrency" value={updCurrency} style={{ width: 150 }} onChange={handleChangeCurrency}>
                       <Option value="CZK">Kč</Option>
                       <Option value="EUR">€</Option>
                   </Select>
                   </Form.Item>
+                  </>}
+                  {(updType!=='zapujcka')&&<>
+                  Termín vrácení
+                  <Form.Item>
+                      <DatePicker onChange={handleChangeDateOfReturn}/>
+                  </Form.Item>
+                  </>}
                   Uzavření smlouvy
                   <Form.Item>
-                      <DatePicker onChange={handleChangeDate}/>
+                      <DatePicker onChange={handleChangeDateOfAction}/>
                   </Form.Item>
                     <Button htmlType="submit" type="default" >Odeslat</Button>
-                    <Button type="default" onClick={()=>{handleClickDeleteRecord(updFormId)}}>Smaž položku</Button>
+                    <Button type="default" onClick={()=>{handleClickDeleteRecord(updId)}}>Smaž položku</Button>
             </Form>
         </div>
     );

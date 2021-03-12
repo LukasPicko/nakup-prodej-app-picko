@@ -13,7 +13,7 @@ const TheFilter: React.FC<FilterValuesProps> = (props) => {
     }, [props.filterType, props.filterName]);
 
     const handleChangeFilterType = (value:string) => {
-        props.setFilterType((value==='nakup')?'Nákup':(value==='pronajem')?'Pronájem':'#');
+        props.setFilterType(value);
       }
 
     const handleChangeSorting = (property:string, howSort:string) =>{
@@ -61,7 +61,7 @@ const TheFilter: React.FC<FilterValuesProps> = (props) => {
                 />
                  
                  <Form.Item>
-                  <Select id="filterType"  style={{ width: 150 }} onChange={handleChangeFilterType}>
+                  <Select id="filterType" defaultValue='#' style={{ width: 150 }} onChange={handleChangeFilterType}>
                       <Option value="#">Všechno</Option>
                       <Option value="nakup">Nákup</Option>
                       <Option value="pronajem">Pronájem</Option>
@@ -124,7 +124,7 @@ const TheFilter: React.FC<FilterValuesProps> = (props) => {
                 />
 
 
-                  <Button onClick={handleEraseFilter}>X</Button>
+                  <Button style={{borderWidth:0}} onClick={handleEraseFilter}>X</Button>
             </Form>
         </div>
     );

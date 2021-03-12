@@ -29,6 +29,7 @@
       currency: string;
       dateOfAction: string;
       dateOfRegister: string;
+      dateOfReturn: string;
 
   }[],
   setData: React.Dispatch<React.SetStateAction<{
@@ -39,6 +40,7 @@
       currency: string;
       dateOfAction:string;
       dateOfRegister: string;
+      dateOfReturn: string;
   }[]>>
   }
 
@@ -51,6 +53,7 @@
       currency: string;
       dateOfAction: string;
       dateOfRegister: string;
+      dateOfReturn: string;
   }[],
   setDataToShow: React.Dispatch<React.SetStateAction<{
       id: string;
@@ -60,6 +63,7 @@
       currency: string;
       dateOfAction: string;
       dateOfRegister: string;
+      dateOfReturn: string;
   }[]>>
   }
 

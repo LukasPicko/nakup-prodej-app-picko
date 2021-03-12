@@ -15,24 +15,24 @@ storedFilterType = stType ? stType : '#';
 storedFilterName = stName ? stName : '';
 storedSorting = stSort ? JSON.parse(stSort) : [{item:'name', direction:'asc'}, {item:'type', direction:'asc'} ];
 
-const filterResult = (data:{id: string; type: string; name: string; price: number; currency: string; dateOfAction:string; dateOfRegister: string;}[], filterName:string, filterType:string) => {
+const filterResult = (data:{id: string; type: string; name: string; price: number; currency: string; dateOfAction:string; dateOfRegister: string; dateOfReturn: string;}[], filterName:string, filterType:string) => {
   if(!filterName&&filterType==='#'){return data}
   else if(!filterName){return filterTypeResult(data, filterType)}
   else if(filterType==='#'){return filterNameResult(data, filterName)}
   else {return filterNameResult(filterTypeResult(data, filterType), filterName)}
 }
 
-function filterNameResult(data:{id: string; type: string; name: string; price: number; currency: string, dateOfAction:string; dateOfRegister: string;}[], filterName:string):{id: string; type: string; name: string; price: number; currency: string; dateOfAction:string; dateOfRegister: string;}[]{
+function filterNameResult(data:{id: string; type: string; name: string; price: number; currency: string, dateOfAction:string; dateOfRegister: string; dateOfReturn: string;}[], filterName:string):{id: string; type: string; name: string; price: number; currency: string; dateOfAction:string; dateOfRegister: string; dateOfReturn: string;}[]{
   return data.filter(item => item.name.includes(filterName))
 }
-function filterTypeResult(data:{id: string; type: string; name: string; price: number; currency: string; dateOfAction:string; dateOfRegister: string;}[], filterType:string):{id: string; type: string; name: string; price: number; currency: string; dateOfAction:string; dateOfRegister: string;}[]{
+function filterTypeResult(data:{id: string; type: string; name: string; price: number; currency: string; dateOfAction:string; dateOfRegister: string; dateOfReturn: string;}[], filterType:string):{id: string; type: string; name: string; price: number; currency: string; dateOfAction:string; dateOfRegister: string; dateOfReturn: string;}[]{
   return data.filter(item => item.type === filterType)
 }
 
-function sortDataToShow(data:{id: string; type: string; name: string; price: number; currency: string; dateOfAction:string; dateOfRegister: string;}[], sorting:{item: string; direction: string;}[]){
+function sortDataToShow(data:{id: string; type: string; name: string; price: number; currency: string; dateOfAction:string; dateOfRegister: string; dateOfReturn: string;}[], sorting:{item: string; direction: string;}[]){
     if(sorting[0].item==='price'){
-      let purchase = data.filter(item => item.type==='Nákup')
-      let lease = data.filter(item => item.type==='Pronájem')
+      let purchase = data.filter(item => item.type==='nakup')
+      let lease = data.filter(item => item.type==='pronajem')
       purchase = sorting[0].direction==='asc' ? _.orderBy(purchase, [sorting[0].item, sorting[1].item] , ['asc', 'asc']) : _.orderBy(purchase, [sorting[0].item, sorting[1].item] , ['desc', 'asc']);
       lease = sorting[0].direction==='asc' ? _.orderBy(lease, [sorting[0].item, sorting[1].item] , ['asc', 'asc']) : _.orderBy(lease, [sorting[0].item, sorting[1].item] , ['desc', 'asc']);
       return [...purchase, ...lease]
@@ -92,18 +92,25 @@ const RegisterList: React.FC<CommonProps> = (Props) => {
                     <List.Item key={item.id}>
                       <List.Item.Meta
                         avatar={
-                          <Avatar icon={(item.type==='Nákup')?'dollar':'clock-circle'} size={55} style={{backgroundColor: '#FF9F33'}}/>
+                          <Avatar icon={(item.type==='nakup')?'dollar':(item.type==='pronajem')?'clock-circle':"issues-close"} size={55} style={{backgroundColor: '#FF9F33'}}/>
                         }
                         title={
                           <Title level={4} ><span onClick= {() => {editRecordForm(item.id)}}>{item.name}</span></Title>}
-                        description={item.type}
+                        description={(item.type==='nakup'?'Nákup':(item.type==='pronajem')?'Pronájem':'Zápůjčka')}
                       />
                       
                       <div style={{marginRight:20}}><p>Platnost od :</p><p>{moment(item.dateOfAction).format('DD.MM.YYYY')}</p></div>
                       
                       
                       <div style={{marginRight:20}}><p>V registru od :</p><p>{moment(item.dateOfRegister).format('DD.MM.YYYY')}</p></div>
-                      <div style={{marginRight:20}}>{item.price}{(item.type==='Nákup') ? (' '+ item.currency):(' '+ item.currency+'/měsíc')}</div>
+                      {(item.type!=='zapujcka')&&<>
+                      <div style={{marginRight:20}}>{item.price}{(item.type==='nakup') ? (' '+ item.currency):(' '+ item.currency+'/měsíc')}</div>
+                      </>}
+                      {(item.type==='zapujcka')&&<>
+                      <div style={{marginRight:20}}><p>Termín vrácení :</p><p>{moment(item.dateOfReturn).format('DD.MM.YYYY')}</p></div>
+                      </>}
+                      
+                      
                       <Button style={{borderWidth:0}} onClick={()=>{handleClickDeleteRecord(item.id)}}>X</Button>
                       
                     </List.Item>
@@ -112,7 +119,6 @@ const RegisterList: React.FC<CommonProps> = (Props) => {
                 </List>
             </div>
         );
-      
 }
 
 export default RegisterList;
