@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { Switch, Route } from 'react-router-dom'
 import { PageHeader } from 'antd';
 import TheNavigation from './component/TheNavigation';
@@ -17,38 +17,64 @@ else {
   purchases = [
     {
     "id": "c6cc568e-4141-4aea-9273-a7849ab20776",
-    "type": "Pronájem",
+    "type": "pronajem",
     "name": "prvnijmeno",
     "price": 10,
     "currency" : 'CZK',
     "dateOfAction": '2021-03-08',
-    "dateOfRegister": '2021-03-08',
+    "dateOfRegister": '2021-03-10',
 
     },
     {
     "id": "90e7c81e-ad7a-4f99-9ee6-f4a73182dc93",
-    "type": "Nákup",
+    "type": "nakup",
     "name": "druhejmeno",
     "price": 100,
     "currency" : 'CZK',
-    "dateOfAction": '2021-03-08',
-    "dateOfRegister": '2021-03-08',
+    "dateOfAction": '2021-03-07',
+    "dateOfRegister": '2021-03-11',
     },
     {
     "id": "abee251c-78c8-4c0c-bf1c-a4c962e8b0de",
-    "type": "Pronájem",
+    "type": "pronajem",
     "name": "tretijmeno",
     "price": 1000,
     "currency" : 'EUR',
-    "dateOfAction": '2021-03-08',
-    "dateOfRegister": '2021-03-08',
+    "dateOfAction": '2021-03-06',
+    "dateOfRegister": '2021-03-12',
     },
   ]
 }
 const App: React.FC = () => {
-  
   const [showFilter, setShowFilter] = useState(false);
   const [data, setData] = useState(purchases);
+
+  // useEffect(() => {
+  //   alert('jsem v App useeffectu')
+  //   fetch('https://cors-anywhere.herokuapp.com/https://www.cnb.cz/cs/financni_trhy/devizovy_trh/kurzy_devizoveho_trhu/denni_kurz.txt',
+  //   {
+  //     //mode: 'no-cors',
+  //     headers:{
+  //       'Content-Type': 'text/plain;charset=UTF-8',
+  //       'Access-Control-Allow-Origin': '*'
+  //     }
+  //   }
+  //   )
+  //   .then((r) => r.text())
+  //   .then(text  => {
+  //     console.log('fetch pokus')
+  //     console.log('|=>'+text+'<=|');
+  //   })
+  //   .catch(error => {
+  //     console.log(error);
+  //     alert('text CNB nefetchuju');
+
+    
+  // }) 
+    
+  // },[]);
+  
+  
   return (
     <div>
       <TheNavigation/>
