@@ -5,7 +5,10 @@ import { useHistory } from "react-router-dom";
 import moment from "moment";
 import _ from "lodash";
 import TheFilter from "./TheFilter";
+import {typesOfType, typesOfCurrency} from './Enums/enums'
 const { Title } = Typography;
+
+
 
 var storedFilterName: string,
   storedFilterType: string,
@@ -211,11 +214,8 @@ const RegisterList: React.FC<CommonProps> = (Props) => {
                 </Title>
               }
               description={
-                item.type === "nakup"
-                  ? "Nákup"
-                  : item.type === "pronajem"
-                  ? "Pronájem"
-                  : "Zápůjčka"
+                //@ts-ignore
+                typesOfType[item.type]
               }
             />
 
@@ -232,10 +232,10 @@ const RegisterList: React.FC<CommonProps> = (Props) => {
             {item.type !== "zapujcka" && (
               <>
                 <div style={{ marginRight: 20 }}>
-                  {item.price}
-                  {item.type === "nakup"
-                    ? " " + item.currency
-                    : " " + item.currency + "/měsíc"}
+                  {item.price + ' '}
+                  {//@ts-ignore
+                    typesOfCurrency[item.currency]
+                  }
                 </div>
               </>
             )}
