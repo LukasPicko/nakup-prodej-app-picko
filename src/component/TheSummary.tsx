@@ -1,7 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import {Card, Typography} from 'antd';
 import { DataProps } from './../types/types';
+import moment from "moment";
+import _ from "lodash";
 const {Text} = Typography;
+
+
+
 
 const TheSummary: React.FC<DataProps> = (props) => {
 
@@ -13,6 +18,9 @@ const TheSummary: React.FC<DataProps> = (props) => {
     const[leaseSum, setLeaseSum] =useState(0)
     const[leaseAvg, setLeaseAvg] = useState(0)
     const[leaseCount, setLeaseCount] = useState(0)
+    const [loanMin, setLoanMin] = useState('');
+    const [loanMax, setLoanMax] = useState('');
+    const [loanCount, setLoanCount] = useState(0);
 
     useEffect(() => {
       setPurchaseMax(maxFce('nakup'));
@@ -23,8 +31,19 @@ const TheSummary: React.FC<DataProps> = (props) => {
       setLeaseSum(sumFce('pronajem'));
       setLeaseAvg(avgFce('pronajem'));
       setLeaseCount(countFce('pronajem'));
+      setLoanMax(loanMaxMin('max'));
+      setLoanMin(loanMaxMin('min'));
+      setLoanCount(countFce('zapujcka'))
 
     },[]);
+
+    const loanMaxMin = (extreme:string) => {
+      let sorted = _.orderBy(props.data, ['dateOfReturn'],['desc'])
+      if (extreme==='max'){
+        return moment(sorted[0].dateOfReturn).format('DD.MM.YYYY')
+      }
+      else {return moment(sorted[sorted.length-1].dateOfReturn).format('DD.MM.YYYY')}
+    }
 
     const maxFce = (par:string) => {
       return  Math.max(...props.data.filter(item => item.type===par).map(item => (item.price)))
@@ -66,6 +85,17 @@ const TheSummary: React.FC<DataProps> = (props) => {
           <Text>Pronájmy celková cena {leaseSum}</Text>
           <br />
           <Text>Pronájmy počet {leaseCount}</Text>
+        </Card>
+        <Card
+          style={{ marginTop: 16 }}
+          type="inner"
+          title="Zápůjčky"
+        >
+          <Text>Zápůjčky vrátit nejříve: {loanMin}</Text>
+          <br />
+          <Text>Zápůjčky vrátit nejpozději: {loanMax}</Text>
+          <br />
+          <Text>Zápůjčky počet {loanCount}</Text>
         </Card>
         
   </Card>

@@ -1,15 +1,17 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import { Switch, Route } from 'react-router-dom'
 import { PageHeader } from 'antd';
 import TheNavigation from './component/TheNavigation';
 import './App.css';
-import TheRegister from './component/TheRegister';
+//import TheRegister from './component/TheRegister';
+
 import TheSummary from './component/TheSummary';
 import TheSetting from './component/TheSetting';
 import UpdateForm from './component/UpdateForm';
+import RegisterList from './component/RegisterList';
 
 
-var data = localStorage.getItem("storedData");
+let data = localStorage.getItem("storedData");
 if (data) {
   var purchases = JSON.parse(data);
 }
@@ -86,8 +88,8 @@ const App: React.FC = () => {
     ></PageHeader>
 		  <main>
         <Switch>
-					<Route path="/" component={TheRegister} exact>
-                <TheRegister showFilter={showFilter} setShowFilter={setShowFilter} data={data} setData={setData}/>
+					<Route path="/" exact>
+                <RegisterList showFilter={showFilter} setShowFilter={setShowFilter} data={data} setData={setData}/>
           </Route>
 
 					<Route path="/summary" component={TheSummary} >

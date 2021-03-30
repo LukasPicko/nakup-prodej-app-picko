@@ -65,6 +65,7 @@ const TheFilter: React.FC<FilterValuesProps> = (props) => {
                       <Option value="#">Všechno</Option>
                       <Option value="nakup">Nákup</Option>
                       <Option value="pronajem">Pronájem</Option>
+                      <Option value="zapujcka">Zápůjčka</Option>
                   </Select>
                   </Form.Item>
                   <Button 
