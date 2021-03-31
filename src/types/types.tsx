@@ -66,7 +66,8 @@ setDataToShow: React.Dispatch<React.SetStateAction<{
 }
 
 export interface DataModalProps extends DataProps {
+  visibleModalForm: boolean
   setVisibleModalForm: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export interface CommonProps extends FilterShowProps, DataProps {}
+export interface CommonProps extends FilterShowProps, DataModalProps {}

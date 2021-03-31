@@ -3,12 +3,13 @@ import {Button, Modal} from 'antd';
 import AddForm from './AddForm';
 import 'antd/dist/antd.css';
 import { CommonProps } from './../types/types';
+import CommonForm from './CommonForm';
 
 
 
 const TheSetting: React.FC<CommonProps> = (Props) => {
     const [changeButton, setChangeButton] = useState(true);
-    const [visibleModalForm, setVisibleModalForm] = useState(false);
+//    const [visibleModalForm, setVisibleModalForm] = useState(false);
 
     const handleOnOffFilter = () => {
         setChangeButton(!changeButton);
@@ -16,7 +17,7 @@ const TheSetting: React.FC<CommonProps> = (Props) => {
     }
 
     const showModal = () => {
-        setVisibleModalForm(!visibleModalForm);
+        Props.setVisibleModalForm(!Props.visibleModalForm);
       };
 
     return (
@@ -32,11 +33,11 @@ const TheSetting: React.FC<CommonProps> = (Props) => {
             <Button shape="circle" style={{ background: '#FF9F33', borderColor: '#FF9F33', color: '#000000' }}>En</Button>
             <Modal
                 title="Přidat položku"
-                visible={visibleModalForm}
+                visible={Props.visibleModalForm}
                 onCancel={showModal}
                 footer={null}
                 >
-                    <AddForm data={Props.data} setData={Props.setData} setVisibleModalForm={setVisibleModalForm}/>
+                    <CommonForm data={Props.data} setData={Props.setData} visibleModalForm={Props.visibleModalForm} setVisibleModalForm={Props.setVisibleModalForm}/>
             </Modal>
       </div>
     );

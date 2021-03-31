@@ -1,8 +1,7 @@
 import React, {useState, useEffect} from 'react';
-import {useParams} from 'react-router-dom'
+import {useParams, useHistory} from 'react-router-dom'
 import {Form, Input,Select, InputNumber, Button, DatePicker} from 'antd';
 import {DataProps} from '../types/types';
-import { useHistory } from "react-router-dom";
 import moment from 'moment';
 import 'antd/dist/antd.css';
 const { Option } = Select;

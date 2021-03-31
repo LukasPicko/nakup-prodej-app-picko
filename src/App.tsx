@@ -7,6 +7,7 @@ import './App.css';
 
 import TheSummary from './component/TheSummary';
 import TheSetting from './component/TheSetting';
+import CommonForm from './component/CommonForm';
 import UpdateForm from './component/UpdateForm';
 import RegisterList from './component/RegisterList';
 
@@ -50,6 +51,7 @@ else {
 const App: React.FC = () => {
   const [showFilter, setShowFilter] = useState(false);
   const [data, setData] = useState(purchases);
+  const [visibleModalForm, setVisibleModalForm] = useState(false);
 
   // useEffect(() => {
   //   alert('jsem v App useeffectu')
@@ -83,20 +85,20 @@ const App: React.FC = () => {
       <PageHeader
         title="NÁKUPY A PRONÁJMY"
         extra={[
-          <TheSetting showFilter={showFilter} setShowFilter={setShowFilter} data={data} setData={setData}/>
+          <TheSetting showFilter={showFilter} setShowFilter={setShowFilter} data={data} setData={setData} visibleModalForm={visibleModalForm} setVisibleModalForm={setVisibleModalForm}/>
       ]}
     ></PageHeader>
 		  <main>
         <Switch>
 					<Route path="/" exact>
-                <RegisterList showFilter={showFilter} setShowFilter={setShowFilter} data={data} setData={setData}/>
+                <RegisterList showFilter={showFilter} setShowFilter={setShowFilter} data={data} setData={setData} visibleModalForm={visibleModalForm} setVisibleModalForm={setVisibleModalForm}/>
           </Route>
 
-					<Route path="/summary" component={TheSummary} >
+					<Route path="/summary" >
                 <TheSummary data={data} setData={setData}/>
           </Route>
           <Route path="/:id" >
-                <UpdateForm data={data} setData={setData}/>
+                <CommonForm data={data} setData={setData} visibleModalForm={visibleModalForm} setVisibleModalForm={setVisibleModalForm}/>
           </Route>
 				</Switch>
 		  </main>
