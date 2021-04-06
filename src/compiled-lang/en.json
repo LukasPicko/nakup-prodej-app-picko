@@ -1,0 +1,112 @@
+{
+  "sumLeaseAvg": [
+    {
+      "type": 0,
+      "value": "Leases average price "
+    },
+    {
+      "type": 1,
+      "value": "leaseAvg"
+    }
+  ],
+  "sumLeaseCount": [
+    {
+      "type": 0,
+      "value": "Leases count "
+    },
+    {
+      "type": 1,
+      "value": "leaseCount"
+    }
+  ],
+  "sumLeaseMax": [
+    {
+      "type": 0,
+      "value": "Leases max price "
+    },
+    {
+      "type": 1,
+      "value": "leaseMax"
+    }
+  ],
+  "sumLeaseSum": [
+    {
+      "type": 0,
+      "value": "Leases total price  "
+    },
+    {
+      "type": 1,
+      "value": "leaseSum"
+    }
+  ],
+  "sumLoanCount": [
+    {
+      "type": 0,
+      "value": "Loans count "
+    },
+    {
+      "type": 1,
+      "value": "loanCount"
+    }
+  ],
+  "sumLoanFirst": [
+    {
+      "type": 0,
+      "value": "Loan return first: "
+    },
+    {
+      "type": 1,
+      "value": "loanMin"
+    }
+  ],
+  "sumLoanLast": [
+    {
+      "type": 0,
+      "value": "Loan return last: "
+    },
+    {
+      "type": 1,
+      "value": "loanMax"
+    }
+  ],
+  "sumPurchAvg": [
+    {
+      "type": 0,
+      "value": "Purchases average price "
+    },
+    {
+      "type": 1,
+      "value": "purchaseAvg"
+    }
+  ],
+  "sumPurchCount": [
+    {
+      "type": 0,
+      "value": "Purchases count "
+    },
+    {
+      "type": 1,
+      "value": "purchaseCount"
+    }
+  ],
+  "sumPurchMax": [
+    {
+      "type": 0,
+      "value": "Purchases max price "
+    },
+    {
+      "type": 1,
+      "value": "purchaseMax"
+    }
+  ],
+  "sumPurchSum": [
+    {
+      "type": 0,
+      "value": "Purchases total price "
+    },
+    {
+      "type": 1,
+      "value": "purchaseSum"
+    }
+  ]
+}

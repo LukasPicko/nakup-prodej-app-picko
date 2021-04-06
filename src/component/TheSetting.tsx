@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {Button, Modal} from 'antd';
-import AddForm from './AddForm';
 import 'antd/dist/antd.css';
 import { CommonProps } from './../types/types';
 import CommonForm from './CommonForm';
@@ -9,7 +8,6 @@ import CommonForm from './CommonForm';
 
 const TheSetting: React.FC<CommonProps> = (Props) => {
     const [changeButton, setChangeButton] = useState(true);
-//    const [visibleModalForm, setVisibleModalForm] = useState(false);
 
     const handleOnOffFilter = () => {
         setChangeButton(!changeButton);
@@ -20,6 +18,16 @@ const TheSetting: React.FC<CommonProps> = (Props) => {
         Props.setVisibleModalForm(!Props.visibleModalForm);
       };
 
+      const setCz = () => {
+          Props.setLanguage('cz')
+      }
+
+      const setEn = () => {
+        Props.setLanguage('en')
+    }
+
+      
+
     return (
       <div>
           {changeButton && 
@@ -29,8 +37,8 @@ const TheSetting: React.FC<CommonProps> = (Props) => {
                     <Button onClick={handleOnOffFilter} type="primary" shape="circle" icon="filter" size='default'  style={{ background: '#FF9F33', borderColor: '#FF9F33' }}/>
                 }
             <Button shape="round" onClick={showModal} style={{ background: '#FF9F33', borderColor: '#FF9F33', color: '#000000'}}>+Přidat</Button>{''}
-            <Button shape="circle" style={{ background: '#FF9F33', borderColor: '#FF9F33', color: '#000000'}}>Cz</Button>
-            <Button shape="circle" style={{ background: '#FF9F33', borderColor: '#FF9F33', color: '#000000' }}>En</Button>
+            <Button shape="circle" onClick={()=> setCz()} style={{ background: '#FF9F33', borderColor: '#FF9F33', color: '#000000'}}>Cz</Button>
+            <Button shape="circle" onClick={()=> setEn()} style={{ background: '#FF9F33', borderColor: '#FF9F33', color: '#000000' }}>En</Button>
             <Modal
                 title="Přidat položku"
                 visible={Props.visibleModalForm}

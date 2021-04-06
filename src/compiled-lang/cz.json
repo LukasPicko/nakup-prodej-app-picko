@@ -1,0 +1,112 @@
+{
+  "sumLeaseAvg": [
+    {
+      "type": 0,
+      "value": "Pronájmy průměrná cena "
+    },
+    {
+      "type": 1,
+      "value": "leaseAvg"
+    }
+  ],
+  "sumLeaseCount": [
+    {
+      "type": 0,
+      "value": "Pronájmy počet "
+    },
+    {
+      "type": 1,
+      "value": "leaseCount"
+    }
+  ],
+  "sumLeaseMax": [
+    {
+      "type": 0,
+      "value": "Pronájmy maximální cena "
+    },
+    {
+      "type": 1,
+      "value": "leaseMax"
+    }
+  ],
+  "sumLeaseSum": [
+    {
+      "type": 0,
+      "value": "Pronájmy celková cena "
+    },
+    {
+      "type": 1,
+      "value": "leaseSum"
+    }
+  ],
+  "sumLoanCount": [
+    {
+      "type": 0,
+      "value": "Zápůjčky počet "
+    },
+    {
+      "type": 1,
+      "value": "loanCount"
+    }
+  ],
+  "sumLoanFirst": [
+    {
+      "type": 0,
+      "value": "Zápůjčky vrátit nejříve: "
+    },
+    {
+      "type": 1,
+      "value": "loanMin"
+    }
+  ],
+  "sumLoanLast": [
+    {
+      "type": 0,
+      "value": "Zápůjčky vrátit nejpozději: "
+    },
+    {
+      "type": 1,
+      "value": "loanMax"
+    }
+  ],
+  "sumPurchAvg": [
+    {
+      "type": 0,
+      "value": "Nákupy průměrná cena "
+    },
+    {
+      "type": 1,
+      "value": "purchaseAvg"
+    }
+  ],
+  "sumPurchCount": [
+    {
+      "type": 0,
+      "value": "Nákupy počet "
+    },
+    {
+      "type": 1,
+      "value": "purchaseCount"
+    }
+  ],
+  "sumPurchMax": [
+    {
+      "type": 0,
+      "value": "Nákupy maximální cena "
+    },
+    {
+      "type": 1,
+      "value": "purchaseMax"
+    }
+  ],
+  "sumPurchSum": [
+    {
+      "type": 0,
+      "value": "Nákupy celková cena "
+    },
+    {
+      "type": 1,
+      "value": "purchaseSum"
+    }
+  ]
+}

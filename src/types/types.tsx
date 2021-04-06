@@ -70,4 +70,6 @@ export interface DataModalProps extends DataProps {
   setVisibleModalForm: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export interface CommonProps extends FilterShowProps, DataModalProps {}
+export interface CommonProps extends FilterShowProps, DataModalProps {
+  setLanguage: React.Dispatch<React.SetStateAction<string>>
+}
