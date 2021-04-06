@@ -8,7 +8,6 @@ import './App.css';
 import TheSummary from './component/TheSummary';
 import TheSetting from './component/TheSetting';
 import CommonForm from './component/CommonForm';
-import UpdateForm from './component/UpdateForm';
 import RegisterList from './component/RegisterList';
 
 

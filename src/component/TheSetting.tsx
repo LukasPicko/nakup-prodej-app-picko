@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {Button, Modal} from 'antd';
-import AddForm from './AddForm';
 import 'antd/dist/antd.css';
 import { CommonProps } from './../types/types';
 import CommonForm from './CommonForm';
