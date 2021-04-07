@@ -1,14 +1,18 @@
-import React, { useState, useEffect } from "react";
-import { List, Typography, Avatar, Button } from "antd";
+import React, {
+  useState,
+  useEffect,
+  MouseEvent,
+  MouseEventHandler,
+} from "react";
+import { List, Typography, Avatar, Button, message } from "antd";
 import { CommonProps } from "./../types/types";
 import { useHistory } from "react-router-dom";
 import moment from "moment";
 import _ from "lodash";
 import TheFilter from "./TheFilter";
-import {typesOfType, typesOfCurrency} from './Enums/enums'
+import { typesOfType, typesOfCurrency } from "./Enums/enums";
+import { collapseTextChangeRangesAcrossMultipleVersions } from "typescript";
 const { Title } = Typography;
-
-
 
 var storedFilterName: string,
   storedFilterType: string,
@@ -145,6 +149,7 @@ const RegisterList: React.FC<CommonProps> = (Props) => {
   const [filterType, setFilterType] = useState(storedFilterType);
   const [sorting, setSorting] = useState(storedSorting);
   const [dataToShow, setDataToShow] = useState(Props.data);
+  const [showButton, setShowButton] = useState('');
   const history = useHistory();
 
   useEffect(() => {
@@ -169,6 +174,15 @@ const RegisterList: React.FC<CommonProps> = (Props) => {
     history.push("/" + value);
   }
 
+  const showMe = (e: MouseEvent) => {
+      setShowButton(e.currentTarget.id);
+      console.log(e.currentTarget.id)
+  };
+
+  const hideMe = () => {
+    setShowButton('');
+  }
+
   return (
     <div className="demo-infinite-container">
       {Props.showFilter && (
@@ -187,7 +201,12 @@ const RegisterList: React.FC<CommonProps> = (Props) => {
         bordered
         dataSource={dataToShow}
         renderItem={(item) => (
-          <List.Item key={item.id}>
+          <List.Item
+            key={item.id}
+            id={item.id}
+            onMouseOver={showMe}
+            onMouseLeave={hideMe}
+          >
             <List.Item.Meta
               avatar={
                 <Avatar
@@ -232,8 +251,9 @@ const RegisterList: React.FC<CommonProps> = (Props) => {
             {item.type !== "zapujcka" && (
               <>
                 <div style={{ marginRight: 20 }}>
-                  {item.price + ' '}
-                  {//@ts-ignore
+                  {item.price + " "}
+                  {
+                    //@ts-ignore
                     typesOfCurrency[item.currency]
                   }
                 </div>
@@ -248,14 +268,17 @@ const RegisterList: React.FC<CommonProps> = (Props) => {
               </>
             )}
 
-            <Button
-              style={{ borderWidth: 0 }}
-              onClick={() => {
-                handleClickDeleteRecord(item.id);
-              }}
-            >
-              X
-            </Button>
+            {showButton===item.id && (
+              <Button
+                id={item.id}
+                style={{ borderWidth: 0 }}
+                onClick={() => {
+                  handleClickDeleteRecord(item.id);
+                }}
+              >
+                X
+              </Button>
+            )}
           </List.Item>
         )}
       ></List>
