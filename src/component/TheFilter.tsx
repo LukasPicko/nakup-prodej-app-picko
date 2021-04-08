@@ -2,12 +2,13 @@ import React, {useEffect} from 'react';
 import {Form, Input, Button, Select, Typography} from 'antd';
 import _ from 'lodash';
 import { FilterValuesProps } from './../types/types';
+import { FormattedMessage, useIntl, injectIntl } from "react-intl";
 import 'antd/dist/antd.css';
 const { Option } = Select;
 const {Text} = Typography;
 
 const TheFilter: React.FC<FilterValuesProps> = (props) => {
-
+        const intl = useIntl();
     useEffect(() => {
     
     }, [props.filterType, props.filterName]);
@@ -45,7 +46,11 @@ const TheFilter: React.FC<FilterValuesProps> = (props) => {
                           width: 150,
                           marginRight:0,
                         }}
-                        placeholder="Název položky"
+                        placeholder={intl.formatMessage({
+                                id: "filtrmName",
+                                defaultMessage: "Název položky",
+                                description: "filtr name",
+                              })}
                         aria-autocomplete='inline'
                   />
                  </Form.Item>
@@ -62,10 +67,35 @@ const TheFilter: React.FC<FilterValuesProps> = (props) => {
                  
                  <Form.Item>
                   <Select id="filterType" defaultValue='#' style={{ width: 150 }} onChange={handleChangeFilterType}>
-                      <Option value="#">Všechno</Option>
-                      <Option value="nakup">Nákup</Option>
-                      <Option value="pronajem">Pronájem</Option>
-                      <Option value="zapujcka">Zápůjčka</Option>
+                      <Option value="#">
+                              <FormattedMessage
+                              id='filterSelectAll'
+                              defaultMessage='Všechno'
+                              description='filterSelectAll'
+                              />
+                              </Option>
+                      <Option value="nakup">
+                              <FormattedMessage
+                              id='filterSelectPurchase'
+                              defaultMessage='Nákup'
+                              description='filterSelectPurchase'
+                              
+                              />
+                              </Option>
+                      <Option value="pronajem">
+                              <FormattedMessage
+                              id='filterSelectLease'
+                              defaultMessage='Pronájem'
+                              description='filterSelectLease'
+                              />
+                              </Option>
+                      <Option value="zapujcka">
+                              <FormattedMessage
+                              id='filterSelectLoan'
+                              defaultMessage='Zápůjčka'
+                              description='filterSelectLoan'
+                              />
+                              </Option>
                   </Select>
                   </Form.Item>
                   <Button 
@@ -81,7 +111,14 @@ const TheFilter: React.FC<FilterValuesProps> = (props) => {
                         style={{marginLeft:0,
                         marginRight:30}}
                 />
-                <Text>Cena</Text>
+                <Text>
+                        <FormattedMessage
+                        id='filterTitlePrice'
+                        defaultMessage='Cena'
+                        description='filterTitlePrice'
+                        
+                        />
+                        </Text>
                 <Button 
                         size='small' 
                         icon="sort-ascending"
@@ -95,7 +132,14 @@ const TheFilter: React.FC<FilterValuesProps> = (props) => {
                         style={{marginLeft:0,
                         marginRight:30}}
                 />
-                <Text>Datum platnosti</Text>
+                <Text>
+                        <FormattedMessage
+                        id='filterTitleDateOfCOntract'
+                        defaultMessage='Datum platnosti'
+                        description='filterTitleDateOfCOntract'
+                        
+                        />
+                        </Text>
                 <Button 
                         size='small' 
                         icon="sort-ascending"
@@ -109,7 +153,13 @@ const TheFilter: React.FC<FilterValuesProps> = (props) => {
                         style={{marginLeft:0,
                         marginRight:30}}
                 />
-                <Text>Datum registrace</Text>
+                <Text>
+                        <FormattedMessage
+                        id='filterTitleOfRegister'
+                        defaultMessage='Datum registrace'
+                        description='filterTitleOfRegister'
+                        />
+                        </Text>
                 <Button 
                         size='small' 
                         icon="sort-ascending"

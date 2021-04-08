@@ -1,4 +1,52 @@
 {
+  "filterSelectAll": [
+    {
+      "type": 0,
+      "value": "Všechno"
+    }
+  ],
+  "filterSelectLease": [
+    {
+      "type": 0,
+      "value": "Pronájem"
+    }
+  ],
+  "filterSelectLoan": [
+    {
+      "type": 0,
+      "value": "Zápůjčka"
+    }
+  ],
+  "filterSelectPurchase": [
+    {
+      "type": 0,
+      "value": "Nákup"
+    }
+  ],
+  "filterTitleDateOfCOntract": [
+    {
+      "type": 0,
+      "value": "Datum platnosti"
+    }
+  ],
+  "filterTitleOfRegister": [
+    {
+      "type": 0,
+      "value": "Datum registrace"
+    }
+  ],
+  "filterTitlePrice": [
+    {
+      "type": 0,
+      "value": "Cena"
+    }
+  ],
+  "filtrmName": [
+    {
+      "type": 0,
+      "value": "Název položky"
+    }
+  ],
   "formContractDatePlaceholder": [
     {
       "type": 0,

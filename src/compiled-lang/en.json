@@ -1,4 +1,52 @@
 {
+  "filterSelectAll": [
+    {
+      "type": 0,
+      "value": "All"
+    }
+  ],
+  "filterSelectLease": [
+    {
+      "type": 0,
+      "value": "Lease"
+    }
+  ],
+  "filterSelectLoan": [
+    {
+      "type": 0,
+      "value": "Loan"
+    }
+  ],
+  "filterSelectPurchase": [
+    {
+      "type": 0,
+      "value": "Purchase"
+    }
+  ],
+  "filterTitleDateOfCOntract": [
+    {
+      "type": 0,
+      "value": "Contract date"
+    }
+  ],
+  "filterTitleOfRegister": [
+    {
+      "type": 0,
+      "value": "Registration date"
+    }
+  ],
+  "filterTitlePrice": [
+    {
+      "type": 0,
+      "value": "Price"
+    }
+  ],
+  "filtrmName": [
+    {
+      "type": 0,
+      "value": "Item name"
+    }
+  ],
   "formContractDatePlaceholder": [
     {
       "type": 0,

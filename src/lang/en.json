@@ -1,4 +1,36 @@
 {
+  "filterSelectAll": {
+    "defaultMessage": "All",
+    "description": "filterSelectAll"
+  },
+  "filterSelectLease": {
+    "defaultMessage": "Lease",
+    "description": "filterSelectLease"
+  },
+  "filterSelectLoan": {
+    "defaultMessage": "Loan",
+    "description": "filterSelectLoan"
+  },
+  "filterSelectPurchase": {
+    "defaultMessage": "Purchase",
+    "description": "filterSelectPurchase"
+  },
+  "filterTitleDateOfCOntract": {
+    "defaultMessage": "Contract date",
+    "description": "filterTitleDateOfCOntract"
+  },
+  "filterTitleOfRegister": {
+    "defaultMessage": "Registration date",
+    "description": "filterTitleOfRegister"
+  },
+  "filterTitlePrice": {
+    "defaultMessage": "Price",
+    "description": "filterTitlePrice"
+  },
+  "filtrmName": {
+    "defaultMessage": "Item name",
+    "description": "filtr name"
+  },
   "formContractDatePlaceholder": {
     "defaultMessage": "Date",
     "description": "formContractnDatePlaceholder"
