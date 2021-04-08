@@ -7,7 +7,19 @@ import TheSummary from "./component/TheSummary";
 import TheSetting from "./component/TheSetting";
 import CommonForm from "./component/CommonForm";
 import RegisterList from "./component/RegisterList";
-import { IntlProvider } from "react-intl";
+import {
+  IntlProvider,
+  FormattedMessage,
+  useIntl,
+  injectIntl,
+} from "react-intl";
+import locale_en from "./compiled-lang/en.json";
+import locale_cz from "./compiled-lang/cz.json";
+
+const locales = {
+  cz: locale_cz,
+  en: locale_en,
+};
 
 let data = localStorage.getItem("storedData");
 if (data) {
@@ -47,55 +59,73 @@ const App: React.FC = () => {
   const [showFilter, setShowFilter] = useState(false);
   const [data, setData] = useState(purchases);
   const [visibleModalForm, setVisibleModalForm] = useState(false);
+  const [linesCNB, setLinesCNB] = useState([{}]);
+  const [cnbDate, setCNBDate] = useState("");
   const [language, setLanguage] = useState("cz");
-  const [messages, setMessages] = useState(()=>loadLocaleData('cz'))
+
+
+  function txtToArray(text: string) {
+    //debugger;
+    let arrayOfObjects: {}[] = [];
+    let linesArray: string[] = text.trim().split("\n");
+    setCNBDate(() => linesArray[0].substring(0, 10));
+    localStorage.setItem("cnbDate", cnbDate);
+    for (let index = 2; index < linesArray.length; index++) {
+      let line = linesArray[index].trim().split("|");
+      let objTemp = {
+        country: line[0],
+        currency: line[1],
+        count: line[2],
+        code: line[3],
+        rate: line[4],
+      };
+      arrayOfObjects.push(objTemp);
+    }
+    localStorage.setItem("storedCNBdata", JSON.stringify(arrayOfObjects));
+    setLinesCNB(arrayOfObjects);
+  }
 
   useEffect(() => {
-    setMessages(()=>loadLocaleData(language));
-    message.info(language)
-  }, [language]);
+    fetch(
+      "http://www.cnb.cz/cs/financni_trhy/devizovy_trh/kurzy_devizoveho_trhu/denni_kurz.txt",
+      {
+        method: "GET",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "text/plain; charset=UTF-8",
+        },
+      }
+    )
+      .then((r) => r.text())
+      .then((text) => {
+        console.log("fetch pokus");
+        console.log(text);
+        //debugger;
+        txtToArray(text);
+      })
+      .catch((error) => {
+        console.log(error);
+        alert("text CNB nefetchuju");
+      });
+  }, []);
 
-  function loadLocaleData(language: string){
-    switch (language) {
-      case "cz":
-        return import("./compiled-lang/cz.json");
-      case "en":
-        return import("./compiled-lang/en.json");
-    }
+  const locales = {
+    cz: locale_cz,
+    en: locale_en,
   };
 
-   
-
-  // useEffect(() => {
-  //   alert('jsem v App useeffectu')
-  //   fetch('https://cors-anywhere.herokuapp.com/https://www.cnb.cz/cs/financni_trhy/devizovy_trh/kurzy_devizoveho_trhu/denni_kurz.txt',
-  //   {
-  //     //mode: 'no-cors',
-  //     headers:{
-  //       'Content-Type': 'text/plain;charset=UTF-8',
-  //       'Access-Control-Allow-Origin': '*'
-  //     }
-  //   }
-  //   )
-  //   .then((r) => r.text())
-  //   .then(text  => {
-  //     console.log('fetch pokus')
-  //     console.log('|=>'+text+'<=|');
-  //   })
-  //   .catch(error => {
-  //     console.log(error);
-  //     alert('text CNB nefetchuju');
-
-  // })
-
-  // },[]);
-
   return (
-    //@ts-ignore
-    <IntlProvider locale={language} defaultLocale="cz" messages={messages}>
+    
+    <IntlProvider
+      locale={language}
+      defaultLocale="cz"
+      //@ts-ignore
+      messages={locales[language]}
+    >
       <TheNavigation />
       <PageHeader
-        title="NÁKUPY A PRONÁJMY"
+        //title='NÁKUPY A PRONÁJMY'
+        title={language==='cz'?'NÁKUPY A PRONÁJMY':'PURCHASES AND RENTALS'}
         extra={[
           <TheSetting
             showFilter={showFilter}
@@ -104,6 +134,7 @@ const App: React.FC = () => {
             setData={setData}
             visibleModalForm={visibleModalForm}
             setVisibleModalForm={setVisibleModalForm}
+            language={language}
             setLanguage={setLanguage}
           />,
         ]}
@@ -118,6 +149,7 @@ const App: React.FC = () => {
               setData={setData}
               visibleModalForm={visibleModalForm}
               setVisibleModalForm={setVisibleModalForm}
+              language={language}
               setLanguage={setLanguage}
             />
           </Route>
@@ -131,6 +163,7 @@ const App: React.FC = () => {
               setData={setData}
               visibleModalForm={visibleModalForm}
               setVisibleModalForm={setVisibleModalForm}
+              language={language}
             />
           </Route>
         </Switch>

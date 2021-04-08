@@ -206,3 +206,5 @@ const TheSummary: React.FC<DataProps> = (props) => {
 };
 
 export default TheSummary;
+
+//export default injectIntl(TheSummary);

@@ -1,8 +1,134 @@
 {
+  "formContractDatePlaceholder": [
+    {
+      "type": 0,
+      "value": "Date"
+    }
+  ],
+  "formEditRecord": [
+    {
+      "type": 0,
+      "value": "Edit the selected item"
+    }
+  ],
+  "formEraseButton": [
+    {
+      "type": 0,
+      "value": "Delete item"
+    }
+  ],
+  "formName": [
+    {
+      "type": 0,
+      "value": "Name"
+    }
+  ],
+  "formNamePlaceholder": [
+    {
+      "type": 0,
+      "value": "Item name"
+    }
+  ],
+  "formReturnDatePlaceholder": [
+    {
+      "type": 0,
+      "value": "Date"
+    }
+  ],
+  "formSelecNakup": [
+    {
+      "type": 0,
+      "value": "Purchase"
+    }
+  ],
+  "formSelectPronajem": [
+    {
+      "type": 0,
+      "value": "Lease"
+    }
+  ],
+  "formSelectZapujcka": [
+    {
+      "type": 0,
+      "value": "Loan"
+    }
+  ],
+  "formSubmitButton": [
+    {
+      "type": 0,
+      "value": "Send"
+    }
+  ],
+  "formTitleContract": [
+    {
+      "type": 0,
+      "value": "Contract conclusion"
+    }
+  ],
+  "formTitleCurrency": [
+    {
+      "type": 0,
+      "value": "Currency"
+    }
+  ],
+  "formTitleReturn": [
+    {
+      "type": 0,
+      "value": "Return date"
+    }
+  ],
+  "formType": [
+    {
+      "type": 0,
+      "value": "Item type"
+    }
+  ],
+  "navOverview": [
+    {
+      "type": 0,
+      "value": "Overview"
+    }
+  ],
+  "navSummary": [
+    {
+      "type": 0,
+      "value": "Summary"
+    }
+  ],
+  "reLiActionFrom": [
+    {
+      "type": 0,
+      "value": "Valid from :"
+    }
+  ],
+  "reLiRegisterFrom": [
+    {
+      "type": 0,
+      "value": "In the register from :"
+    }
+  ],
+  "reLiReturnTo": [
+    {
+      "type": 0,
+      "value": "Return date :"
+    }
+  ],
+  "settAddButton": [
+    {
+      "type": 0,
+      "value": "+Add"
+    }
+  ],
+  "sumLease": [
+    {
+      "type": 0,
+      "value": "Rentals"
+    }
+  ],
   "sumLeaseAvg": [
     {
       "type": 0,
-      "value": "Leases average price "
+      "value": "Rentals average price "
     },
     {
       "type": 1,
@@ -12,7 +138,7 @@
   "sumLeaseCount": [
     {
       "type": 0,
-      "value": "Leases count "
+      "value": "Rentals count "
     },
     {
       "type": 1,
@@ -22,7 +148,7 @@
   "sumLeaseMax": [
     {
       "type": 0,
-      "value": "Leases max price "
+      "value": "Rentals maximum price "
     },
     {
       "type": 1,
@@ -32,7 +158,7 @@
   "sumLeaseSum": [
     {
       "type": 0,
-      "value": "Leases total price  "
+      "value": "Rentals total price "
     },
     {
       "type": 1,
@@ -52,7 +178,7 @@
   "sumLoanFirst": [
     {
       "type": 0,
-      "value": "Loan return first: "
+      "value": "Loans return first: "
     },
     {
       "type": 1,
@@ -62,11 +188,17 @@
   "sumLoanLast": [
     {
       "type": 0,
-      "value": "Loan return last: "
+      "value": "Loans return last: "
     },
     {
       "type": 1,
       "value": "loanMax"
+    }
+  ],
+  "sumLoans": [
+    {
+      "type": 0,
+      "value": "Loans"
     }
   ],
   "sumPurchAvg": [
@@ -82,7 +214,7 @@
   "sumPurchCount": [
     {
       "type": 0,
-      "value": "Purchases count "
+      "value": "purchases count "
     },
     {
       "type": 1,
@@ -92,7 +224,7 @@
   "sumPurchMax": [
     {
       "type": 0,
-      "value": "Purchases max price "
+      "value": "Purchases maximal price "
     },
     {
       "type": 1,
@@ -107,6 +239,18 @@
     {
       "type": 1,
       "value": "purchaseSum"
+    }
+  ],
+  "sumPurchases": [
+    {
+      "type": 0,
+      "value": "Purchases"
+    }
+  ],
+  "sumTitle": [
+    {
+      "type": 0,
+      "value": "Summary"
     }
   ]
 }

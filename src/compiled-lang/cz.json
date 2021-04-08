@@ -1,4 +1,130 @@
 {
+  "formContractDatePlaceholder": [
+    {
+      "type": 0,
+      "value": "Datum"
+    }
+  ],
+  "formEditRecord": [
+    {
+      "type": 0,
+      "value": "Editace zvolené položky"
+    }
+  ],
+  "formEraseButton": [
+    {
+      "type": 0,
+      "value": "Smaž položku"
+    }
+  ],
+  "formName": [
+    {
+      "type": 0,
+      "value": "Název"
+    }
+  ],
+  "formNamePlaceholder": [
+    {
+      "type": 0,
+      "value": "Název položky"
+    }
+  ],
+  "formReturnDatePlaceholder": [
+    {
+      "type": 0,
+      "value": "Datum"
+    }
+  ],
+  "formSelecNakup": [
+    {
+      "type": 0,
+      "value": "Nákup"
+    }
+  ],
+  "formSelectPronajem": [
+    {
+      "type": 0,
+      "value": "Pronájem"
+    }
+  ],
+  "formSelectZapujcka": [
+    {
+      "type": 0,
+      "value": "Zápůjčka"
+    }
+  ],
+  "formSubmitButton": [
+    {
+      "type": 0,
+      "value": "Odeslat"
+    }
+  ],
+  "formTitleContract": [
+    {
+      "type": 0,
+      "value": "Uzavření smlouvy"
+    }
+  ],
+  "formTitleCurrency": [
+    {
+      "type": 0,
+      "value": "Měna"
+    }
+  ],
+  "formTitleReturn": [
+    {
+      "type": 0,
+      "value": "Termín vrácení"
+    }
+  ],
+  "formType": [
+    {
+      "type": 0,
+      "value": "Typ položky"
+    }
+  ],
+  "navOverview": [
+    {
+      "type": 0,
+      "value": "Přehled"
+    }
+  ],
+  "navSummary": [
+    {
+      "type": 0,
+      "value": "Sumář"
+    }
+  ],
+  "reLiActionFrom": [
+    {
+      "type": 0,
+      "value": "Platnost od :"
+    }
+  ],
+  "reLiRegisterFrom": [
+    {
+      "type": 0,
+      "value": "V registru od :"
+    }
+  ],
+  "reLiReturnTo": [
+    {
+      "type": 0,
+      "value": "Termín vrácení :"
+    }
+  ],
+  "settAddButton": [
+    {
+      "type": 0,
+      "value": "+Přidat"
+    }
+  ],
+  "sumLease": [
+    {
+      "type": 0,
+      "value": "Pronájmy"
+    }
+  ],
   "sumLeaseAvg": [
     {
       "type": 0,
@@ -69,6 +195,12 @@
       "value": "loanMax"
     }
   ],
+  "sumLoans": [
+    {
+      "type": 0,
+      "value": "Zápůjčky"
+    }
+  ],
   "sumPurchAvg": [
     {
       "type": 0,
@@ -107,6 +239,18 @@
     {
       "type": 1,
       "value": "purchaseSum"
+    }
+  ],
+  "sumPurchases": [
+    {
+      "type": 0,
+      "value": "Nákupy"
+    }
+  ],
+  "sumTitle": [
+    {
+      "type": 0,
+      "value": "Sumář"
     }
   ]
 }

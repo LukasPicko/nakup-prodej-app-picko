@@ -3,6 +3,8 @@ import { Form, Input, Select, InputNumber, Button, DatePicker } from "antd";
 import { useHistory, useParams } from "react-router-dom";
 import { DataModalProps } from "../types/types";
 import { v4 as uuidv4 } from "uuid";
+import { FormattedMessage, useIntl, injectIntl } from "react-intl";
+import { typesOfPricesCZ, typesOfPricesEN } from "./Enums/enums";
 import "antd/dist/antd.css";
 import moment from "moment";
 const { Option } = Select;
@@ -20,6 +22,7 @@ const CommonForm: React.FC<DataModalProps> = (props) => {
   const [firstTime, setFirstTime] = useState(true);
 
   const history = useHistory();
+  const intl = useIntl();
 
   function nowDate() {
     return moment(Date.now()).format("YYYY-MM-DD");
@@ -48,15 +51,16 @@ const CommonForm: React.FC<DataModalProps> = (props) => {
       setFoDateOfReturn(() => objTemp.dateOfReturn);
       setFirstTime(() => !firstTime);
       setFoAction(() => "upd");
-    } 
+    }
   }
 
   useEffect(() => {
     if (firstTime) {
       if (foId) {
         fillVariables();
+      } else {
+        setFoAction(() => "add");
       }
-      else{setFoAction(() => "add");}
     }
   }, [
     foName,
@@ -121,9 +125,23 @@ const CommonForm: React.FC<DataModalProps> = (props) => {
 
   return (
     <div>
-      {foAction === "upd" && <h1>Editace zvolené položky</h1>}
+      {foAction === "upd" && (
+        <h2>
+          <FormattedMessage
+            id="formEditRecord"
+            defaultMessage="Editace zvolené položky"
+            description="form title edit record"
+          />
+        </h2>
+      )}
       <Form layout="vertical" id="filter" onSubmit={handleSubmit}>
-        <Form.Item label="Název">
+        <Form.Item
+          label={intl.formatMessage({
+            id: "formName",
+            defaultMessage: "Název",
+            description: "form title of name",
+          })}
+        >
           <Input
             id="adName"
             name="addName"
@@ -134,27 +152,68 @@ const CommonForm: React.FC<DataModalProps> = (props) => {
             style={{
               width: 150,
             }}
-            placeholder="Název položky"
+            placeholder={intl.formatMessage({
+              id: "formNamePlaceholder",
+              defaultMessage: "Název položky",
+              description: "form placeholder of name",
+            })}
           />
         </Form.Item>
-        <Form.Item label="Typ transakce">
+        <Form.Item
+          label={intl.formatMessage({
+            id: "formType",
+            defaultMessage: "Typ položky",
+            description: "form title of type",
+          })}
+        >
           <Select
             id="updType"
             value={foType}
             style={{ width: 150 }}
             onChange={handleChangeType}
           >
-            <Option value="nakup">Nákup</Option>
-            <Option value="pronajem">Pronájem</Option>
-            <Option value="zapujcka">Zápůjčka</Option>
+            <Option value="nakup">
+              <FormattedMessage
+                id="formSelecNakup"
+                defaultMessage="Nákup"
+                description="formSelectNakup"
+              />
+            </Option>
+
+            <Option value="pronajem">
+              <FormattedMessage
+                id="formSelectPronajem"
+                defaultMessage="Pronájem"
+                description="formSelectPronajem"
+              />
+            </Option>
+            <Option value="zapujcka">
+              <FormattedMessage
+                id="formSelectZapujcka"
+                defaultMessage="Zápůjčka"
+                description="formSelectZapujcka"
+              />
+            </Option>
           </Select>
         </Form.Item>
         {foType !== "zapujcka" && (
           <>
-            <Form.Item label={foType === "nakup" ? "Cena" : "Cena za měsíc"}>
+            <Form.Item
+              label={
+                props.language === "cz"
+                  ? //@ts-ignore
+                    typesOfPricesCZ[foType]
+                  : //@ts-ignore
+                    typesOfPricesEN[foType]
+              }
+            >
               <InputNumber value={foPrice} onChange={handleChangeNumber} />
             </Form.Item>
-            Měna
+            <FormattedMessage
+              id="formTitleCurrency"
+              defaultMessage="Měna"
+              description="formTitleCurrency"
+            />
             <Form.Item>
               <Select
                 id="updCurrency"
@@ -170,18 +229,44 @@ const CommonForm: React.FC<DataModalProps> = (props) => {
         )}
         {foType === "zapujcka" && (
           <>
-            Termín vrácení
+            <FormattedMessage
+              id="formTitleReturn"
+              defaultMessage="Termín vrácení"
+              description="formTitleReturn"
+            />
             <Form.Item>
-              <DatePicker onChange={handleChangeDateOfReturn} />
+              <DatePicker
+                onChange={handleChangeDateOfReturn}
+                placeholder={intl.formatMessage({
+                  id: "formReturnDatePlaceholder",
+                  defaultMessage: "Datum",
+                  description: "formReturnDatePlaceholder",
+                })}
+              />
             </Form.Item>
           </>
         )}
-        Uzavření smlouvy
+        <FormattedMessage
+          id="formTitleContract"
+          defaultMessage="Uzavření smlouvy"
+          description="formTitleContract"
+        />
         <Form.Item>
-          <DatePicker onChange={handleChangeDateOfAction} />
+          <DatePicker
+            onChange={handleChangeDateOfAction}
+            placeholder={intl.formatMessage({
+              id: "formContractDatePlaceholder",
+              defaultMessage: "Datum",
+              description: "formContractnDatePlaceholder",
+            })}
+          />
         </Form.Item>
         <Button htmlType="submit" type="default">
-          Odeslat
+          <FormattedMessage
+            id="formSubmitButton"
+            defaultMessage="Odeslat"
+            description="formSubmitButton"
+          />
         </Button>
         {foAction === "upd" && (
           <Button
@@ -190,7 +275,11 @@ const CommonForm: React.FC<DataModalProps> = (props) => {
               handleClickDeleteRecord(foId);
             }}
           >
-            Smaž položku
+            <FormattedMessage
+              id="formEraseButton"
+              defaultMessage="Smaž položku"
+              description="formEraseButton"
+            />
           </Button>
         )}
       </Form>

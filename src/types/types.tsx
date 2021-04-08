@@ -66,10 +66,12 @@ setDataToShow: React.Dispatch<React.SetStateAction<{
 }
 
 export interface DataModalProps extends DataProps {
-  visibleModalForm: boolean
-  setVisibleModalForm: React.Dispatch<React.SetStateAction<boolean>>
+  visibleModalForm: boolean;
+  setVisibleModalForm: React.Dispatch<React.SetStateAction<boolean>>;
+  language: string
 }
 
 export interface CommonProps extends FilterShowProps, DataModalProps {
-  setLanguage: React.Dispatch<React.SetStateAction<string>>
+  language: string;
+  setLanguage: React.Dispatch<React.SetStateAction<string>>;
 }

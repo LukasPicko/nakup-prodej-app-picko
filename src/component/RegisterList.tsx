@@ -2,7 +2,6 @@ import React, {
   useState,
   useEffect,
   MouseEvent,
-  MouseEventHandler,
 } from "react";
 import { List, Typography, Avatar, Button, message } from "antd";
 import { CommonProps } from "./../types/types";
@@ -10,8 +9,8 @@ import { useHistory } from "react-router-dom";
 import moment from "moment";
 import _ from "lodash";
 import TheFilter from "./TheFilter";
-import { typesOfType, typesOfCurrency } from "./Enums/enums";
-import { collapseTextChangeRangesAcrossMultipleVersions } from "typescript";
+import { typesOfTypeCZ, typesOfTypeEN, typesOfCurrency } from "./Enums/enums";
+import { FormattedMessage, useIntl, injectIntl } from "react-intl";
 const { Title } = Typography;
 
 var storedFilterName: string,
@@ -234,17 +233,29 @@ const RegisterList: React.FC<CommonProps> = (Props) => {
               }
               description={
                 //@ts-ignore
-                typesOfType[item.type]
+                Props.language ==='cz'? typesOfTypeCZ[item.type]: typesOfTypeEN[item.type]
               }
             />
 
             <div style={{ marginRight: 20 }}>
-              <p>Platnost od :</p>
+              <p>
+                <FormattedMessage
+                id='reLiActionFrom'
+                defaultMessage='Platnost od :'
+                description='title dateOfAction'
+                />
+                </p>
               <p>{moment(item.dateOfAction).format("DD.MM.YYYY")}</p>
             </div>
 
             <div style={{ marginRight: 20 }}>
-              <p>V registru od :</p>
+              <p>
+                <FormattedMessage
+                id='reLiRegisterFrom'
+                defaultMessage='V registru od :'
+                description='title dateOfRegister'
+                />
+                </p>
               <p>{moment(item.dateOfRegister).format("DD.MM.YYYY")}</p>
             </div>
 
@@ -262,7 +273,13 @@ const RegisterList: React.FC<CommonProps> = (Props) => {
             {item.type === "zapujcka" && (
               <>
                 <div style={{ marginRight: 20 }}>
-                  <p>Termín vrácení :</p>
+                  <p>
+                    <FormattedMessage
+                    id='reLiReturnTo'
+                    defaultMessage='Termín vrácení :'
+                    description='title dateOfReturn'
+                    />
+                    </p>
                   <p>{moment(item.dateOfReturn).format("DD.MM.YYYY")}</p>
                 </div>
               </>

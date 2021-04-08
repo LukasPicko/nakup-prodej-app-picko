@@ -1,0 +1,142 @@
+{
+  "formContractDatePlaceholder": {
+    "defaultMessage": "Date",
+    "description": "formContractnDatePlaceholder"
+  },
+    "formEditRecord": {
+      "defaultMessage": "Edit the selected item",
+      "description": "form title edit record"
+    },
+    "formEraseButton": {
+      "defaultMessage": "Delete item",
+      "description": "formEraseButton"
+    },
+    "formName": {
+      "defaultMessage": "Name",
+      "description": "form title of name"
+    },
+    "formNamePlaceholder": {
+      "defaultMessage": "Item name",
+      "description": "form placeholder of name"
+    },
+    "formReturnDatePlaceholder": {
+      "defaultMessage": "Date",
+      "description": "formReturnDatePlaceholder"
+    },
+    "formSelecNakup": {
+      "defaultMessage": "Purchase",
+      "description": "formSelectNakup"
+    },
+    "formSelectPronajem": {
+      "defaultMessage": "Lease",
+      "description": "formSelectPronajem"
+    },
+    "formSelectZapujcka": {
+      "defaultMessage": "Loan",
+      "description": "formSelectZapujcka"
+    },
+    "formSubmitButton": {
+      "defaultMessage": "Send",
+      "description": "formSubmitButton"
+    },
+    "formTitleContract": {
+      "defaultMessage": "Contract conclusion",
+      "description": "formTitleContract"
+    },
+    "formTitleCurrency": {
+      "defaultMessage": "Currency",
+      "description": "formTitleCurrency"
+    },
+    "formTitleReturn": {
+      "defaultMessage": "Return date",
+      "description": "formTitleReturn"
+    },
+    "formType": {
+      "defaultMessage": "Item type",
+      "description": "form title of type"
+    },
+    "navOverview": {
+      "defaultMessage": "Overview",
+      "description": "navOverview"
+    },
+    "navSummary": {
+      "defaultMessage": "Summary",
+      "description": "navSummary"
+    },
+    "reLiActionFrom": {
+      "defaultMessage": "Valid from :",
+      "description": "title dateOfAction"
+    },
+    "reLiRegisterFrom": {
+      "defaultMessage": "In the register from :",
+      "description": "title dateOfRegister"
+    },
+    "reLiReturnTo": {
+      "defaultMessage": "Return date :",
+      "description": "title dateOfReturn"
+    },
+    "settAddButton": {
+      "defaultMessage": "+Add",
+      "description": "desc of button to add record"
+    },
+    "sumLease": {
+      "defaultMessage": "Rentals",
+      "description": "title of lease"
+    },
+    "sumLeaseAvg": {
+      "defaultMessage": "Rentals average price {leaseAvg}",
+      "description": "avg price of leases"
+    },
+    "sumLeaseCount": {
+      "defaultMessage": "Rentals count {leaseCount}",
+      "description": "count of leases"
+    },
+    "sumLeaseMax": {
+      "defaultMessage": "Rentals maximum price {leaseMax}",
+      "description": "max price of leases"
+    },
+    "sumLeaseSum": {
+      "defaultMessage": "Rentals total price {leaseSum}",
+      "description": "sum price of leases"
+    },
+    "sumLoanCount": {
+      "defaultMessage": "Loans count {loanCount}",
+      "description": "count of loans"
+    },
+    "sumLoanFirst": {
+      "defaultMessage": "Loans return first: {loanMin}",
+      "description": "loan return first"
+    },
+    "sumLoanLast": {
+      "defaultMessage": "Loans return last: {loanMax}",
+      "description": "loan return last"
+    },
+    "sumLoans": {
+      "defaultMessage": "Loans",
+      "description": "title of loans"
+    },
+    "sumPurchAvg": {
+      "defaultMessage": "Purchases average price {purchaseAvg}",
+      "description": "avg price of purchases"
+    },
+    "sumPurchCount": {
+      "defaultMessage": "purchases count {purchaseCount}",
+      "description": "count of purchases"
+    },
+    "sumPurchMax": {
+      "defaultMessage": "Purchases maximal price {purchaseMax}",
+      "description": "max price of purchases"
+    },
+    "sumPurchSum": {
+      "defaultMessage": "Purchases total price {purchaseSum}",
+      "description": "sum of prices of purchases"
+    },
+    "sumPurchases": {
+      "defaultMessage": "Purchases",
+      "description": "title of purchases"
+    },
+    "sumTitle": {
+      "defaultMessage": "Summary",
+      "description": "title of summary"
+    }
+  }

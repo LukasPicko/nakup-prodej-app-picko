@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { NavLink } from 'react-router-dom';
 import { Menu } from 'antd';
+import { FormattedMessage, useIntl, injectIntl } from "react-intl";
 
 
 
@@ -14,12 +15,20 @@ const TheNavigation: React.FC = () => {
           <Menu onClick={handleClick} mode="horizontal" selectedKeys={[current]}>
               <Menu.Item key='register'>
                  <NavLink to="/"  exact>
-				            Přehled
+                   <FormattedMessage
+                   id='navOverview'
+                   defaultMessage='Přehled'
+				            description='navOverview'
+                    />
 			            </NavLink>
                </Menu.Item>
              <Menu.Item key='summary'>
 			          <NavLink to="/summary" >
-				            Sumář
+                <FormattedMessage
+                   id='navSummary'
+                   defaultMessage='Sumář'
+				            description='navSummary'
+                    />
 			          </NavLink>
               </Menu.Item>
           </Menu>
