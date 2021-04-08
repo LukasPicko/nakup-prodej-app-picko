@@ -140,7 +140,6 @@ const CommonForm: React.FC<DataModalProps> = (props) => {
         </h2>
       )}
       <Form layout="vertical" id="filter" onSubmit={handleSubmit}>
-<<<<<<< HEAD
         <Form.Item
           label={intl.formatMessage({
             id: "formName",
@@ -151,12 +150,6 @@ const CommonForm: React.FC<DataModalProps> = (props) => {
           <Input
             id="adName"
             name="addName"
-=======
-        <Form.Item label="Název">
-       <Input
-            id="name"
-            name="name"
->>>>>>> fdf2176ab72097468fec484ac1196d7a2c492da9
             value={foName}
             onChange={(e: React.FormEvent<HTMLInputElement>) =>
               setFoName(e.currentTarget.value)

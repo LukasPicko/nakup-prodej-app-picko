@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useEffect, useState } from "react";
 import { Switch, Route } from "react-router-dom";
 import { PageHeader, message } from "antd";
@@ -16,19 +15,6 @@ import {
 } from "react-intl";
 import locale_en from "./compiled-lang/en.json";
 import locale_cz from "./compiled-lang/cz.json";
-=======
-import React, {useState} from 'react';
-import { Switch, Route } from 'react-router-dom'
-import { PageHeader } from 'antd';
-import TheNavigation from './component/TheNavigation';
-import './App.css';
-//import TheRegister from './component/TheRegister';
-
-import TheSummary from './component/TheSummary';
-import TheSetting from './component/TheSetting';
-import CommonForm from './component/CommonForm';
-import RegisterList from './component/RegisterList';
->>>>>>> fdf2176ab72097468fec484ac1196d7a2c492da9
 
 const locales = {
   cz: locale_cz,
