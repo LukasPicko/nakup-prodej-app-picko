@@ -1,8 +1,17 @@
+<<<<<<< HEAD
 import React, { useState } from "react";
 import { Button, Modal } from "antd";
 import "antd/dist/antd.css";
 import { CommonProps } from "./../types/types";
 import CommonForm from "./CommonForm";
+=======
+import React, {useState} from 'react';
+import {Button, Modal} from 'antd';
+import 'antd/dist/antd.css';
+import { CommonProps } from './../types/types';
+import CommonForm from './CommonForm';
+
+>>>>>>> fdf2176ab72097468fec484ac1196d7a2c492da9
 
 import { FormattedMessage, useIntl, injectIntl } from "react-intl";
 

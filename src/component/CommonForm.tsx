@@ -7,7 +7,10 @@ import { FormattedMessage, useIntl, injectIntl } from "react-intl";
 import { typesOfPricesCZ, typesOfPricesEN } from "./Enums/enums";
 import "antd/dist/antd.css";
 import moment from "moment";
+//import { FormComponentProps } from 'antd/lib/form/Form';
 const { Option } = Select;
+
+
 
 const CommonForm: React.FC<DataModalProps> = (props) => {
   const [foId] = useState(useParams<{ id: string }>().id || "");
@@ -28,6 +31,8 @@ const CommonForm: React.FC<DataModalProps> = (props) => {
     return moment(Date.now()).format("YYYY-MM-DD");
   }
 
+  //const { getFieldDecorator } = props.form;
+
   function fillVariables() {
     let objTemp: any = {
       id: "",
@@ -40,7 +45,7 @@ const CommonForm: React.FC<DataModalProps> = (props) => {
       dateOfReturn: "",
     };
     if (props.data !== undefined) {
-      objTemp = props.data.find((item) => item.id === foId);
+      objTemp = props.data.find((item: { id: string; }) => item.id === foId);
 
       setFoName(() => objTemp.name);
       setFoPrice(() => objTemp.price);
@@ -75,9 +80,9 @@ const CommonForm: React.FC<DataModalProps> = (props) => {
   const handleSubmit = (event: any) => {
     event.preventDefault();
     if (foAction === "upd") {
-      props.setData(props.data.filter((item) => item.id !== foId));
+      props.setData(props.data.filter((item: { id: string; }) => item.id !== foId));
     }
-    props.setData((oldData) => [
+    props.setData((oldData: any) => [
       ...oldData,
       {
         id: foAction === "add" ? uuidv4() : foId,
@@ -117,7 +122,7 @@ const CommonForm: React.FC<DataModalProps> = (props) => {
   function handleClickDeleteRecord(id: any) {
     let objTemp: any = { id: "", type: "", name: "", price: 0 };
     if (props.data !== undefined) {
-      objTemp = props.data.filter((item) => item.id !== id);
+      objTemp = props.data.filter((item: { id: any; }) => item.id !== id);
     }
     props.setData(objTemp);
     history.push("/");
@@ -135,6 +140,7 @@ const CommonForm: React.FC<DataModalProps> = (props) => {
         </h2>
       )}
       <Form layout="vertical" id="filter" onSubmit={handleSubmit}>
+<<<<<<< HEAD
         <Form.Item
           label={intl.formatMessage({
             id: "formName",
@@ -145,6 +151,12 @@ const CommonForm: React.FC<DataModalProps> = (props) => {
           <Input
             id="adName"
             name="addName"
+=======
+        <Form.Item label="Název">
+       <Input
+            id="name"
+            name="name"
+>>>>>>> fdf2176ab72097468fec484ac1196d7a2c492da9
             value={foName}
             onChange={(e: React.FormEvent<HTMLInputElement>) =>
               setFoName(e.currentTarget.value)
