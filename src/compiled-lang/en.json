@@ -83,6 +83,12 @@
       "value": "Item type"
     }
   ],
+  "modalTitle": [
+    {
+      "type": 0,
+      "value": "Add an item"
+    }
+  ],
   "navOverview": [
     {
       "type": 0,

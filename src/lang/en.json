@@ -55,6 +55,10 @@
       "defaultMessage": "Item type",
       "description": "form title of type"
     },
+    "modalTitle": {
+      "defaultMessage": "Add an item",
+      "description": "modalTitle"
+    },
     "navOverview": {
       "defaultMessage": "Overview",
       "description": "navOverview"

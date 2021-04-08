@@ -83,6 +83,12 @@
       "value": "Typ položky"
     }
   ],
+  "modalTitle": [
+    {
+      "type": 0,
+      "value": "Přidat položku"
+    }
+  ],
   "navOverview": [
     {
       "type": 0,

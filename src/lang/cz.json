@@ -55,6 +55,10 @@
     "defaultMessage": "Typ položky",
     "description": "form title of type"
   },
+  "modalTitle": {
+    "defaultMessage": "Přidat položku",
+    "description": "modalTitle"
+  },
   "navOverview": {
     "defaultMessage": "Přehled",
     "description": "navOverview"

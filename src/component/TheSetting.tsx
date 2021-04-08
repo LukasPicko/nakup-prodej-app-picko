@@ -70,7 +70,11 @@ const TheSetting: React.FC<CommonProps> = (Props) => {
         En
       </Button>
       <Modal
-        title="Přidat položku"
+        title={intl.formatMessage({
+          id: "modalTitle",
+          defaultMessage: "Přidat položku",
+          description: "modalTitle",
+        })}
         visible={Props.visibleModalForm}
         onCancel={showModal}
         footer={null}
