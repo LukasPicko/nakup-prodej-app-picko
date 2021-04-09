@@ -36,7 +36,7 @@ setData: React.Dispatch<React.SetStateAction<{
     name: string;
     price: number;
     currency: string;
-    dateOfAction:string;
+    dateOfAction: string;
     dateOfRegister: string;
     dateOfReturn: string;
 }[]>>

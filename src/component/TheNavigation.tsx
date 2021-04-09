@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { NavLink } from 'react-router-dom';
 import { Menu } from 'antd';
-import { FormattedMessage, useIntl, injectIntl } from "react-intl";
+import { FormattedMessage } from "react-intl";
 
 
 

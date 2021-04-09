@@ -145,6 +145,7 @@ const RegisterList: React.FC<CommonProps> = (Props) => {
   const [sorting, setSorting] = useState(storedSorting);
   const [dataToShow, setDataToShow] = useState(Props.data);
   const [showButton, setShowButton] = useState("");
+  const [editable, setEditable] = useState(false);
   const history = useHistory();
   const intl = useIntl();
 
@@ -172,7 +173,6 @@ const RegisterList: React.FC<CommonProps> = (Props) => {
 
   const showMe = (e: MouseEvent) => {
     setShowButton(e.currentTarget.id);
-    console.log(e.currentTarget.id);
   };
 
   const hideMe = () => {
@@ -218,11 +218,15 @@ const RegisterList: React.FC<CommonProps> = (Props) => {
                 />
               }
               title={
-                <Title level={4}>
+                <Title level={4}
+                id={item.id}
+                editable={{editing:editable, onChange: ()=>{} }}
+                >
                   <span
                     onClick={() => {
                       editRecordForm(item.id);
                     }}
+                    
                   >
                     {item.name}
                   </span>
@@ -306,6 +310,13 @@ const RegisterList: React.FC<CommonProps> = (Props) => {
             )}
 
             {showButton === item.id && (
+              <>
+              <Button
+              id={item.id}
+              onClick={()=>setEditable(!editable)}
+              >
+                Změnit
+              </Button>
               <Button
                 id={item.id}
                 style={{ borderWidth: 0 }}
@@ -315,6 +326,7 @@ const RegisterList: React.FC<CommonProps> = (Props) => {
               >
                 X
               </Button>
+              </>
             )}
           </List.Item>
         )}

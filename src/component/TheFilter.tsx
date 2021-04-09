@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import {Form, Input, Button, Select, Typography} from 'antd';
 import _ from 'lodash';
 import { FilterValuesProps } from './../types/types';
-import { FormattedMessage, useIntl, injectIntl } from "react-intl";
+import { FormattedMessage, useIntl } from "react-intl";
 import 'antd/dist/antd.css';
 const { Option } = Select;
 const {Text} = Typography;

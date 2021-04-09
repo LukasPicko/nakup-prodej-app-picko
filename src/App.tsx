@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Switch, Route } from "react-router-dom";
-import { PageHeader, message } from "antd";
+import { PageHeader } from "antd";
 import TheNavigation from "./component/TheNavigation";
 import "./App.css";
 import TheSummary from "./component/TheSummary";
@@ -11,10 +11,6 @@ import { IntlProvider } from "react-intl";
 import locale_en from "./compiled-lang/en.json";
 import locale_cz from "./compiled-lang/cz.json";
 
-const locales = {
-  cz: locale_cz,
-  en: locale_en,
-};
 
 let data = localStorage.getItem("storedData");
 if (data) {
@@ -54,7 +50,7 @@ const App: React.FC = () => {
   const [showFilter, setShowFilter] = useState(false);
   const [data, setData] = useState(purchases);
   const [visibleModalForm, setVisibleModalForm] = useState(false);
-  const [linesCNB, setLinesCNB] = useState([{}]);
+  const [, setLinesCNB] = useState<{}[]>([]);
   const [cnbDate, setCNBDate] = useState("");
   const [language, setLanguage] = useState("cz");
 
@@ -79,7 +75,24 @@ const App: React.FC = () => {
     setLinesCNB(arrayOfObjects);
   }
 
+  const loadData = async () => {
+    const response = await fetch(
+      "http://www.cnb.cz/cs/financni_trhy/devizovy_trh/kurzy_devizoveho_trhu/denni_kurz.txt",
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "text/plain; charset=UTF-8",
+        },
+      }
+    );
+
+    const text = await response.text();
+    console.log(text);
+    
+  };
+
   useEffect(() => {
+    loadData();
     fetch(
       "http://www.cnb.cz/cs/financni_trhy/devizovy_trh/kurzy_devizoveho_trhu/denni_kurz.txt",
       {
@@ -90,6 +103,13 @@ const App: React.FC = () => {
         },
       }
     )
+      .then((r) => {
+        console.log(r);
+        r.text().then((text) => {
+          console.log("text", text);
+        });
+        return r;
+      })
       .then((r) => r.text())
       .then((text) => {
         console.log("fetch pokus");

@@ -3,8 +3,10 @@ import { Card, Typography } from "antd";
 import { DataProps } from "./../types/types";
 import moment from "moment";
 import _ from "lodash";
-import { FormattedMessage, useIntl, injectIntl } from "react-intl";
+import { FormattedMessage, useIntl } from "react-intl";
 const { Text } = Typography;
+
+
 
 const TheSummary: React.FC<DataProps> = (props) => {
   const [purchaseMax, setPurchaseMax] = useState(0);
@@ -18,6 +20,21 @@ const TheSummary: React.FC<DataProps> = (props) => {
   const [loanMin, setLoanMin] = useState("");
   const [loanMax, setLoanMax] = useState("");
   const [loanCount, setLoanCount] = useState(0);
+
+  const [summaryResult, setSummaryResult] = useState (
+    {purchaseMax: 0,
+      purchaseSum: 0,
+      purchaseAvg: 0,
+      purchaseCount: 0,
+      leaseMax: 0,
+      leaseSum: 0,
+      leaseAvg: 0,
+      leaseCount: 0,
+      loanMax: "",
+      loanMin: "",
+      loanCount: 0
+    }
+  );
   const intl = useIntl();
 
   useEffect(() => {
@@ -34,7 +51,7 @@ const TheSummary: React.FC<DataProps> = (props) => {
     setLoanCount(countFce("zapujcka"));
   }, []);
 
-  const loanMaxMin = (extreme: string) => {
+  const loanMaxMin = (extreme: string,) => {
     let sorted = _.orderBy(props.data, ["dateOfReturn"], ["desc"]);
     if (extreme === "max") {
       return moment(sorted[0].dateOfReturn).format("DD.MM.YYYY");

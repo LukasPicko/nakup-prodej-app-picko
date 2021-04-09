@@ -3,7 +3,7 @@ import { Form, Input, Select, InputNumber, Button, DatePicker } from "antd";
 import { useHistory, useParams } from "react-router-dom";
 import { DataModalProps } from "../types/types";
 import { v4 as uuidv4 } from "uuid";
-import { FormattedMessage, useIntl, injectIntl } from "react-intl";
+import { FormattedMessage, useIntl } from "react-intl";
 import "antd/dist/antd.css";
 import moment from "moment";
 //import { FormComponentProps } from 'antd/lib/form/Form';
@@ -12,15 +12,15 @@ const { Option } = Select;
 
 
 const CommonForm: React.FC<DataModalProps> = (props) => {
-  const [foId] = useState(useParams<{ id: string }>().id || "");
-  const [foName, setFoName] = useState("");
-  const [foType, setFoType] = useState("");
-  const [foPrice, setFoPrice] = useState(0);
-  const [foCurrency, setFoCurrency] = useState("");
-  const [foDateOfAction, setFoDateOfAction] = useState(() => nowDate());
-  const [foDateOfRegister, setFoDateOfRegister] = useState(() => nowDate());
-  const [foDateOfReturn, setFoDateOfReturn] = useState(() => nowDate());
-  const [foAction, setFoAction] = useState("");
+  const [formItemId] = useState(useParams<{ id: string }>().id || "");
+  const [formItemName, setFormItemName] = useState("");
+  const [formItemType, setFormItemType] = useState("");
+  const [formItemPrice, setFormItemPrice] = useState(0);
+  const [formItemCurrency, setFormItemCurrency] = useState("");
+  const [formItemDateOfAction, setFormItemDateOfAction] = useState(() => nowDate());
+  const [formItemDateOfRegister, setFormItemDateOfRegister] = useState(() => nowDate());
+  const [formItemDateOfReturn, setFormItemDateOfReturn] = useState(() => nowDate());
+  const [formItemAction, setFormItemAction] = useState("");
   const [firstTime, setFirstTime] = useState(true);
 
   const history = useHistory();
@@ -44,78 +44,78 @@ const CommonForm: React.FC<DataModalProps> = (props) => {
       dateOfReturn: "",
     };
     if (props.data !== undefined) {
-      objTemp = props.data.find((item: { id: string; }) => item.id === foId);
+      objTemp = props.data.find((item: { id: string; }) => item.id === formItemId);
 
-      setFoName(() => objTemp.name);
-      setFoPrice(() => objTemp.price);
-      setFoCurrency(() => objTemp.currency);
-      setFoType(() => objTemp.type);
-      setFoDateOfAction(() => objTemp.dateOfAction);
-      setFoDateOfRegister(() => objTemp.dateOfRegister);
-      setFoDateOfReturn(() => objTemp.dateOfReturn);
+      setFormItemName(() => objTemp.name);
+      setFormItemPrice(() => objTemp.price);
+      setFormItemCurrency(() => objTemp.currency);
+      setFormItemType(() => objTemp.type);
+      setFormItemDateOfAction(() => objTemp.dateOfAction);
+      setFormItemDateOfRegister(() => objTemp.dateOfRegister);
+      setFormItemDateOfReturn(() => objTemp.dateOfReturn);
       setFirstTime(() => !firstTime);
-      setFoAction(() => "upd");
+      setFormItemAction(() => "upd");
     }
   }
 
   useEffect(() => {
     if (firstTime) {
-      if (foId) {
+      if (formItemId) {
         fillVariables();
       } else {
-        setFoAction(() => "add");
+        setFormItemAction(() => "add");
       }
     }
   }, [
-    foName,
-    foType,
-    foPrice,
-    foCurrency,
-    foDateOfAction,
-    foDateOfRegister,
-    foDateOfReturn,
+    formItemName,
+    formItemType,
+    formItemPrice,
+    formItemCurrency,
+    formItemDateOfAction,
+    formItemDateOfRegister,
+    formItemDateOfReturn,
   ]);
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
-    if (foAction === "upd") {
-      props.setData(props.data.filter((item: { id: string; }) => item.id !== foId));
+    if (formItemAction === "upd") {
+      props.setData(props.data.filter((item: { id: string; }) => item.id !== formItemId));
     }
     props.setData((oldData: any) => [
       ...oldData,
       {
-        id: foAction === "add" ? uuidv4() : foId,
-        type: foType,
-        name: foName,
-        price: foPrice,
-        currency: foCurrency,
-        dateOfAction: foDateOfAction,
-        dateOfRegister: foDateOfRegister,
-        dateOfReturn: foDateOfReturn,
+        id: formItemAction === "add" ? uuidv4() : formItemId,
+        type: formItemType,
+        name: formItemName,
+        price: formItemPrice,
+        currency: formItemCurrency,
+        dateOfAction: formItemDateOfAction,
+        dateOfRegister: formItemDateOfRegister,
+        dateOfReturn: formItemDateOfReturn,
       },
     ]);
-    if (foAction === "add") props.setVisibleModalForm(false);
+    if (formItemAction === "add") props.setVisibleModalForm(false);
     history.push("/");
   };
 
   const handleChangeNumber = (value: any) => {
-    setFoPrice(parseFloat(value));
+    setFormItemPrice(parseFloat(value));
   };
 
   const handleChangeDateOfAction = (date: any, dateString: string) => {
-    setFoDateOfAction(moment(date).format("YYYY-MM-DD"));
+    setFormItemDateOfAction(moment(date).format("YYYY-MM-DD"));
   };
 
   const handleChangeDateOfReturn = (date: any, dateString: string) => {
-    setFoDateOfReturn(moment(date).format("YYYY-MM-DD"));
+    setFormItemDateOfReturn(moment(date).format("YYYY-MM-DD"));
   };
 
   const handleChangeType = (value: string) => {
-    setFoType(value);
+    setFormItemType(value);
   };
 
   const handleChangeCurrency = (value: string) => {
-    setFoCurrency(value);
+    setFormItemCurrency(value);
   };
 
   function handleClickDeleteRecord(id: any) {
@@ -129,7 +129,7 @@ const CommonForm: React.FC<DataModalProps> = (props) => {
 
   return (
     <div>
-      {foAction === "upd" && (
+      {formItemAction === "upd" && (
         <h2>
           <FormattedMessage
             id="formEditRecord"
@@ -149,9 +149,9 @@ const CommonForm: React.FC<DataModalProps> = (props) => {
           <Input
             id="adName"
             name="addName"
-            value={foName}
+            value={formItemName}
             onChange={(e: React.FormEvent<HTMLInputElement>) =>
-              setFoName(e.currentTarget.value)
+              setFormItemName(e.currentTarget.value)
             }
             style={{
               width: 150,
@@ -172,7 +172,7 @@ const CommonForm: React.FC<DataModalProps> = (props) => {
         >
           <Select
             id="updType"
-            value={foType}
+            value={formItemType}
             style={{ width: 150 }}
             onChange={handleChangeType}
           >
@@ -200,12 +200,12 @@ const CommonForm: React.FC<DataModalProps> = (props) => {
             </Option>
           </Select>
         </Form.Item>
-        {foType !== "zapujcka" && (
+        {formItemType !== "zapujcka" && (
           <>
             <Form.Item
               label={
                
-                foType === "nakup"
+                formItemType === "nakup"
                 ? intl.formatMessage({
                     id: "formPriceLabel",
                     defaultMessage: "Cena",
@@ -219,7 +219,7 @@ const CommonForm: React.FC<DataModalProps> = (props) => {
 
               }
             >
-              <InputNumber value={foPrice} onChange={handleChangeNumber} />
+              <InputNumber value={formItemPrice} onChange={handleChangeNumber} />
             </Form.Item>
             <FormattedMessage
               id="formTitleCurrency"
@@ -229,7 +229,7 @@ const CommonForm: React.FC<DataModalProps> = (props) => {
             <Form.Item>
               <Select
                 id="updCurrency"
-                value={foCurrency}
+                value={formItemCurrency}
                 style={{ width: 150 }}
                 onChange={handleChangeCurrency}
               >
@@ -239,7 +239,7 @@ const CommonForm: React.FC<DataModalProps> = (props) => {
             </Form.Item>
           </>
         )}
-        {foType === "zapujcka" && (
+        {formItemType === "zapujcka" && (
           <>
             <FormattedMessage
               id="formTitleReturn"
@@ -280,11 +280,11 @@ const CommonForm: React.FC<DataModalProps> = (props) => {
             description="formSubmitButton"
           />
         </Button>
-        {foAction === "upd" && (
+        {formItemAction === "upd" && (
           <Button
             type="default"
             onClick={() => {
-              handleClickDeleteRecord(foId);
+              handleClickDeleteRecord(formItemId);
             }}
           >
             <FormattedMessage
