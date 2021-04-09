@@ -77,6 +77,18 @@
       "value": "Název položky"
     }
   ],
+  "formPriceLabel": [
+    {
+      "type": 0,
+      "value": "Cena"
+    }
+  ],
+  "formPricePerMonthLabel": [
+    {
+      "type": 0,
+      "value": "Cena za měsíc"
+    }
+  ],
   "formReturnDatePlaceholder": [
     {
       "type": 0,
@@ -155,6 +167,12 @@
       "value": "Platnost od :"
     }
   ],
+  "reLiPerMonth": [
+    {
+      "type": 0,
+      "value": "/měsíc"
+    }
+  ],
   "reLiRegisterFrom": [
     {
       "type": 0,
@@ -165,6 +183,24 @@
     {
       "type": 0,
       "value": "Termín vrácení :"
+    }
+  ],
+  "reLiSubtitleLease": [
+    {
+      "type": 0,
+      "value": "Pronájem"
+    }
+  ],
+  "reLiSubtitleLoan": [
+    {
+      "type": 0,
+      "value": "Zápůjčka"
+    }
+  ],
+  "reLiSubtitlePurchase": [
+    {
+      "type": 0,
+      "value": "Nákup"
     }
   ],
   "settAddButton": [

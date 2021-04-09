@@ -4,7 +4,6 @@ import { useHistory, useParams } from "react-router-dom";
 import { DataModalProps } from "../types/types";
 import { v4 as uuidv4 } from "uuid";
 import { FormattedMessage, useIntl, injectIntl } from "react-intl";
-import { typesOfPricesCZ, typesOfPricesEN } from "./Enums/enums";
 import "antd/dist/antd.css";
 import moment from "moment";
 //import { FormComponentProps } from 'antd/lib/form/Form';
@@ -205,11 +204,19 @@ const CommonForm: React.FC<DataModalProps> = (props) => {
           <>
             <Form.Item
               label={
-                props.language === "cz"
-                  ? //@ts-ignore
-                    typesOfPricesCZ[foType]
-                  : //@ts-ignore
-                    typesOfPricesEN[foType]
+               
+                foType === "nakup"
+                ? intl.formatMessage({
+                    id: "formPriceLabel",
+                    defaultMessage: "Cena",
+                    description: "price label in form",
+                  })
+                : intl.formatMessage({
+                    id: "formPricePerMonthLabel",
+                    defaultMessage: "Cena za měsíc",
+                    description: "price per month label in form",
+                  })
+
               }
             >
               <InputNumber value={foPrice} onChange={handleChangeNumber} />

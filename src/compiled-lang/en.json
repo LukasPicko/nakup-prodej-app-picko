@@ -77,6 +77,18 @@
       "value": "Item name"
     }
   ],
+  "formPriceLabel": [
+    {
+      "type": 0,
+      "value": "Price"
+    }
+  ],
+  "formPricePerMonthLabel": [
+    {
+      "type": 0,
+      "value": "Price per month"
+    }
+  ],
   "formReturnDatePlaceholder": [
     {
       "type": 0,
@@ -155,6 +167,12 @@
       "value": "Valid from :"
     }
   ],
+  "reLiPerMonth": [
+    {
+      "type": 0,
+      "value": "/month"
+    }
+  ],
   "reLiRegisterFrom": [
     {
       "type": 0,
@@ -165,6 +183,24 @@
     {
       "type": 0,
       "value": "Return date :"
+    }
+  ],
+  "reLiSubtitleLease": [
+    {
+      "type": 0,
+      "value": "Lease"
+    }
+  ],
+  "reLiSubtitleLoan": [
+    {
+      "type": 0,
+      "value": "Loan"
+    }
+  ],
+  "reLiSubtitlePurchase": [
+    {
+      "type": 0,
+      "value": "Purchase"
     }
   ],
   "settAddButton": [

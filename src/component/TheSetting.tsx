@@ -4,7 +4,7 @@ import "antd/dist/antd.css";
 import { CommonProps } from "./../types/types";
 import CommonForm from "./CommonForm";
 
-import { FormattedMessage, useIntl, injectIntl } from "react-intl";
+import { FormattedMessage, useIntl } from "react-intl";
 
 const TheSetting: React.FC<CommonProps> = (Props) => {
   const [changeButton, setChangeButton] = useState(true);
@@ -35,7 +35,7 @@ const TheSetting: React.FC<CommonProps> = (Props) => {
   };
 
   return (
-    <div>
+    <>
       {changeButton && (
         <Button
           onClick={handleOnOffFilter}
@@ -87,7 +87,7 @@ const TheSetting: React.FC<CommonProps> = (Props) => {
           language={Props.language}
         />
       </Modal>
-    </div>
+    </>
   );
 };
 

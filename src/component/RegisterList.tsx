@@ -1,16 +1,12 @@
-import React, {
-  useState,
-  useEffect,
-  MouseEvent,
-} from "react";
-import { List, Typography, Avatar, Button, message } from "antd";
+import React, { useState, useEffect, MouseEvent } from "react";
+import { List, Typography, Avatar, Button } from "antd";
 import { CommonProps } from "./../types/types";
 import { useHistory } from "react-router-dom";
 import moment from "moment";
 import _ from "lodash";
 import TheFilter from "./TheFilter";
-import { typesOfTypeCZ, typesOfTypeEN, typesOfCurrency } from "./Enums/enums";
-import { FormattedMessage, useIntl, injectIntl } from "react-intl";
+import { typesOfCurrency } from "./Enums/enums";
+import { FormattedMessage, useIntl } from "react-intl";
 const { Title } = Typography;
 
 var storedFilterName: string,
@@ -148,8 +144,9 @@ const RegisterList: React.FC<CommonProps> = (Props) => {
   const [filterType, setFilterType] = useState(storedFilterType);
   const [sorting, setSorting] = useState(storedSorting);
   const [dataToShow, setDataToShow] = useState(Props.data);
-  const [showButton, setShowButton] = useState('');
+  const [showButton, setShowButton] = useState("");
   const history = useHistory();
+  const intl = useIntl();
 
   useEffect(() => {
     setDataToShow(() =>
@@ -174,13 +171,13 @@ const RegisterList: React.FC<CommonProps> = (Props) => {
   }
 
   const showMe = (e: MouseEvent) => {
-      setShowButton(e.currentTarget.id);
-      console.log(e.currentTarget.id)
+    setShowButton(e.currentTarget.id);
+    console.log(e.currentTarget.id);
   };
 
   const hideMe = () => {
-    setShowButton('');
-  }
+    setShowButton("");
+  };
 
   return (
     <div className="demo-infinite-container">
@@ -232,30 +229,46 @@ const RegisterList: React.FC<CommonProps> = (Props) => {
                 </Title>
               }
               description={
-                //@ts-ignore
-                Props.language ==='cz'? typesOfTypeCZ[item.type]: typesOfTypeEN[item.type]
+                
+                item.type === "nakup"
+                  ? intl.formatMessage({
+                      id: "reLiSubtitlePurchase",
+                      defaultMessage: "Nákup",
+                      description: "description of type on list item - purchase",
+                    })
+                  : item.type === "pronajem"
+                  ? intl.formatMessage({
+                      id: "reLiSubtitleLease",
+                      defaultMessage: "Pronájem",
+                      description: "description of type on list item - lease",
+                    })
+                  : intl.formatMessage({
+                      id: "reLiSubtitleLoan",
+                      defaultMessage: "Zápůjčka",
+                      description: "description of type on list item - loan",
+                    })
               }
             />
 
             <div style={{ marginRight: 20 }}>
               <p>
                 <FormattedMessage
-                id='reLiActionFrom'
-                defaultMessage='Platnost od :'
-                description='title dateOfAction'
+                  id="reLiActionFrom"
+                  defaultMessage="Platnost od :"
+                  description="title dateOfAction"
                 />
-                </p>
+              </p>
               <p>{moment(item.dateOfAction).format("DD.MM.YYYY")}</p>
             </div>
 
             <div style={{ marginRight: 20 }}>
               <p>
                 <FormattedMessage
-                id='reLiRegisterFrom'
-                defaultMessage='V registru od :'
-                description='title dateOfRegister'
+                  id="reLiRegisterFrom"
+                  defaultMessage="V registru od :"
+                  description="title dateOfRegister"
                 />
-                </p>
+              </p>
               <p>{moment(item.dateOfRegister).format("DD.MM.YYYY")}</p>
             </div>
 
@@ -267,6 +280,13 @@ const RegisterList: React.FC<CommonProps> = (Props) => {
                     //@ts-ignore
                     typesOfCurrency[item.currency]
                   }
+                  {item.type === "pronajem" && (
+                    <FormattedMessage
+                      id="reLiPerMonth"
+                      defaultMessage="/měsíc"
+                      description="per month suffix"
+                    />
+                  )}
                 </div>
               </>
             )}
@@ -275,17 +295,17 @@ const RegisterList: React.FC<CommonProps> = (Props) => {
                 <div style={{ marginRight: 20 }}>
                   <p>
                     <FormattedMessage
-                    id='reLiReturnTo'
-                    defaultMessage='Termín vrácení :'
-                    description='title dateOfReturn'
+                      id="reLiReturnTo"
+                      defaultMessage="Termín vrácení :"
+                      description="title dateOfReturn"
                     />
-                    </p>
+                  </p>
                   <p>{moment(item.dateOfReturn).format("DD.MM.YYYY")}</p>
                 </div>
               </>
             )}
 
-            {showButton===item.id && (
+            {showButton === item.id && (
               <Button
                 id={item.id}
                 style={{ borderWidth: 0 }}

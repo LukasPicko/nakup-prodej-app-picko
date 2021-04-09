@@ -7,12 +7,7 @@ import TheSummary from "./component/TheSummary";
 import TheSetting from "./component/TheSetting";
 import CommonForm from "./component/CommonForm";
 import RegisterList from "./component/RegisterList";
-import {
-  IntlProvider,
-  FormattedMessage,
-  useIntl,
-  injectIntl,
-} from "react-intl";
+import { IntlProvider } from "react-intl";
 import locale_en from "./compiled-lang/en.json";
 import locale_cz from "./compiled-lang/cz.json";
 
@@ -62,7 +57,6 @@ const App: React.FC = () => {
   const [linesCNB, setLinesCNB] = useState([{}]);
   const [cnbDate, setCNBDate] = useState("");
   const [language, setLanguage] = useState("cz");
-
 
   function txtToArray(text: string) {
     //debugger;
@@ -115,7 +109,6 @@ const App: React.FC = () => {
   };
 
   return (
-    
     <IntlProvider
       locale={language}
       defaultLocale="cz"
@@ -124,8 +117,9 @@ const App: React.FC = () => {
     >
       <TheNavigation />
       <PageHeader
-        //title='NÁKUPY A PRONÁJMY'
-        title={language==='cz'?'NÁKUPY A PRONÁJMY':'PURCHASES AND RENTALS'}
+        title={
+          language === "cz" ? "NÁKUPY A PRONÁJMY" : "PURCHASES AND RENTALS"
+        }
         extra={[
           <TheSetting
             showFilter={showFilter}

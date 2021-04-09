@@ -51,6 +51,14 @@
       "defaultMessage": "Item name",
       "description": "form placeholder of name"
     },
+    "formPriceLabel": {
+      "defaultMessage": "Price",
+      "description": "price label in form"
+    },
+    "formPricePerMonthLabel": {
+      "defaultMessage": "Price per month",
+      "description": "price per month label in form"
+    },
     "formReturnDatePlaceholder": {
       "defaultMessage": "Date",
       "description": "formReturnDatePlaceholder"
@@ -103,6 +111,10 @@
       "defaultMessage": "Valid from :",
       "description": "title dateOfAction"
     },
+    "reLiPerMonth": {
+      "defaultMessage": "/month",
+      "description": "per month suffix"
+    },
     "reLiRegisterFrom": {
       "defaultMessage": "In the register from :",
       "description": "title dateOfRegister"
@@ -110,6 +122,18 @@
     "reLiReturnTo": {
       "defaultMessage": "Return date :",
       "description": "title dateOfReturn"
+    },
+    "reLiSubtitleLease": {
+      "defaultMessage": "Lease",
+      "description": "description of type on list item - lease"
+    },
+    "reLiSubtitleLoan": {
+      "defaultMessage": "Loan",
+      "description": "description of type on list item - loan"
+    },
+    "reLiSubtitlePurchase": {
+      "defaultMessage": "Purchase",
+      "description": "description of type on list item - purchase"
     },
     "settAddButton": {
       "defaultMessage": "+Add",

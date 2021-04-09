@@ -51,6 +51,14 @@
     "defaultMessage": "Název položky",
     "description": "form placeholder of name"
   },
+  "formPriceLabel": {
+    "defaultMessage": "Cena",
+    "description": "price label in form"
+  },
+  "formPricePerMonthLabel": {
+    "defaultMessage": "Cena za měsíc",
+    "description": "price per month label in form"
+  },
   "formReturnDatePlaceholder": {
     "defaultMessage": "Datum",
     "description": "formReturnDatePlaceholder"
@@ -103,6 +111,10 @@
     "defaultMessage": "Platnost od :",
     "description": "title dateOfAction"
   },
+  "reLiPerMonth": {
+    "defaultMessage": "/měsíc",
+    "description": "per month suffix"
+  },
   "reLiRegisterFrom": {
     "defaultMessage": "V registru od :",
     "description": "title dateOfRegister"
@@ -110,6 +122,18 @@
   "reLiReturnTo": {
     "defaultMessage": "Termín vrácení :",
     "description": "title dateOfReturn"
+  },
+  "reLiSubtitleLease": {
+    "defaultMessage": "Pronájem",
+    "description": "description of type on list item - lease"
+  },
+  "reLiSubtitleLoan": {
+    "defaultMessage": "Zápůjčka",
+    "description": "description of type on list item - loan"
+  },
+  "reLiSubtitlePurchase": {
+    "defaultMessage": "Nákup",
+    "description": "description of type on list item - purchase"
   },
   "settAddButton": {
     "defaultMessage": "+Přidat",
