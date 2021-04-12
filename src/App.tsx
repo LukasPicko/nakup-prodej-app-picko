@@ -11,7 +11,6 @@ import { IntlProvider } from "react-intl";
 import locale_en from "./compiled-lang/en.json";
 import locale_cz from "./compiled-lang/cz.json";
 
-
 let data = localStorage.getItem("storedData");
 if (data) {
   var purchases = JSON.parse(data);
@@ -46,34 +45,35 @@ if (data) {
     },
   ];
 }
+
+const pushLinesToArray = (text: string) => {
+  let linesArray: string[] = text.trim().split("\n");
+  return linesArray;
+};
+
+function pushItemsObjectsToArray(text: string) {
+  let arrayOfObjects: {}[] = [];
+  for (let index = 2; index < pushLinesToArray(text).length; index++) {
+    let line = pushLinesToArray(text)[index].trim().split("|");
+    let objTemp = {
+      country: line[0],
+      currency: line[1],
+      count: line[2],
+      code: line[3],
+      rate: line[4],
+    };
+    arrayOfObjects.push(objTemp);
+  }
+  return arrayOfObjects;
+}
+
 const App: React.FC = () => {
   const [showFilter, setShowFilter] = useState(false);
   const [data, setData] = useState(purchases);
   const [visibleModalForm, setVisibleModalForm] = useState(false);
-  const [, setLinesCNB] = useState<{}[]>([]);
+  const [linesCNB, setLinesCNB] = useState<{}[]>([]);
   const [cnbDate, setCNBDate] = useState("");
   const [language, setLanguage] = useState("cz");
-
-  function txtToArray(text: string) {
-    //debugger;
-    let arrayOfObjects: {}[] = [];
-    let linesArray: string[] = text.trim().split("\n");
-    setCNBDate(() => linesArray[0].substring(0, 10));
-    localStorage.setItem("cnbDate", cnbDate);
-    for (let index = 2; index < linesArray.length; index++) {
-      let line = linesArray[index].trim().split("|");
-      let objTemp = {
-        country: line[0],
-        currency: line[1],
-        count: line[2],
-        code: line[3],
-        rate: line[4],
-      };
-      arrayOfObjects.push(objTemp);
-    }
-    localStorage.setItem("storedCNBdata", JSON.stringify(arrayOfObjects));
-    setLinesCNB(arrayOfObjects);
-  }
 
   const loadData = async () => {
     const response = await fetch(
@@ -88,7 +88,6 @@ const App: React.FC = () => {
 
     const text = await response.text();
     console.log(text);
-    
   };
 
   useEffect(() => {
@@ -114,8 +113,12 @@ const App: React.FC = () => {
       .then((text) => {
         console.log("fetch pokus");
         console.log(text);
+        setCNBDate(() => pushLinesToArray(text)[0].substring(0, 10));
+        localStorage.setItem("cnbDate", cnbDate);
         //debugger;
-        txtToArray(text);
+        setLinesCNB(pushItemsObjectsToArray(text));
+
+        localStorage.setItem("linesCNB", JSON.stringify(linesCNB));
       })
       .catch((error) => {
         console.log(error);

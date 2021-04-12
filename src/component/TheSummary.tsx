@@ -6,84 +6,112 @@ import _ from "lodash";
 import { FormattedMessage, useIntl } from "react-intl";
 const { Text } = Typography;
 
+const loanMaxMin = (
+  data: {
+    id: string;
+    type: string;
+    name: string;
+    price: number;
+    currency: string;
+    dateOfAction: string;
+    dateOfRegister: string;
+    dateOfReturn: string;
+  }[],
+  extreme: string
+) => {
+  let sorted = _.orderBy(data, ["dateOfReturn"], ["desc"]);
+  if (extreme === "max") {
+    return moment(sorted[0].dateOfReturn).format("DD.MM.YYYY");
+  } else {
+    return moment(sorted[sorted.length - 1].dateOfReturn).format("DD.MM.YYYY");
+  }
+};
 
+const maxFce = (
+  data: {
+    id: string;
+    type: string;
+    name: string;
+    price: number;
+    currency: string;
+    dateOfAction: string;
+    dateOfRegister: string;
+    dateOfReturn: string;
+  }[],
+  par: string
+) => {
+  return Math.max(
+    ...data.filter((item) => item.type === par).map((item) => item.price)
+  );
+};
+
+const sumItems = (
+  data: {
+    id: string;
+    type: string;
+    name: string;
+    price: number;
+    currency: string;
+    dateOfAction: string;
+    dateOfRegister: string;
+    dateOfReturn: string;
+  }[],
+  par: string
+) => {
+  return data
+    .filter((item) => item.type === par)
+    .map((item) => item.price)
+    .reduce((prev, curr) => prev + curr);
+};
+
+const avgItems = (
+  data: {
+    id: string;
+    type: string;
+    name: string;
+    price: number;
+    currency: string;
+    dateOfAction: string;
+    dateOfRegister: string;
+    dateOfReturn: string;
+  }[],
+  par: string
+) => {
+  return sumItems(data, par) / data.filter((item) => item.type === par).length;
+};
+
+const countItems = (
+  data: {
+    id: string;
+    type: string;
+    name: string;
+    price: number;
+    currency: string;
+    dateOfAction: string;
+    dateOfRegister: string;
+    dateOfReturn: string;
+  }[],
+  par: string
+) => {
+  return data.filter((item) => item.type === par).length;
+};
 
 const TheSummary: React.FC<DataProps> = (props) => {
-  const [purchaseMax, setPurchaseMax] = useState(0);
-  const [purchaseSum, setPurchaseSum] = useState(0);
-  const [purchaseAvg, setPurchaseAvg] = useState(0);
-  const [purchaseCount, setPurchaseCount] = useState(0);
-  const [leaseMax, setLesaeMax] = useState(0);
-  const [leaseSum, setLeaseSum] = useState(0);
-  const [leaseAvg, setLeaseAvg] = useState(0);
-  const [leaseCount, setLeaseCount] = useState(0);
-  const [loanMin, setLoanMin] = useState("");
-  const [loanMax, setLoanMax] = useState("");
-  const [loanCount, setLoanCount] = useState(0);
+  const summaryResult = {
+    purchaseMax: maxFce(props.data, "nakup"),
+    purchaseSum: sumItems(props.data, "nakup"),
+    purchaseAvg: avgItems(props.data, "nakup"),
+    purchaseCount: countItems(props.data, "nakup"),
+    leaseMax: maxFce(props.data, "pronajem"),
+    leaseSum: sumItems(props.data, "pronajem"),
+    leaseAvg: avgItems(props.data, "pronajem"),
+    leaseCount: countItems(props.data, "pronajem"),
+    loanMax: loanMaxMin(props.data, "max"),
+    loanMin: loanMaxMin(props.data, "min"),
+    loanCount: countItems(props.data, "zapujcka"),
+  };
 
-  const [summaryResult, setSummaryResult] = useState (
-    {purchaseMax: 0,
-      purchaseSum: 0,
-      purchaseAvg: 0,
-      purchaseCount: 0,
-      leaseMax: 0,
-      leaseSum: 0,
-      leaseAvg: 0,
-      leaseCount: 0,
-      loanMax: "",
-      loanMin: "",
-      loanCount: 0
-    }
-  );
   const intl = useIntl();
-
-  useEffect(() => {
-    setPurchaseMax(maxFce("nakup"));
-    setPurchaseSum(sumFce("nakup"));
-    setPurchaseAvg(avgFce("nakup"));
-    setPurchaseCount(countFce("nakup"));
-    setLesaeMax(maxFce("pronajem"));
-    setLeaseSum(sumFce("pronajem"));
-    setLeaseAvg(avgFce("pronajem"));
-    setLeaseCount(countFce("pronajem"));
-    setLoanMax(loanMaxMin("max"));
-    setLoanMin(loanMaxMin("min"));
-    setLoanCount(countFce("zapujcka"));
-  }, []);
-
-  const loanMaxMin = (extreme: string,) => {
-    let sorted = _.orderBy(props.data, ["dateOfReturn"], ["desc"]);
-    if (extreme === "max") {
-      return moment(sorted[0].dateOfReturn).format("DD.MM.YYYY");
-    } else {
-      return moment(sorted[sorted.length - 1].dateOfReturn).format(
-        "DD.MM.YYYY"
-      );
-    }
-  };
-
-  const maxFce = (par: string) => {
-    return Math.max(
-      ...props.data
-        .filter((item) => item.type === par)
-        .map((item) => item.price)
-    );
-  };
-
-  const sumFce = (par: string) => {
-    return props.data
-      .filter((item) => item.type === par)
-      .map((item) => item.price)
-      .reduce((prev, curr) => prev + curr);
-  };
-
-  const avgFce = (par: string) => {
-    return sumFce(par) / props.data.filter((item) => item.type === par).length;
-  };
-
-  const countFce = (par: string) => {
-    return props.data.filter((item) => item.type === par).length;
-  };
 
   return (
     <Card
@@ -106,7 +134,7 @@ const TheSummary: React.FC<DataProps> = (props) => {
             id="sumPurchMax"
             defaultMessage="Nákupy maximální cena {purchaseMax}"
             description="max price of purchases"
-            values={{ purchaseMax }}
+            values={{ purchaseMax: summaryResult.purchaseMax }}
           />
         </Text>
         <br />
@@ -115,7 +143,7 @@ const TheSummary: React.FC<DataProps> = (props) => {
             id="sumPurchAvg"
             defaultMessage="Nákupy průměrná cena {purchaseAvg}"
             description="avg price of purchases"
-            values={{ purchaseAvg }}
+            values={{ purchaseAvg: summaryResult.purchaseAvg }}
           />
         </Text>
         <br />
@@ -124,7 +152,7 @@ const TheSummary: React.FC<DataProps> = (props) => {
             id="sumPurchSum"
             defaultMessage="Nákupy celková cena {purchaseSum}"
             description="sum of prices of purchases"
-            values={{ purchaseSum }}
+            values={{ purchaseSum: summaryResult.purchaseSum }}
           />
         </Text>
         <br />
@@ -133,7 +161,7 @@ const TheSummary: React.FC<DataProps> = (props) => {
             id="sumPurchCount"
             defaultMessage="Nákupy počet {purchaseCount}"
             description="count of purchases"
-            values={{ purchaseCount }}
+            values={{ purchaseCount: summaryResult.purchaseCount }}
           />
         </Text>
       </Card>
@@ -151,7 +179,7 @@ const TheSummary: React.FC<DataProps> = (props) => {
             id="sumLeaseMax"
             defaultMessage="Pronájmy maximální cena {leaseMax}"
             description="max price of leases"
-            values={{ leaseMax }}
+            values={{ leaseMax: summaryResult.leaseMax }}
           />
         </Text>
         <br />
@@ -160,7 +188,7 @@ const TheSummary: React.FC<DataProps> = (props) => {
             id="sumLeaseAvg"
             defaultMessage="Pronájmy průměrná cena {leaseAvg}"
             description="avg price of leases"
-            values={{ leaseAvg }}
+            values={{ leaseAvg: summaryResult.leaseAvg }}
           />
         </Text>
         <br />
@@ -169,7 +197,7 @@ const TheSummary: React.FC<DataProps> = (props) => {
             id="sumLeaseSum"
             defaultMessage="Pronájmy celková cena {leaseSum}"
             description="sum price of leases"
-            values={{ leaseSum }}
+            values={{ leaseSum: summaryResult.leaseSum }}
           />
         </Text>
         <br />
@@ -178,7 +206,7 @@ const TheSummary: React.FC<DataProps> = (props) => {
             id="sumLeaseCount"
             defaultMessage="Pronájmy počet {leaseCount}"
             description="count of leases"
-            values={{ leaseCount }}
+            values={{ leaseCount: summaryResult.leaseCount }}
           />
         </Text>
       </Card>
@@ -196,7 +224,7 @@ const TheSummary: React.FC<DataProps> = (props) => {
             id="sumLoanFirst"
             defaultMessage="Zápůjčky vrátit nejříve: {loanMin}"
             description="loan return first"
-            values={{ loanMin }}
+            values={{ loanMin: summaryResult.loanMin }}
           />
         </Text>
         <br />
@@ -205,7 +233,7 @@ const TheSummary: React.FC<DataProps> = (props) => {
             id="sumLoanLast"
             defaultMessage="Zápůjčky vrátit nejpozději: {loanMax}"
             description="loan return last"
-            values={{ loanMax }}
+            values={{ loanMax: summaryResult.loanMax }}
           />
         </Text>
         <br />
@@ -214,7 +242,7 @@ const TheSummary: React.FC<DataProps> = (props) => {
             id="sumLoanCount"
             defaultMessage="Zápůjčky počet {loanCount}"
             description="count of loans"
-            values={{ loanCount }}
+            values={{ loanCount: summaryResult.loanCount }}
           />
         </Text>
       </Card>
@@ -223,5 +251,3 @@ const TheSummary: React.FC<DataProps> = (props) => {
 };
 
 export default TheSummary;
-
-//export default injectIntl(TheSummary);
