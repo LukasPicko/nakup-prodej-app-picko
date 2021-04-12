@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useMemo } from "react";
 import { Card, Typography } from "antd";
 import { DataProps } from "./../types/types";
 import moment from "moment";
@@ -97,7 +97,7 @@ const countItems = (
 };
 
 const TheSummary: React.FC<DataProps> = (props) => {
-  const summaryResult = {
+  const summaryResult = useMemo(()=> ({
     purchaseMax: maxFce(props.data, "nakup"),
     purchaseSum: sumItems(props.data, "nakup"),
     purchaseAvg: avgItems(props.data, "nakup"),
@@ -109,7 +109,7 @@ const TheSummary: React.FC<DataProps> = (props) => {
     loanMax: loanMaxMin(props.data, "max"),
     loanMin: loanMaxMin(props.data, "min"),
     loanCount: countItems(props.data, "zapujcka"),
-  };
+  }),[props.data]);
 
   const intl = useIntl();
 

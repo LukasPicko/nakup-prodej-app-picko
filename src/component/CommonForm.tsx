@@ -6,10 +6,7 @@ import { v4 as uuidv4 } from "uuid";
 import { FormattedMessage, useIntl } from "react-intl";
 import "antd/dist/antd.css";
 import moment from "moment";
-//import { FormComponentProps } from 'antd/lib/form/Form';
 const { Option } = Select;
-
-
 
 const CommonForm: React.FC<DataModalProps> = (props) => {
   const [formItemId] = useState(useParams<{ id: string }>().id || "");
@@ -17,9 +14,15 @@ const CommonForm: React.FC<DataModalProps> = (props) => {
   const [formItemType, setFormItemType] = useState("");
   const [formItemPrice, setFormItemPrice] = useState(0);
   const [formItemCurrency, setFormItemCurrency] = useState("");
-  const [formItemDateOfAction, setFormItemDateOfAction] = useState(() => nowDate());
-  const [formItemDateOfRegister, setFormItemDateOfRegister] = useState(() => nowDate());
-  const [formItemDateOfReturn, setFormItemDateOfReturn] = useState(() => nowDate());
+  const [formItemDateOfAction, setFormItemDateOfAction] = useState(() =>
+    nowDate()
+  );
+  const [formItemDateOfRegister, setFormItemDateOfRegister] = useState(() =>
+    nowDate()
+  );
+  const [formItemDateOfReturn, setFormItemDateOfReturn] = useState(() =>
+    nowDate()
+  );
   const [formItemAction, setFormItemAction] = useState("");
   const [firstTime, setFirstTime] = useState(true);
 
@@ -29,8 +32,6 @@ const CommonForm: React.FC<DataModalProps> = (props) => {
   function nowDate() {
     return moment(Date.now()).format("YYYY-MM-DD");
   }
-
-  //const { getFieldDecorator } = props.form;
 
   function fillVariables() {
     let objTemp: any = {
@@ -44,7 +45,9 @@ const CommonForm: React.FC<DataModalProps> = (props) => {
       dateOfReturn: "",
     };
     if (props.data !== undefined) {
-      objTemp = props.data.find((item: { id: string; }) => item.id === formItemId);
+      objTemp = props.data.find(
+        (item: { id: string }) => item.id === formItemId
+      );
 
       setFormItemName(() => objTemp.name);
       setFormItemPrice(() => objTemp.price);
@@ -79,7 +82,9 @@ const CommonForm: React.FC<DataModalProps> = (props) => {
   const handleSubmit = (event: any) => {
     event.preventDefault();
     if (formItemAction === "upd") {
-      props.setData(props.data.filter((item: { id: string; }) => item.id !== formItemId));
+      props.setData(
+        props.data.filter((item: { id: string }) => item.id !== formItemId)
+      );
     }
     props.setData((oldData: any) => [
       ...oldData,
@@ -102,11 +107,11 @@ const CommonForm: React.FC<DataModalProps> = (props) => {
     setFormItemPrice(parseFloat(value));
   };
 
-  const handleChangeDateOfAction = (date: any, dateString: string) => {
+  const handleChangeDateOfAction = (date: any) => {
     setFormItemDateOfAction(moment(date).format("YYYY-MM-DD"));
   };
 
-  const handleChangeDateOfReturn = (date: any, dateString: string) => {
+  const handleChangeDateOfReturn = (date: any) => {
     setFormItemDateOfReturn(moment(date).format("YYYY-MM-DD"));
   };
 
@@ -121,7 +126,7 @@ const CommonForm: React.FC<DataModalProps> = (props) => {
   function handleClickDeleteRecord(id: any) {
     let objTemp: any = { id: "", type: "", name: "", price: 0 };
     if (props.data !== undefined) {
-      objTemp = props.data.filter((item: { id: any; }) => item.id !== id);
+      objTemp = props.data.filter((item: { id: any }) => item.id !== id);
     }
     props.setData(objTemp);
     history.push("/");
@@ -204,22 +209,23 @@ const CommonForm: React.FC<DataModalProps> = (props) => {
           <>
             <Form.Item
               label={
-               
                 formItemType === "nakup"
-                ? intl.formatMessage({
-                    id: "formPriceLabel",
-                    defaultMessage: "Cena",
-                    description: "price label in form",
-                  })
-                : intl.formatMessage({
-                    id: "formPricePerMonthLabel",
-                    defaultMessage: "Cena za měsíc",
-                    description: "price per month label in form",
-                  })
-
+                  ? intl.formatMessage({
+                      id: "formPriceLabel",
+                      defaultMessage: "Cena",
+                      description: "price label in form",
+                    })
+                  : intl.formatMessage({
+                      id: "formPricePerMonthLabel",
+                      defaultMessage: "Cena za měsíc",
+                      description: "price per month label in form",
+                    })
               }
             >
-              <InputNumber value={formItemPrice} onChange={handleChangeNumber} />
+              <InputNumber
+                value={formItemPrice}
+                onChange={handleChangeNumber}
+              />
             </Form.Item>
             <FormattedMessage
               id="formTitleCurrency"

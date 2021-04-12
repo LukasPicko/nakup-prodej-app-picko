@@ -8,6 +8,7 @@ import TheFilter from "./TheFilter";
 import { typesOfCurrency } from "./Enums/enums";
 import { FormattedMessage, useIntl } from "react-intl";
 const { Title } = Typography;
+const { Paragraph } = Typography;
 
 var storedFilterName: string,
   storedFilterType: string,
@@ -145,7 +146,7 @@ const RegisterList: React.FC<CommonProps> = (Props) => {
   const [sorting, setSorting] = useState(storedSorting);
   const [dataToShow, setDataToShow] = useState(Props.data);
   const [showButton, setShowButton] = useState("");
-  const [editable, setEditable] = useState(false);
+  const [editable, setEditable] = useState("");
   const history = useHistory();
   const intl = useIntl();
 
@@ -169,6 +170,14 @@ const RegisterList: React.FC<CommonProps> = (Props) => {
 
   function editRecordForm(value: string) {
     history.push("/" + value);
+  }
+
+  function editRecordName(value: string, id: string) {
+    let cloneData = Props.data.map((item) => item);
+    let objIndex = cloneData.findIndex((obj) => obj.id === id);
+    cloneData[objIndex].name = value;
+    Props.setData(cloneData);
+    setEditable("");
   }
 
   const showMe = (e: MouseEvent) => {
@@ -218,27 +227,33 @@ const RegisterList: React.FC<CommonProps> = (Props) => {
                 />
               }
               title={
-                <Title level={4}
-                id={item.id}
-                editable={{editing:editable, onChange: ()=>{} }}
-                >
+                <Title level={4} id={item.id}>
                   <span
                     onClick={() => {
                       editRecordForm(item.id);
                     }}
-                    
                   >
-                    {item.name}
+                    <Paragraph
+                    
+                      editable={{
+                        editing: editable === item.id,
+                        onChange: (value) => {
+                          editRecordName(value, item.id);
+                        },
+                      }}
+                    >
+                      {item.name}
+                    </Paragraph>
                   </span>
                 </Title>
               }
               description={
-                
                 item.type === "nakup"
                   ? intl.formatMessage({
                       id: "reLiSubtitlePurchase",
                       defaultMessage: "Nákup",
-                      description: "description of type on list item - purchase",
+                      description:
+                        "description of type on list item - purchase",
                     })
                   : item.type === "pronajem"
                   ? intl.formatMessage({
@@ -311,21 +326,18 @@ const RegisterList: React.FC<CommonProps> = (Props) => {
 
             {showButton === item.id && (
               <>
-              <Button
-              id={item.id}
-              onClick={()=>setEditable(!editable)}
-              >
-                Změnit
-              </Button>
-              <Button
-                id={item.id}
-                style={{ borderWidth: 0 }}
-                onClick={() => {
-                  handleClickDeleteRecord(item.id);
-                }}
-              >
-                X
-              </Button>
+                <Button id={item.id} onClick={() => setEditable(item.id)}>
+                  Změnit
+                </Button>
+                <Button
+                  id={item.id}
+                  style={{ borderWidth: 0 }}
+                  onClick={() => {
+                    handleClickDeleteRecord(item.id);
+                  }}
+                >
+                  X
+                </Button>
               </>
             )}
           </List.Item>

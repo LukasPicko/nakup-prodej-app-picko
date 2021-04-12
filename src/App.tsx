@@ -115,7 +115,7 @@ const App: React.FC = () => {
         console.log(text);
         setCNBDate(() => pushLinesToArray(text)[0].substring(0, 10));
         localStorage.setItem("cnbDate", cnbDate);
-        //debugger;
+        debugger;
         setLinesCNB(pushItemsObjectsToArray(text));
 
         localStorage.setItem("linesCNB", JSON.stringify(linesCNB));
@@ -158,7 +158,7 @@ const App: React.FC = () => {
       ></PageHeader>
       <main>
         <Switch>
-          <Route path="/" exact>
+          <Route path="/" exact key="registerList">
             <RegisterList
               showFilter={showFilter}
               setShowFilter={setShowFilter}
@@ -171,10 +171,10 @@ const App: React.FC = () => {
             />
           </Route>
 
-          <Route path="/summary">
+          <Route path="/summary" key="summary">
             <TheSummary data={data} setData={setData} />
           </Route>
-          <Route path="/:id">
+          <Route path="/:id" key="form">
             <CommonForm
               data={data}
               setData={setData}
