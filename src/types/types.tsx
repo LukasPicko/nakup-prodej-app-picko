@@ -3,7 +3,7 @@ export interface FilterShowProps {
   setShowFilter: (value: boolean | ((prevVar: boolean) => boolean)) => any;
 }
 
-export interface FilterValuesProps extends FilterShowProps{
+export interface FilterValuesProps extends FilterShowProps {
   filterName: string;
   setFilterName: React.Dispatch<React.SetStateAction<string>>;
   filterType: string;
@@ -12,10 +12,14 @@ export interface FilterValuesProps extends FilterShowProps{
     item: string;
     direction: string;
   }[];
-  setSorting: React.Dispatch<React.SetStateAction<{
-    item: string;
-    direction: string;
-  }[]>>
+  setSorting: React.Dispatch<
+    React.SetStateAction<
+      {
+        item: string;
+        direction: string;
+      }[]
+    >
+  >;
 }
 
 export interface DataProps {
@@ -28,47 +32,27 @@ export interface DataProps {
     dateOfAction: string;
     dateOfRegister: string;
     dateOfReturn: string;
-
-}[],
-setData: React.Dispatch<React.SetStateAction<{
-    id: string;
-    type: string;
-    name: string;
-    price: number;
-    currency: string;
-    dateOfAction: string;
-    dateOfRegister: string;
-    dateOfReturn: string;
-}[]>>
-}
-
-export interface DataToShowProps extends FilterShowProps {
-  dataToShow: {
-    id: string;
-    type: string;
-    name: string;
-    price: number;
-    currency: string;
-    dateOfAction: string;
-    dateOfRegister: string;
-    dateOfReturn: string;
-}[],
-setDataToShow: React.Dispatch<React.SetStateAction<{
-    id: string;
-    type: string;
-    name: string;
-    price: number;
-    currency: string;
-    dateOfAction: string;
-    dateOfRegister: string;
-    dateOfReturn: string;
-}[]>>
+  }[];
+  setData: React.Dispatch<
+    React.SetStateAction<
+      {
+        id: string;
+        type: string;
+        name: string;
+        price: number;
+        currency: string;
+        dateOfAction: string;
+        dateOfRegister: string;
+        dateOfReturn: string;
+      }[]
+    >
+  >;
 }
 
 export interface DataModalProps extends DataProps {
   visibleModalForm: boolean;
   setVisibleModalForm: React.Dispatch<React.SetStateAction<boolean>>;
-  language: string
+  language: string;
 }
 
 export interface CommonProps extends FilterShowProps, DataModalProps {
