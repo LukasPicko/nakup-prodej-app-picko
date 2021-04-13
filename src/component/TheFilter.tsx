@@ -18,7 +18,7 @@ const TheFilter: React.FC<FilterValuesProps> = (props) => {
       }
 
     const handleChangeSorting = (property:string, howSort:string) =>{
-        var objectTemp = _.clone(props.sorting)
+        let objectTemp = _.clone(props.sorting)
         const objIndex = objectTemp.findIndex(obj => obj.item === property);
         objectTemp = objectTemp.splice(objIndex,1)
         objectTemp = [{item:property, direction:howSort}, ...objectTemp]

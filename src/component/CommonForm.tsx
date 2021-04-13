@@ -24,7 +24,7 @@ const CommonForm: React.FC<DataModalProps> = (props) => {
     nowDate()
   );
   const [formItemAction, setFormItemAction] = useState("");
-  const [firstTime, setFirstTime] = useState(true);
+  const [firstTimeInUseEffect, setFirstTime] = useState(true);
 
   
   const history = useHistory();
@@ -57,13 +57,13 @@ const CommonForm: React.FC<DataModalProps> = (props) => {
       setFormItemDateOfAction(() => objTemp.dateOfAction);
       setFormItemDateOfRegister(() => objTemp.dateOfRegister);
       setFormItemDateOfReturn(() => objTemp.dateOfReturn);
-      setFirstTime(() => !firstTime);
+      setFirstTime(() => false);
       setFormItemAction(() => "upd");
     }
   }
 
   useEffect(() => {
-    if (firstTime) {
+    if (firstTimeInUseEffect) {
       if (formItemId) {
         fillVariables();
       } else {
@@ -104,7 +104,7 @@ const CommonForm: React.FC<DataModalProps> = (props) => {
     history.push("/");
   };
 
-  const handleChangeNumber = (value: any) => {
+  const handleChangePrice = (value: any) => {
     setFormItemPrice(parseFloat(value));
   };
 
@@ -225,7 +225,7 @@ const CommonForm: React.FC<DataModalProps> = (props) => {
             >
               <InputNumber
                 value={formItemPrice}
-                onChange={handleChangeNumber}
+                onChange={handleChangePrice}
               />
             </Form.Item>
             <FormattedMessage

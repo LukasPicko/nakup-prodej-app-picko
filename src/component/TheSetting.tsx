@@ -55,14 +55,13 @@ const TheSetting: React.FC<CommonProps> = (Props) => {
           style={{ background: "#FF9F33", borderColor: "#FF9F33" }}
         />
       )}
-      <Button shape="round" onClick={showModal} style={styles}>
+      <Button shape="round" onClick={() => showModal()} style={styles}>
         <FormattedMessage
           id="settAddButton"
           defaultMessage="+Přidat"
           description="desc of button to add record"
         />
       </Button>
-      {""}
       <Button shape="circle" onClick={() => setCz()} style={styles}>
         Cz
       </Button>

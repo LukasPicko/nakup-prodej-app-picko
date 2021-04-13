@@ -10,10 +10,12 @@ import RegisterList from "./component/RegisterList";
 import { IntlProvider } from "react-intl";
 import locale_en from "./compiled-lang/en.json";
 import locale_cz from "./compiled-lang/cz.json";
+import {dataOnlyType} from './types/pureTypes';
 
+let purchases:dataOnlyType;
 let data = localStorage.getItem("storedData");
 if (data) {
-  var purchases = JSON.parse(data);
+  purchases = JSON.parse(data);
 } else {
   purchases = [
     {
@@ -24,6 +26,7 @@ if (data) {
       currency: "CZK",
       dateOfAction: "2021-03-08",
       dateOfRegister: "2021-03-10",
+      dateOfReturn: "2021-4-15"
     },
     {
       id: "90e7c81e-ad7a-4f99-9ee6-f4a73182dc93",
@@ -33,6 +36,7 @@ if (data) {
       currency: "CZK",
       dateOfAction: "2021-03-07",
       dateOfRegister: "2021-03-11",
+      dateOfReturn: "2021-4-15"
     },
     {
       id: "abee251c-78c8-4c0c-bf1c-a4c962e8b0de",
@@ -42,6 +46,7 @@ if (data) {
       currency: "EUR",
       dateOfAction: "2021-03-06",
       dateOfRegister: "2021-03-12",
+      dateOfReturn: "2021-4-15"
     },
   ];
 }

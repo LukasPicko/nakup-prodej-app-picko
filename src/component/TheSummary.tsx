@@ -21,28 +21,28 @@ const loanMaxMin = (
 
 const maxFce = (
   data: dataOnlyType,
-  par: string
+  itemType: string
 ) => {
   return Math.max(
-    ...data.filter((item) => item.type === par).map((item) => item.price)
+    ...data.filter((item) => item.type === itemType).map((item) => item.price)
   );
 };
 
 const sumItems = (
   data: dataOnlyType,
-  par: string
+  itemType: string
 ) => {
   return data
-    .filter((item) => item.type === par)
+    .filter((item) => item.type === itemType)
     .map((item) => item.price)
     .reduce((prev, curr) => prev + curr);
 };
 
 const avgItems = (
   data: dataOnlyType,
-  par: string
+  itemType: string
 ) => {
-  return sumItems(data, par) / data.filter((item) => item.type === par).length;
+  return sumItems(data, itemType) / data.filter((item) => item.type === itemType).length;
 };
 
 const countItems = (

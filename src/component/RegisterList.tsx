@@ -6,37 +6,10 @@ import moment from "moment";
 import _ from "lodash";
 import TheFilter from "./TheFilter";
 import { typesOfCurrency } from "./Enums/enums";
-import {dataOnlyType} from '../types/pureTypes';
+import { dataOnlyType } from "../types/pureTypes";
 import { FormattedMessage, useIntl } from "react-intl";
 const { Title } = Typography;
 const { Paragraph } = Typography;
-
-var storedFilterName: string,
-  storedFilterType: string,
-  storedSorting: { item: string; direction: string }[];
-var stType = localStorage.getItem("storedFilterType");
-var stName = localStorage.getItem("storedFilterName");
-var stSort = localStorage.getItem("storedSorting");
-storedFilterType = stType ? stType : "#";
-storedFilterName = stName ? stName : "";
-storedSorting = stSort
-  ? JSON.parse(stSort)
-  : [
-      { item: "name", direction: "asc" },
-      { item: "type", direction: "asc" },
-    ];
-
-// type dataOnlyType =
-//   {
-//     id: string;
-//     type: string;
-//     name: string;
-//     price: number;
-//     currency: string;
-//     dateOfAction: string;
-//     dateOfRegister: string;
-//     dateOfReturn: string;
-//   }[];
 
 // interface dataOnlyType
 // {
@@ -50,7 +23,20 @@ storedSorting = stSort
 //   dateOfReturn: string;
 // }[];
 
-  
+let stType = localStorage.getItem("storedFilterType");
+let stName = localStorage.getItem("storedFilterName");
+let stSort = localStorage.getItem("storedSorting");
+let storedFilterName: string = stName ? stName : "";
+let storedFilterType: string = stType ? stType : "#";
+let storedSorting: { item: string; direction: string }[];
+
+storedSorting = stSort
+  ? JSON.parse(stSort)
+  : [
+      { item: "name", direction: "asc" },
+      { item: "type", direction: "asc" },
+    ];
+
 const filterResult = (
   data: dataOnlyType,
   filterName: string,
