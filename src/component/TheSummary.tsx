@@ -1,22 +1,14 @@
 import React, { useMemo } from "react";
 import { Card, Typography } from "antd";
-import { DataProps } from "./../types/types";
+import { DataProps } from "../types/typesInterfaces";
 import moment from "moment";
 import _ from "lodash";
 import { FormattedMessage, useIntl } from "react-intl";
+import {dataOnlyType} from '../types/pureTypes';
 const { Text } = Typography;
 
 const loanMaxMin = (
-  data: {
-    id: string;
-    type: string;
-    name: string;
-    price: number;
-    currency: string;
-    dateOfAction: string;
-    dateOfRegister: string;
-    dateOfReturn: string;
-  }[],
+  data: dataOnlyType,
   extreme: string
 ) => {
   let sorted = _.orderBy(data, ["dateOfReturn"], ["desc"]);
@@ -28,16 +20,7 @@ const loanMaxMin = (
 };
 
 const maxFce = (
-  data: {
-    id: string;
-    type: string;
-    name: string;
-    price: number;
-    currency: string;
-    dateOfAction: string;
-    dateOfRegister: string;
-    dateOfReturn: string;
-  }[],
+  data: dataOnlyType,
   par: string
 ) => {
   return Math.max(
@@ -46,16 +29,7 @@ const maxFce = (
 };
 
 const sumItems = (
-  data: {
-    id: string;
-    type: string;
-    name: string;
-    price: number;
-    currency: string;
-    dateOfAction: string;
-    dateOfRegister: string;
-    dateOfReturn: string;
-  }[],
+  data: dataOnlyType,
   par: string
 ) => {
   return data
@@ -65,32 +39,14 @@ const sumItems = (
 };
 
 const avgItems = (
-  data: {
-    id: string;
-    type: string;
-    name: string;
-    price: number;
-    currency: string;
-    dateOfAction: string;
-    dateOfRegister: string;
-    dateOfReturn: string;
-  }[],
+  data: dataOnlyType,
   par: string
 ) => {
   return sumItems(data, par) / data.filter((item) => item.type === par).length;
 };
 
 const countItems = (
-  data: {
-    id: string;
-    type: string;
-    name: string;
-    price: number;
-    currency: string;
-    dateOfAction: string;
-    dateOfRegister: string;
-    dateOfReturn: string;
-  }[],
+  data: dataOnlyType,
   par: string
 ) => {
   return data.filter((item) => item.type === par).length;

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, Modal } from "antd";
 import "antd/dist/antd.css";
-import { CommonProps } from "./../types/types";
+import { CommonProps } from "../types/typesInterfaces";
 import CommonForm from "./CommonForm";
 
 import { FormattedMessage, useIntl } from "react-intl";

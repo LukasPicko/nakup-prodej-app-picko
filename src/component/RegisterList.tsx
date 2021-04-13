@@ -1,11 +1,12 @@
 import React, { useState, useEffect, MouseEvent } from "react";
 import { List, Typography, Avatar, Button } from "antd";
-import { CommonProps } from "./../types/types";
+import { CommonProps } from "../types/typesInterfaces";
 import { useHistory } from "react-router-dom";
 import moment from "moment";
 import _ from "lodash";
 import TheFilter from "./TheFilter";
 import { typesOfCurrency } from "./Enums/enums";
+import {dataOnlyType} from '../types/pureTypes';
 import { FormattedMessage, useIntl } from "react-intl";
 const { Title } = Typography;
 const { Paragraph } = Typography;
@@ -25,17 +26,33 @@ storedSorting = stSort
       { item: "type", direction: "asc" },
     ];
 
+// type dataOnlyType =
+//   {
+//     id: string;
+//     type: string;
+//     name: string;
+//     price: number;
+//     currency: string;
+//     dateOfAction: string;
+//     dateOfRegister: string;
+//     dateOfReturn: string;
+//   }[];
+
+// interface dataOnlyType
+// {
+//   id: string;
+//   type: string;
+//   name: string;
+//   price: number;
+//   currency: string;
+//   dateOfAction: string;
+//   dateOfRegister: string;
+//   dateOfReturn: string;
+// }[];
+
+  
 const filterResult = (
-  data: {
-    id: string;
-    type: string;
-    name: string;
-    price: number;
-    currency: string;
-    dateOfAction: string;
-    dateOfRegister: string;
-    dateOfReturn: string;
-  }[],
+  data: dataOnlyType,
   filterName: string,
   filterType: string
 ) => {
@@ -51,65 +68,20 @@ const filterResult = (
 };
 
 function filterNameResult(
-  data: {
-    id: string;
-    type: string;
-    name: string;
-    price: number;
-    currency: string;
-    dateOfAction: string;
-    dateOfRegister: string;
-    dateOfReturn: string;
-  }[],
+  data: dataOnlyType,
   filterName: string
-): {
-  id: string;
-  type: string;
-  name: string;
-  price: number;
-  currency: string;
-  dateOfAction: string;
-  dateOfRegister: string;
-  dateOfReturn: string;
-}[] {
+): dataOnlyType {
   return data.filter((item) => item.name.includes(filterName));
 }
 function filterTypeResult(
-  data: {
-    id: string;
-    type: string;
-    name: string;
-    price: number;
-    currency: string;
-    dateOfAction: string;
-    dateOfRegister: string;
-    dateOfReturn: string;
-  }[],
+  data: dataOnlyType,
   filterType: string
-): {
-  id: string;
-  type: string;
-  name: string;
-  price: number;
-  currency: string;
-  dateOfAction: string;
-  dateOfRegister: string;
-  dateOfReturn: string;
-}[] {
+): dataOnlyType {
   return data.filter((item) => item.type === filterType);
 }
 
 function sortDataToShow(
-  data: {
-    id: string;
-    type: string;
-    name: string;
-    price: number;
-    currency: string;
-    dateOfAction: string;
-    dateOfRegister: string;
-    dateOfReturn: string;
-  }[],
+  data: dataOnlyType,
   sorting: { item: string; direction: string }[]
 ) {
   if (sorting[0].item === "price") {
@@ -234,7 +206,6 @@ const RegisterList: React.FC<CommonProps> = (Props) => {
                     }}
                   >
                     <Paragraph
-                    
                       editable={{
                         editing: editable === item.id,
                         onChange: (value) => {

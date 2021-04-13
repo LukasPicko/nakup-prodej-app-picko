@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Form, Input, Select, InputNumber, Button, DatePicker } from "antd";
 import { useHistory, useParams } from "react-router-dom";
-import { DataModalProps } from "../types/types";
+import { DataModalProps } from "../types/typesInterfaces";
 import { v4 as uuidv4 } from "uuid";
 import { FormattedMessage, useIntl } from "react-intl";
 import "antd/dist/antd.css";
@@ -26,6 +26,7 @@ const CommonForm: React.FC<DataModalProps> = (props) => {
   const [formItemAction, setFormItemAction] = useState("");
   const [firstTime, setFirstTime] = useState(true);
 
+  
   const history = useHistory();
   const intl = useIntl();
 

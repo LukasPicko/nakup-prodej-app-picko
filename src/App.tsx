@@ -115,9 +115,7 @@ const App: React.FC = () => {
         console.log(text);
         setCNBDate(() => pushLinesToArray(text)[0].substring(0, 10));
         localStorage.setItem("cnbDate", cnbDate);
-        debugger;
         setLinesCNB(pushItemsObjectsToArray(text));
-
         localStorage.setItem("linesCNB", JSON.stringify(linesCNB));
       })
       .catch((error) => {
