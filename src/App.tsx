@@ -10,11 +10,11 @@ import RegisterList from "./component/RegisterList";
 import { IntlProvider } from "react-intl";
 import locale_en from "./compiled-lang/en.json";
 import locale_cz from "./compiled-lang/cz.json";
-import {dataObjectType} from './types/pureTypes';
+import {TransactionType} from './types/pureTypes';
 import axios from 'axios'
 
 
-let purchases:dataObjectType[];
+let purchases:TransactionType[];
 let data = localStorage.getItem("storedData");
 if (data) {
   purchases = JSON.parse(data);

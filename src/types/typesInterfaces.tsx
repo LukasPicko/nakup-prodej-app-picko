@@ -1,5 +1,5 @@
 
-import {dataObjectType} from '../types/pureTypes';
+import {TransactionType} from '../types/pureTypes';
 
 export interface FilterShowProps {
   showFilter: boolean;
@@ -26,10 +26,10 @@ export interface FilterValuesProps extends FilterShowProps {
 }
 
 export interface DataProps {
-  data: dataObjectType[];
+  data: TransactionType[];
   setData: React.Dispatch<
     React.SetStateAction<
-      dataObjectType[]
+      TransactionType[]
     >
   >;
 }

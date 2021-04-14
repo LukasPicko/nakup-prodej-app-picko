@@ -6,7 +6,7 @@ import moment from "moment";
 import _ from "lodash";
 import TheFilter from "./TheFilter";
 import { typesOfCurrency } from "./Enums/enums";
-import { dataObjectType } from "../types/pureTypes";
+import { TransactionType } from "../types/pureTypes";
 import { FormattedMessage, useIntl } from "react-intl";
 const { Title } = Typography;
 const { Paragraph } = Typography;
@@ -47,7 +47,7 @@ storedSorting = stSort
     ];
 
 const filterResult = (
-  data: dataObjectType[],
+  data: TransactionType[],
   filterName: string,
   filterType: string
 ) => {
@@ -63,20 +63,20 @@ const filterResult = (
 };
 
 function filterNameResult(
-  data: dataObjectType[],
+  data: TransactionType[],
   filterName: string
-): dataObjectType[] {
+): TransactionType[] {
   return data.filter((item) => item.name.includes(filterName));
 }
 function filterTypeResult(
-  data: dataObjectType[],
+  data: TransactionType[],
   filterType: string
-): dataObjectType[] {
+): TransactionType[] {
   return data.filter((item) => item.type === filterType);
 }
 
 function sortDataToShow(
-  data: dataObjectType[],
+  data: TransactionType[],
   sorting: { item: string; direction: string }[]
 ) {
   if (sorting[0].item === "price") {

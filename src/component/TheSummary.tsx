@@ -4,10 +4,22 @@ import { DataProps } from "../types/typesInterfaces";
 import moment from "moment";
 import _ from "lodash";
 import { FormattedMessage, useIntl } from "react-intl";
-import { dataObjectType } from "../types/pureTypes";
+import { TransactionType, FilteredDataType, LoanXtremesType } from "../types/pureTypes";
+import {typesEnum} from './Enums/enums';
 const { Text } = Typography;
 
-const getExtrems = (data: dataObjectType[]) => {
+let filteredData: FilteredDataType;
+let loanXtremes: LoanXtremesType;
+
+const filterTransaction = (data: TransactionType[]) => {
+  return {
+    purchasesOnly: data.filter((item) => item.type === typesEnum[0]),
+    leasesOnly: data.filter((item) => item.type === typesEnum[1]),
+    loansOnly: data.filter((item) => item.type === typesEnum[2]),
+  };
+};
+
+const getExtremesDates = (data: TransactionType[]) => {
   let sorted = _.orderBy(data, ["dateOfReturn"], ["desc"]);
   return {
     max: sorted[0].dateOfReturn,
@@ -15,45 +27,46 @@ const getExtrems = (data: dataObjectType[]) => {
   };
 };
 
-const maxFce = (data: dataObjectType[], itemType: string) => {
-  return Math.max(
-    ...data.filter((item) => item.type === itemType).map((item) => item.price)
-  );
+const getMaxPrice = (data: TransactionType[]) => {
+  return Math.max(...data.map((item) => item.price));
 };
 
-const sumItems = (data: dataObjectType[], itemType: string) => {
-  return data
-    .filter((item) => item.type === itemType)
-    .map((item) => item.price)
-    .reduce((prev, curr) => prev + curr);
+const sumItems = (data: TransactionType[]) => {
+  return data.map((item) => item.price).reduce((prev, curr) => prev + curr);
 };
 
-const avgItems = (data: dataObjectType[], itemType: string) => {
-  return (
-    sumItems(data, itemType) /
-    data.filter((item) => item.type === itemType).length
-  );
+const avgItems = (data: TransactionType[]) => {
+  return sumItems(data) / countItems(data);
 };
 
-const countItems = (data: dataObjectType[], par: string) => {
-  return data.filter((item) => item.type === par).length;
+const countItems = (data: TransactionType[]) => {
+  return data.length;
+};
+
+const getSummaryResult = (
+  filteredData: FilteredDataType,
+  loanXtremes: LoanXtremesType
+) => {
+  return {
+    purchaseMax: getMaxPrice(filteredData.purchasesOnly),
+    purchaseSum: sumItems(filteredData.purchasesOnly),
+    purchaseAvg: avgItems(filteredData.purchasesOnly),
+    purchaseCount: countItems(filteredData.purchasesOnly),
+    leaseMax: getMaxPrice(filteredData.leasesOnly),
+    leaseSum: sumItems(filteredData.leasesOnly),
+    leaseAvg: avgItems(filteredData.leasesOnly),
+    leaseCount: countItems(filteredData.leasesOnly),
+    loanMax: moment(loanXtremes.max).format("DD.MM.yyyy"),
+    loanMin: moment(loanXtremes.min).format("DD.MM.yyyy"),
+    loanCount: countItems(filteredData.loansOnly),
+  };
 };
 
 const TheSummary: React.FC<DataProps> = (props) => {
+  filteredData = filterTransaction(props.data);
+  loanXtremes = getExtremesDates(filteredData.loansOnly);
   const summaryResult = useMemo(
-    () => ({
-      purchaseMax: maxFce(props.data, "nakup"),
-      purchaseSum: sumItems(props.data, "nakup"),
-      purchaseAvg: avgItems(props.data, "nakup"),
-      purchaseCount: countItems(props.data, "nakup"),
-      leaseMax: maxFce(props.data, "pronajem"),
-      leaseSum: sumItems(props.data, "pronajem"),
-      leaseAvg: avgItems(props.data, "pronajem"),
-      leaseCount: countItems(props.data, "pronajem"),
-      loanMax: moment(getExtrems(props.data).max).format('DD.MM.yyyy'),
-      loanMin: moment(getExtrems(props.data).min).format('DD.MM.yyyy'),
-      loanCount: countItems(props.data, "zapujcka"),
-    }),
+    () => getSummaryResult(filteredData, loanXtremes),
     [props.data]
   );
 
