@@ -4,68 +4,58 @@ import { DataProps } from "../types/typesInterfaces";
 import moment from "moment";
 import _ from "lodash";
 import { FormattedMessage, useIntl } from "react-intl";
-import {dataObjectType} from '../types/pureTypes';
+import { dataObjectType } from "../types/pureTypes";
 const { Text } = Typography;
 
-const loanMaxMin = (
-  data: dataObjectType[],
-  extreme: string
-) => {
+const getExtrems = (data: dataObjectType[]) => {
   let sorted = _.orderBy(data, ["dateOfReturn"], ["desc"]);
-  if (extreme === "max") {
-    return moment(sorted[0].dateOfReturn).format("DD.MM.YYYY");
-  } else {
-    return moment(sorted[sorted.length - 1].dateOfReturn).format("DD.MM.YYYY");
-  }
+  return {
+    max: sorted[0].dateOfReturn,
+    min: sorted[sorted.length - 1].dateOfReturn,
+  };
 };
 
-const maxFce = (
-  data: dataObjectType[],
-  itemType: string
-) => {
+const maxFce = (data: dataObjectType[], itemType: string) => {
   return Math.max(
     ...data.filter((item) => item.type === itemType).map((item) => item.price)
   );
 };
 
-const sumItems = (
-  data: dataObjectType[],
-  itemType: string
-) => {
+const sumItems = (data: dataObjectType[], itemType: string) => {
   return data
     .filter((item) => item.type === itemType)
     .map((item) => item.price)
     .reduce((prev, curr) => prev + curr);
 };
 
-const avgItems = (
-  data: dataObjectType[],
-  itemType: string
-) => {
-  return sumItems(data, itemType) / data.filter((item) => item.type === itemType).length;
+const avgItems = (data: dataObjectType[], itemType: string) => {
+  return (
+    sumItems(data, itemType) /
+    data.filter((item) => item.type === itemType).length
+  );
 };
 
-const countItems = (
-  data: dataObjectType[],
-  par: string
-) => {
+const countItems = (data: dataObjectType[], par: string) => {
   return data.filter((item) => item.type === par).length;
 };
 
 const TheSummary: React.FC<DataProps> = (props) => {
-  const summaryResult = useMemo(()=> ({
-    purchaseMax: maxFce(props.data, "nakup"),
-    purchaseSum: sumItems(props.data, "nakup"),
-    purchaseAvg: avgItems(props.data, "nakup"),
-    purchaseCount: countItems(props.data, "nakup"),
-    leaseMax: maxFce(props.data, "pronajem"),
-    leaseSum: sumItems(props.data, "pronajem"),
-    leaseAvg: avgItems(props.data, "pronajem"),
-    leaseCount: countItems(props.data, "pronajem"),
-    loanMax: loanMaxMin(props.data, "max"),
-    loanMin: loanMaxMin(props.data, "min"),
-    loanCount: countItems(props.data, "zapujcka"),
-  }),[props.data]);
+  const summaryResult = useMemo(
+    () => ({
+      purchaseMax: maxFce(props.data, "nakup"),
+      purchaseSum: sumItems(props.data, "nakup"),
+      purchaseAvg: avgItems(props.data, "nakup"),
+      purchaseCount: countItems(props.data, "nakup"),
+      leaseMax: maxFce(props.data, "pronajem"),
+      leaseSum: sumItems(props.data, "pronajem"),
+      leaseAvg: avgItems(props.data, "pronajem"),
+      leaseCount: countItems(props.data, "pronajem"),
+      loanMax: moment(getExtrems(props.data).max).format('DD.MM.yyyy'),
+      loanMin: moment(getExtrems(props.data).min).format('DD.MM.yyyy'),
+      loanCount: countItems(props.data, "zapujcka"),
+    }),
+    [props.data]
+  );
 
   const intl = useIntl();
 
