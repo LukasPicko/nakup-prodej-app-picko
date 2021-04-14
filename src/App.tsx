@@ -10,9 +10,11 @@ import RegisterList from "./component/RegisterList";
 import { IntlProvider } from "react-intl";
 import locale_en from "./compiled-lang/en.json";
 import locale_cz from "./compiled-lang/cz.json";
-import {dataOnlyType} from './types/pureTypes';
+import {dataObjectType} from './types/pureTypes';
+import axios from 'axios'
 
-let purchases:dataOnlyType;
+
+let purchases:dataObjectType[];
 let data = localStorage.getItem("storedData");
 if (data) {
   purchases = JSON.parse(data);
@@ -97,36 +99,41 @@ const App: React.FC = () => {
 
   useEffect(() => {
     loadData();
-    fetch(
-      "http://www.cnb.cz/cs/financni_trhy/devizovy_trh/kurzy_devizoveho_trhu/denni_kurz.txt",
-      {
-        method: "GET",
-        mode: "no-cors",
-        headers: {
-          "Content-Type": "text/plain; charset=UTF-8",
-        },
-      }
-    )
-      .then((r) => {
-        console.log(r);
-        r.text().then((text) => {
-          console.log("text", text);
-        });
-        return r;
-      })
-      .then((r) => r.text())
-      .then((text) => {
-        console.log("fetch pokus");
-        console.log(text);
-        setCNBDate(() => pushLinesToArray(text)[0].substring(0, 10));
-        localStorage.setItem("cnbDate", cnbDate);
-        setLinesCNB(pushItemsObjectsToArray(text));
-        localStorage.setItem("linesCNB", JSON.stringify(linesCNB));
-      })
-      .catch((error) => {
-        console.log(error);
-        alert("text CNB nefetchuju");
-      });
+    // fetch(
+    //   "http://www.cnb.cz/cs/financni_trhy/devizovy_trh/kurzy_devizoveho_trhu/denni_kurz.txt",
+    //   {
+    //     method: "GET",
+    //     //mode: "no-cors",
+    //     headers: {
+    //       "Content-Type": "text/plain; charset=UTF-8",
+    //     },
+    //   }
+    // )
+    //   .then((r) => {
+    //     console.log(r);
+    //     r.text().then((text) => {
+    //       console.log("text", text);
+    //     });
+    //     return r;
+    //   })
+    //   .then((r) => r.text())
+    //   .then((text) => {
+    //     console.log("fetch pokus");
+    //     console.log(text);
+    //     setCNBDate(() => pushLinesToArray(text)[0].substring(0, 10));
+    //     localStorage.setItem("cnbDate", cnbDate);
+    //     setLinesCNB(pushItemsObjectsToArray(text));
+    //     localStorage.setItem("linesCNB", JSON.stringify(linesCNB));
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //     alert("text CNB nefetchuju");
+    //   });
+
+
+    // axios.get("http://www.cnb.cz/cs/financni_trhy/devizovy_trh/kurzy_devizoveho_trhu/denni_kurz.txt")
+    // .then(function(response){console.log(response.data)})
+    
   }, []);
 
   const locales = {

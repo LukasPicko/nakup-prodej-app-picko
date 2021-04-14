@@ -4,11 +4,11 @@ import { DataProps } from "../types/typesInterfaces";
 import moment from "moment";
 import _ from "lodash";
 import { FormattedMessage, useIntl } from "react-intl";
-import {dataOnlyType} from '../types/pureTypes';
+import {dataObjectType} from '../types/pureTypes';
 const { Text } = Typography;
 
 const loanMaxMin = (
-  data: dataOnlyType,
+  data: dataObjectType[],
   extreme: string
 ) => {
   let sorted = _.orderBy(data, ["dateOfReturn"], ["desc"]);
@@ -20,7 +20,7 @@ const loanMaxMin = (
 };
 
 const maxFce = (
-  data: dataOnlyType,
+  data: dataObjectType[],
   itemType: string
 ) => {
   return Math.max(
@@ -29,7 +29,7 @@ const maxFce = (
 };
 
 const sumItems = (
-  data: dataOnlyType,
+  data: dataObjectType[],
   itemType: string
 ) => {
   return data
@@ -39,14 +39,14 @@ const sumItems = (
 };
 
 const avgItems = (
-  data: dataOnlyType,
+  data: dataObjectType[],
   itemType: string
 ) => {
   return sumItems(data, itemType) / data.filter((item) => item.type === itemType).length;
 };
 
 const countItems = (
-  data: dataOnlyType,
+  data: dataObjectType[],
   par: string
 ) => {
   return data.filter((item) => item.type === par).length;

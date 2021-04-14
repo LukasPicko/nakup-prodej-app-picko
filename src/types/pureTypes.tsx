@@ -1,5 +1,4 @@
-export type dataOnlyType =
-{
+export type dataObjectType = {
   id: string;
   type: string;
   name: string;
@@ -8,4 +7,4 @@ export type dataOnlyType =
   dateOfAction: string;
   dateOfRegister: string;
   dateOfReturn: string;
-}[];
+}

@@ -9,7 +9,9 @@ import moment from "moment";
 const { Option } = Select;
 
 const CommonForm: React.FC<DataModalProps> = (props) => {
-  const [formItemId] = useState(useParams<{ id: string }>().id || "");
+  const [formItemId, setFormItemId] = useState(
+    useParams<{ id: string }>().id || ""
+  );
   const [formItemName, setFormItemName] = useState("");
   const [formItemType, setFormItemType] = useState("");
   const [formItemPrice, setFormItemPrice] = useState(0);
@@ -26,7 +28,6 @@ const CommonForm: React.FC<DataModalProps> = (props) => {
   const [formItemAction, setFormItemAction] = useState("");
   const [firstTimeInUseEffect, setFirstTime] = useState(true);
 
-  
   const history = useHistory();
   const intl = useIntl();
 
@@ -101,6 +102,16 @@ const CommonForm: React.FC<DataModalProps> = (props) => {
       },
     ]);
     if (formItemAction === "add") props.setVisibleModalForm(false);
+    setFormItemId(() => "");
+    setFormItemName(() => "");
+    setFormItemPrice(() => 0);
+    setFormItemCurrency(() => "");
+    setFormItemType(() => "");
+    setFormItemDateOfAction(() => "");
+    setFormItemDateOfRegister(() => "");
+    setFormItemDateOfReturn(() => "");
+    setFirstTime(() => true);
+    setFormItemAction(() => "upd");
     history.push("/");
   };
 
@@ -223,10 +234,7 @@ const CommonForm: React.FC<DataModalProps> = (props) => {
                     })
               }
             >
-              <InputNumber
-                value={formItemPrice}
-                onChange={handleChangePrice}
-              />
+              <InputNumber value={formItemPrice} onChange={handleChangePrice} />
             </Form.Item>
             <FormattedMessage
               id="formTitleCurrency"
@@ -255,6 +263,10 @@ const CommonForm: React.FC<DataModalProps> = (props) => {
             />
             <Form.Item>
               <DatePicker
+                defaultValue={moment(formItemDateOfReturn)}
+                // disabledDate={moment(formItemDateOfAction) => {
+                //   return  time > moment(formItemAction);
+                // }}
                 onChange={handleChangeDateOfReturn}
                 placeholder={intl.formatMessage({
                   id: "formReturnDatePlaceholder",
@@ -272,6 +284,7 @@ const CommonForm: React.FC<DataModalProps> = (props) => {
         />
         <Form.Item>
           <DatePicker
+            defaultValue={moment(formItemDateOfAction)}
             onChange={handleChangeDateOfAction}
             placeholder={intl.formatMessage({
               id: "formContractDatePlaceholder",

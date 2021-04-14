@@ -1,5 +1,5 @@
 
-import {dataOnlyType} from '../types/pureTypes';
+import {dataObjectType} from '../types/pureTypes';
 
 export interface FilterShowProps {
   showFilter: boolean;
@@ -26,10 +26,10 @@ export interface FilterValuesProps extends FilterShowProps {
 }
 
 export interface DataProps {
-  data: dataOnlyType;
+  data: dataObjectType[];
   setData: React.Dispatch<
     React.SetStateAction<
-      dataOnlyType
+      dataObjectType[]
     >
   >;
 }

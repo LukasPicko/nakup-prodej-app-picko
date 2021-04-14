@@ -6,7 +6,7 @@ import moment from "moment";
 import _ from "lodash";
 import TheFilter from "./TheFilter";
 import { typesOfCurrency } from "./Enums/enums";
-import { dataOnlyType } from "../types/pureTypes";
+import { dataObjectType } from "../types/pureTypes";
 import { FormattedMessage, useIntl } from "react-intl";
 const { Title } = Typography;
 const { Paragraph } = Typography;
@@ -23,6 +23,15 @@ const { Paragraph } = Typography;
 //   dateOfReturn: string;
 // }[];
 
+// type text = string;
+// interface text2 {
+//   klic: () => number;
+// }
+
+// type Mix =  text | text2;
+
+// const hodnotaMix: Mix = {klic: ()=>12 };
+
 let stType = localStorage.getItem("storedFilterType");
 let stName = localStorage.getItem("storedFilterName");
 let stSort = localStorage.getItem("storedSorting");
@@ -38,7 +47,7 @@ storedSorting = stSort
     ];
 
 const filterResult = (
-  data: dataOnlyType,
+  data: dataObjectType[],
   filterName: string,
   filterType: string
 ) => {
@@ -54,20 +63,20 @@ const filterResult = (
 };
 
 function filterNameResult(
-  data: dataOnlyType,
+  data: dataObjectType[],
   filterName: string
-): dataOnlyType {
+): dataObjectType[] {
   return data.filter((item) => item.name.includes(filterName));
 }
 function filterTypeResult(
-  data: dataOnlyType,
+  data: dataObjectType[],
   filterType: string
-): dataOnlyType {
+): dataObjectType[] {
   return data.filter((item) => item.type === filterType);
 }
 
 function sortDataToShow(
-  data: dataOnlyType,
+  data: dataObjectType[],
   sorting: { item: string; direction: string }[]
 ) {
   if (sorting[0].item === "price") {
@@ -186,22 +195,28 @@ const RegisterList: React.FC<CommonProps> = (Props) => {
               }
               title={
                 <Title level={4} id={item.id}>
-                  <span
-                    onClick={() => {
-                      editRecordForm(item.id);
-                    }}
-                  >
-                    <Paragraph
-                      editable={{
-                        editing: editable === item.id,
-                        onChange: (value) => {
-                          editRecordName(value, item.id);
-                        },
+                  {editable !== item.id ? (
+                    <span
+                      onClick={() => {
+                        editRecordForm(item.id);
                       }}
                     >
-                      {item.name}
-                    </Paragraph>
-                  </span>
+                      <Paragraph>{item.name}</Paragraph>
+                    </span>
+                  ) : (
+                    <span>
+                      <Paragraph
+                        editable={{
+                          editing: true,
+                          onChange: (value) => {
+                            editRecordName(value, item.id);
+                          },
+                        }}
+                      >
+                        {item.name}
+                      </Paragraph>
+                    </span>
+                  )}
                 </Title>
               }
               description={
